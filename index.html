@@ -5,39 +5,317 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Мой Бизнес</title>
   <style>
-    body {
-      background: #fff9e6; /* pastel yellow */
-      font-family: Arial, sans-serif;
+    :root {
+      --pastel-yellow: #fff9e6;
+      --burgundy: #800020;
+      --white: #ffffff;
+      --text-dark: #333333;
+    }
+
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      background: var(--pastel-yellow);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Шапка */
     header {
-      background: #800020; /* burgundy */
-      color: white;
-      padding: 2rem;
-      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    main {
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .moon {
+      font-size: 1.5rem;
+      color: #ffcc00;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffcc00;
+    }
+
+    /* Главный баннер */
+    .hero {
+      height: 100vh;
+      background: url('https://via.placeholder.com/1920x1080') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       padding: 2rem;
+      margin-top: 80px;
+    }
+
+    .hero-content {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 2rem;
+      border-radius: 1rem;
       max-width: 800px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--burgundy);
+    }
+
+    .hero p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--burgundy);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #600018;
+    }
+
+    /* Описание */
+    .section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
       margin: 0 auto;
     }
-    .moon {
-      font-size: 2rem;
-      color: #ffcc00;
+
+    .section-title {
       text-align: center;
-      margin: 1rem 0;
+      font-size: 2rem;
+      color: var(--burgundy);
+      margin-bottom: 2rem;
+    }
+
+    .description {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    /* Преимущества */
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--burgundy);
+      margin-bottom: 1rem;
+    }
+
+    /* Галерея */
+    .gallery {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      padding: 1rem 0;
+      scroll-behavior: smooth;
+    }
+
+    .gallery img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    /* Карта */
+    .map {
+      height: 400px;
+      background: #f0f0f0;
+      margin-top: 2rem;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+    }
+
+    /* Футер */
+    footer {
+      background: var(--burgundy);
+      color: var(--white);
+      text-align: center;
+      padding: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 2rem 1rem;
+      }
+
+      .feature {
+        width: 150px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Шапка -->
   <header>
-    <h1>Добро пожаловать в Мой Бизнес</h1>
+    <div class="logo">
+      <span class="moon">🌙</span>
+      <span>Мой Бизнес</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#about">О нас</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#gallery">Галерея</a></li>
+        <li><a href="#contact">Контакты</a></li>
+      </ul>
+    </nav>
   </header>
-  <main>
-    <div class="moon">🌙</div>
-    <p>Мы предоставляем качественные услуги для жителей Алмазного.</p>
-    <p>Свяжитесь с нами: ваш-email@example.com</p>
-  </main>
+
+  <!-- Главный баннер -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Добро пожаловать в Мой Бизнес</h1>
+      <p>Мы предоставляем качественные услуги для жителей Алмазного.</p>
+      <a href="#contact" class="btn">Связаться с нами</a>
+    </div>
+  </section>
+
+  <!-- Описание -->
+  <section id="about" class="section">
+    <h2 class="section-title">О нас</h2>
+    <div class="description">
+      <p>Наш бизнес основан на принципах качества, надёжности и индивидуального подхода к каждому клиенту. Мы гордимся тем, что помогаем людям решать их задачи быстро и эффективно.</p>
+    </div>
+  </section>
+
+  <!-- Преимущества -->
+  <section id="services" class="section">
+    <h2 class="section-title">Наши преимущества</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <h3>Качество</h3>
+        <p>Мы работаем только с проверенными материалами и технологиями.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⏱️</div>
+        <h3>Скорость</h3>
+        <p>Быстро выполняем заказы без потери качества.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📞</div>
+        <h3>Поддержка</h3>
+        <p>Всегда на связи — ответим на любые вопросы.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <h3>Цена</h3>
+        <p>Разумные цены — доступно каждому.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Галерея -->
+  <section id="gallery" class="section">
+    <h2 class="section-title">Галерея</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/200x150?text=Фото+1" alt="Фото 1">
+      <img src="https://via.placeholder.com/200x150?text=Фото+2" alt="Фото 2">
+      <img src="https://via.placeholder.com/200x150?text=Фото+3" alt="Фото 3">
+      <img src="https://via.placeholder.com/200x150?text=Фото+4" alt="Фото 4">
+      <img src="https://via.placeholder.com/200x150?text=Фото+5" alt="Фото 5">
+    </div>
+  </section>
+
+  <!-- Карта -->
+  <section id="contact" class="section">
+    <h2 class="section-title">Контакты</h2>
+    <div class="map">
+      <p>Адрес: г. Алмазный, ул. Центральная, 1<br>Телефон: +7 (999) 123-45-67<br>Email: info@moibiznes.ru</p>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer>
+    <p>&copy; 2025 Мой Бизнес. Все права защищены.</p>
+  </footer>
 </body>
 </html>
