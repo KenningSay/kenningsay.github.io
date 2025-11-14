@@ -403,6 +403,61 @@
       border-color: rgba(255, 107, 0, 0.5);
     }
 
+    /* Стили для блока "О нас" */
+    .about-content {
+      font-size: 1.2rem;
+      line-height: 1.8;
+    }
+
+    .process-steps {
+      margin-top: 2.5rem;
+    }
+
+    .process-step {
+      background: rgba(255, 107, 0, 0.1);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .process-step:hover {
+      background: rgba(255, 107, 0, 0.15);
+      border-color: var(--orange);
+      transform: translateX(10px);
+    }
+
+    .process-step h3 {
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .process-step h3::before {
+      content: '▶';
+      font-size: 0.8rem;
+      color: var(--orange);
+    }
+
+    .materials {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 140, 66, 0.1));
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .materials h3 {
+      color: var(--orange);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
     /* Преимущества */
     .features {
       display: flex;
@@ -661,6 +716,18 @@
         width: 200px;
         height: 150px;
       }
+
+      .about-content {
+        font-size: 1.1rem;
+      }
+
+      .process-step {
+        padding: 1.2rem;
+      }
+
+      .process-step h3 {
+        font-size: 1.2rem;
+      }
     }
 
     @media (max-width: 480px) {
@@ -699,6 +766,14 @@
         width: 35px;
         height: 35px;
       }
+
+      .about-content {
+        font-size: 1rem;
+      }
+
+      .process-step {
+        padding: 1rem;
+      }
     }
   </style>
 </head>
@@ -711,7 +786,7 @@
     <div class="logo">
       <!-- Замените src на URL вашего изображения -->
       <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0ZGNkIwMCIvPgo8cGF0aCBkPSJNMTAgMTVIMzBWMTVIMzBWMjVIMzBIMzVIMzBIMzBIMzVIMzBWMzVIMTBWMjVIMTVWMjVIMTNWMTVIMTVWMTVIMTBWMTVaIiBmaWxsPSIjMTIxMjEyIi8+CjxwYXRoIGQ9Ik0xNSAyMEgyNVYzMEgxNVYyMFoiIGZpbGw9IiNGRjZCMDAiLz4KPC9zdmc+Cg==" alt="Логотип" class="logo-image">
-      <span>Мой Бизнес</span>
+      <span>3D Мастерская</span>
     </div>
     
     <div class="menu-toggle" id="menuToggle">
@@ -744,20 +819,41 @@
   <section id="about" class="section">
     <h2 class="section-title">О нас</h2>
     <div class="glass-card">
-      <p>Мы создаем прочные и детализированные изделия из PLA и PETG-пластиков прямо из нашей домашней мастерской в Алмазном.
-
-Как мы работаем:
-
-    Вы присылаете 3D-модель (в формате .stl или .obj) или просто идею.
-
-    Мы бесплатно проконсультируем по дизайну и подготовим модель к печати.
-
-    Рассчитаем стоимость и сроки (от 1 до 3 дней в зависимости от сложности).
-
-    Напечатаем, аккуратно обработаем и сообщим, когда работа будет готова к выдаче.
-
-Используем современные 3D-принтеры, которые обеспечивают высокую точность и гладкость поверхностей. Каждое изделие мы проверяем лично, ведь оно сделано для вашего дома, как и для нашего.
-      </p>
+      <div class="about-content">
+        <p>Мы создаем прочные и детализированные изделия из PLA и PETG-пластиков прямо из нашей домашней мастерской.</p>
+        
+        <div class="process-steps">
+          <div class="process-step">
+            <h3>Вы присылаете заявку</h3>
+            <p>3D-модель в формате .stl или .obj, либо просто идею для консультации</p>
+          </div>
+          
+          <div class="process-step">
+            <h3>Бесплатная консультация</h3>
+            <p>Помогаем с дизайном и подготовкой модели к печати</p>
+          </div>
+          
+          <div class="process-step">
+            <h3>Расчёт и согласование</h3>
+            <p>Озвучиваем стоимость и сроки выполнения (от 1 до 3 дней в зависимости от сложности)</p>
+          </div>
+          
+          <div class="process-step">
+            <h3>Печать и обработка</h3>
+            <p>Аккуратно печатаем и обрабатываем каждое изделие</p>
+          </div>
+        </div>
+        
+        <div class="materials">
+          <h3>Используемые материалы</h3>
+          <p><strong>PLA и PETG-пластики</strong> - обеспечивают прочность и детализацию готовых изделий</p>
+        </div>
+        
+        <p style="margin-top: 2rem; font-style: italic; text-align: center;">
+          Используем современные 3D-принтеры, которые обеспечивают высокую точность и гладкость поверхностей. 
+          Каждое изделие мы проверяем лично, ведь оно сделано для вашего дома, как и для нашего.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -768,49 +864,50 @@
       <div class="feature">
         <div class="feature-icon">✅</div>
         <h3>Качество</h3>
-        <p>Мы работаем только с проверенными материалами и технологиями.</p>
+        <p>Работаем только с проверенными материалами и технологиями</p>
       </div>
       <div class="feature">
         <div class="feature-icon">⏱️</div>
         <h3>Скорость</h3>
-        <p>Быстро выполняем заказы без потери качества.</p>
+        <p>Выполняем заказы от 1 до 3 дней без потери качества</p>
       </div>
       <div class="feature">
         <div class="feature-icon">📞</div>
         <h3>Поддержка</h3>
-        <p>Всегда на связи — ответим на любые вопросы.</p>
+        <p>Всегда на связи — ответим на любые вопросы</p>
       </div>
       <div class="feature">
         <div class="feature-icon">💰</div>
         <h3>Цена</h3>
-        <p>Разумные цены — доступно каждому.</p>
+        <p>Разумные цены — доступно каждому</p>
       </div>
     </div>
   </section>
 
   <!-- Галерея -->
   <section id="gallery" class="section">
-    <h2 class="section-title">Галерея</h2>
+    <h2 class="section-title">Галерея работ</h2>
     <div class="glass-card">
       <div class="gallery">
-        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk9maWNlPC90ZXh0Pjwvc3ZnPg==" alt="Современный офис">
-        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNDQ0Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRlYW08L3RleHQ+PC9zdmc+" alt="Команда профессионалов">
-        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldvcms8L3RleHQ+PC9zdmc+" alt="Рабочий процесс">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMzMzIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPjNEIE1vZGVsPC90ZXh0Pjwvc3ZnPg==" alt="3D Модель">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNDQ0Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlByaW50ZXI8L3RleHQ+PC9zdmc+" alt="3D Принтер">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNTU1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRlc2lnbjwvdGV4dD48L3N2Zz4=" alt="Дизайн">
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNjY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlc3VsdHM8L3RleHQ+PC9zdmc+" alt="Результаты работы">
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNzc3Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIyMCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRlY2g8L3RleHQ+PC9zdmc+" alt="Технологии">
       </div>
     </div>
   </section>
 
-  <!-- Карта -->
+  <!-- Контакты -->
   <section id="contact" class="section">
     <h2 class="section-title">Контакты</h2>
     <div class="glass-card">
       <div class="map">
         <div class="contact-info">
-          <p>📍 Адрес: г. Алмазный, ул. Центральная, 1</p>
+          <p>📍 Адрес: г. Алмазный</p>
           <p>📞 Телефон: +7 (999) 123-45-67</p>
-          <p>✉️ Email: info@moibiznes.ru</p>
+          <p>✉️ Email: info@3dmaster.ru</p>
+          <p>🕒 Время работы: Пн-Вс 9:00-21:00</p>
         </div>
       </div>
     </div>
@@ -818,7 +915,7 @@
 
   <!-- Футер -->
   <footer>
-    <p>&copy; 2025 Мой Бизнес. Все права защищены.</p>
+    <p>&copy; 2025 Домашняя 3D Мастерская. Все права защищены.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
