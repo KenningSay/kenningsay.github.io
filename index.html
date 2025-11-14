@@ -10,6 +10,7 @@
       --orange: #FF6B00;
       --orange-dark: #E55A00;
       --orange-light: #FF8C42;
+      --orange-glow: rgba(255, 107, 0, 0.5);
       --black: #121212;
       --black-light: #1E1E1E;
       --white: #ffffff;
@@ -38,28 +39,37 @@
       overflow-x: hidden;
     }
 
-    /* Парящая шапка */
+    /* Парящая шапка с закругленными краями */
     header {
-      background: rgba(18, 18, 18, 0.9);
-      backdrop-filter: blur(15px);
+      background: rgba(18, 18, 18, 0.85);
+      backdrop-filter: blur(20px);
       padding: 1rem 2rem;
       position: fixed;
-      width: 100%;
-      top: 0;
+      width: 90%;
+      max-width: 1200px;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(0);
       z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: var(--shadow);
-      border-bottom: 1px solid var(--glass-border);
-      transform: translateY(0);
+      box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        0 0 20px var(--orange-glow);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
       transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     header.scrolled {
-      padding: 0.7rem 2rem;
-      background: rgba(18, 18, 18, 0.95);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      width: 95%;
+      padding: 0.8rem 1.8rem;
+      background: rgba(18, 18, 18, 0.92);
+      box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        0 0 25px var(--orange-glow);
+      top: 15px;
     }
 
     .logo {
@@ -74,6 +84,7 @@
 
     .logo:hover {
       color: var(--orange);
+      text-shadow: 0 0 10px var(--orange-glow);
     }
 
     .flame {
@@ -84,7 +95,7 @@
     }
 
     .logo:hover .flame {
-      filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.9));
+      filter: drop-shadow(0 0 12px rgba(255, 107, 0, 0.9));
       transform: scale(1.1);
     }
 
@@ -111,11 +122,14 @@
       width: 0;
       height: 2px;
       background: var(--orange);
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--orange);
       transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     nav a:hover {
       color: var(--orange);
+      text-shadow: 0 0 8px var(--orange-glow);
     }
 
     nav a:hover::after {
@@ -130,6 +144,7 @@
       width: 30px;
       height: 21px;
       cursor: pointer;
+      z-index: 1001;
     }
 
     .menu-toggle span {
@@ -139,6 +154,12 @@
       background-color: var(--white);
       border-radius: 3px;
       transition: all 0.3s ease;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    }
+
+    .menu-toggle.active span {
+      background-color: var(--orange);
+      box-shadow: 0 0 8px var(--orange);
     }
 
     .menu-toggle.active span:nth-child(1) {
@@ -164,7 +185,6 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      margin-top: 80px;
       position: relative;
     }
 
@@ -283,6 +303,7 @@
       height: 3px;
       background: var(--orange);
       border-radius: 2px;
+      box-shadow: 0 0 8px var(--orange);
     }
 
     .glass-card {
@@ -299,6 +320,7 @@
     .glass-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 107, 0, 0.5);
     }
 
     /* Преимущества */
@@ -334,6 +356,7 @@
       transform: scaleX(0);
       transform-origin: left;
       transition: transform 0.5s ease;
+      box-shadow: 0 0 10px var(--orange);
     }
 
     .feature:hover {
@@ -384,6 +407,7 @@
     .gallery::-webkit-scrollbar-thumb {
       background: var(--orange);
       border-radius: 10px;
+      box-shadow: 0 0 5px var(--orange);
     }
 
     .gallery img {
@@ -401,6 +425,7 @@
     .gallery img:hover {
       transform: scale(1.05);
       box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3);
+      border-color: var(--orange);
     }
 
     /* Карта */
@@ -423,6 +448,20 @@
     .map:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      border-color: rgba(255, 107, 0, 0.5);
+    }
+
+    .contact-info p {
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .contact-info i {
+      color: var(--orange);
+      text-shadow: 0 0 5px var(--orange-glow);
     }
 
     /* Футер */
@@ -444,16 +483,23 @@
       .feature {
         width: 180px;
       }
+      
+      header {
+        width: 95%;
+        padding: 1rem 1.5rem;
+      }
     }
 
     @media (max-width: 768px) {
       header {
-        flex-direction: row;
+        width: 95%;
         padding: 1rem;
+        border-radius: 30px;
       }
 
       header.scrolled {
-        padding: 0.7rem 1rem;
+        padding: 0.8rem 1rem;
+        border-radius: 30px;
       }
 
       .menu-toggle {
@@ -462,25 +508,28 @@
 
       nav {
         position: fixed;
-        top: 80px;
+        top: 90px;
         right: -100%;
-        width: 70%;
-        height: calc(100vh - 80px);
+        width: 80%;
+        max-width: 300px;
+        height: auto;
         background: rgba(18, 18, 18, 0.95);
-        backdrop-filter: blur(15px);
+        backdrop-filter: blur(20px);
         transition: right 0.4s ease;
         z-index: 999;
-        border-left: 1px solid var(--glass-border);
+        border: 1px solid var(--glass-border);
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        padding: 1rem 0;
       }
 
       nav.active {
-        right: 0;
+        right: 2.5%;
       }
 
       nav ul {
         flex-direction: column;
         gap: 0;
-        padding: 2rem;
         width: 100%;
       }
 
@@ -489,9 +538,13 @@
         border-bottom: 1px solid rgba(255, 107, 0, 0.2);
       }
 
+      nav li:last-child {
+        border-bottom: none;
+      }
+
       nav a {
         display: block;
-        padding: 1rem 0;
+        padding: 1rem 1.5rem;
         width: 100%;
       }
 
@@ -550,6 +603,11 @@
       .gallery img {
         width: 180px;
         height: 130px;
+      }
+      
+      header {
+        width: 92%;
+        border-radius: 25px;
       }
     }
   </style>
@@ -695,7 +753,7 @@
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
           window.scrollTo({
-            top: targetElement.offsetTop - 80,
+            top: targetElement.offsetTop - 100,
             behavior: 'smooth'
           });
           
@@ -703,6 +761,7 @@
           if (window.innerWidth <= 768) {
             nav.classList.remove('active');
             menuToggle.classList.remove('active');
+            document.body.style.overflow = 'auto';
           }
         }
       });
