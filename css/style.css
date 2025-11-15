@@ -111,8 +111,8 @@ header.scrolled {
 }
 
 .logo-image {
-  width: 47px;
-  height: 47px;
+  width: 45px;
+  height: 45px;
   border-radius: 12px;
   color: var(--white);
   object-fit: contain;
@@ -126,7 +126,7 @@ header.scrolled {
 }
 
 .logo:hover .logo-image {
-  transform: scale(1.15) rotate(5deg);
+  transform: scale(1.2) rotate(5deg);
   box-shadow: 
     0 0 25px var(--orange),
     inset 0 0 15px rgba(255, 107, 0, 0.5);
@@ -771,6 +771,7 @@ footer {
   }
 
 }
+
 
 
 
