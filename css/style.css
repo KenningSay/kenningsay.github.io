@@ -121,7 +121,6 @@ header.scrolled {
     0 0 15px var(--orange-glow),
     inset 0 0 10px rgba(255, 107, 0, 0.3);
   transition: var(--transition);
-  filter: brightness(0.7);
   padding: 3px;
   filter: brightness(0) invert(1) opacity(0.9); /* ДОБАВЛЯЕМ: делает белым */
 }
@@ -773,6 +772,7 @@ footer {
   }
 
 }
+
 
 
 
