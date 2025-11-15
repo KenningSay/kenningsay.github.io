@@ -95,8 +95,8 @@ header.scrolled {
 }
 
 .logo {
-  width: 25px;           /* Авто ширина */
-  height: 25px;          /* Фиксированная высота */
+  width: auto;           /* Авто ширина */
+  height: 45px;          /* Фиксированная высота */
   object-fit: contain;   /* Сохраняет пропорции */
   color: var(--orange);
   max-width: 220px;      /* Не даст растянуться слишком */
@@ -110,7 +110,7 @@ header.scrolled {
 }
 
 .logo-image {
-  width: 45px;
+  width: auto;
   height: 45px;
   border-radius: 12px;
   object-fit: cover;
@@ -119,7 +119,7 @@ header.scrolled {
     0 0 15px var(--orange-glow),
     inset 0 0 10px rgba(255, 107, 0, 0.3);
   transition: var(--transition);
-  filter: brightness(1.1);
+  filter: brightness(1.6);
 }
 
 .logo:hover .logo-image {
@@ -768,6 +768,7 @@ footer {
   }
 
 }
+
 
 
 
