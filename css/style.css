@@ -120,7 +120,7 @@ header.scrolled {
     0 0 15px var(--orange-glow),
     inset 0 0 10px rgba(255, 107, 0, 0.3);
   transition: var(--transition);
-  filter: brightness(1.6);
+  filter: brightness(0.7);
 }
 
 .logo:hover .logo-image {
@@ -769,6 +769,7 @@ footer {
   }
 
 }
+
 
 
 
