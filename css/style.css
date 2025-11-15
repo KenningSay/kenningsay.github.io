@@ -114,12 +114,14 @@ header.scrolled {
   width: 45px;
   height: 45px;
   border-radius: 12px;
-  object-fit: cover;
-  border: 2px solid var(--orange);
-  box-shadow:0 0 15px var(--orange-glow), inset 0 0 10px rgba(255, 107, 0, 0.3);
+  object-fit: contain;
+  border: 2px solid #FF6B00 !important; /* Явно оранжевый */
+  box-shadow: 
+    0 0 15px rgba(255, 107, 0, 0.5),
+    inset 0 0 10px rgba(255, 107, 0, 0.3);
   transition: var(--transition);
-  padding: 1rm;
- filter: brightness(0) invert(1) opacity(0.9);
+  padding: 3px;
+  filter: brightness(0) invert(1) opacity(0.9);
 }
 
 .logo:hover .logo-image {
@@ -769,6 +771,7 @@ footer {
   }
 
 }
+
 
 
 
