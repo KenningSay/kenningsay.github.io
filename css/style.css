@@ -98,7 +98,7 @@ header.scrolled {
  display: flex;
   align-items: center;
   gap: 1rem;
-  color: var(--white);
+  color: var(--orange);
   font-size: 1.7rem;
   font-weight: 700;
   transition: var(--transition);
@@ -773,6 +773,7 @@ footer {
   }
 
 }
+
 
 
 
