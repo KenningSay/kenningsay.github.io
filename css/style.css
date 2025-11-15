@@ -113,8 +113,8 @@ header.scrolled {
 .logo-image {
   width: 45px;
   height: 45px;
-  border-radius: 12px;
-  color: var(--white);
+  border-radius: 16px;
+ 
   object-fit: contain;
   border: 2px solid var(--orange);
   box-shadow: 
@@ -772,6 +772,7 @@ footer {
   }
 
 }
+
 
 
 
