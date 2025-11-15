@@ -62,7 +62,7 @@ body::before {
 /* Парящая шапка с улучшенным дизайном */
 header {
   background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
-  backdrop-filter: blur(25px) saturate(180%);
+  backdrop-filter: blur(45px) saturate(180%);
   padding: 1.2rem 2.5rem;
   position: fixed;
   width: 92%;
@@ -95,14 +95,12 @@ header.scrolled {
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: var(--white);
-  font-size: 1.7rem;
-  font-weight: 700;
+  width: auto;           /* Авто ширина */
+  height: 45px;          /* Фиксированная высота */
+  object-fit: contain;   /* Сохраняет пропорции */
+  max-width: 220px;      /* Не даст растянуться слишком */
+  min-width: 120px;      /* Не даст сжаться слишком */
   transition: var(--transition);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .logo:hover {
@@ -767,4 +765,5 @@ footer {
   .process-step {
     padding: 1rem;
   }
+
 }
