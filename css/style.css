@@ -115,7 +115,7 @@ header.scrolled {
   height: 65px;
   border-radius: 12px;
   color: var(--white);
-  object-fit: cover;
+  object-fit: contain;
   border: 2px solid var(--orange);
   box-shadow: 
     0 0 15px var(--orange-glow),
@@ -770,6 +770,7 @@ footer {
   }
 
 }
+
 
 
 
