@@ -123,6 +123,7 @@ header.scrolled {
   transition: var(--transition);
   filter: brightness(0.7);
   padding: 3px;
+  filter: brightness(0) invert(1); /* ДОБАВЛЯЕМ: делает белым */
 }
 
 .logo:hover .logo-image {
@@ -771,6 +772,7 @@ footer {
   }
 
 }
+
 
 
 
