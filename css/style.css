@@ -122,9 +122,7 @@ header.scrolled {
     inset 0 0 10px rgba(255, 107, 0, 0.3);
   transition: var(--transition);
   padding: 3px;
-    /* Вместо filter используем blend-mode */
-  mix-blend-mode: lighten;
-  background-color: white; /* Задний фон белый */
+ filter: brightness(0) invert(1) opacity(0.9);
 }
 
 .logo:hover .logo-image {
@@ -774,6 +772,7 @@ footer {
   }
 
 }
+
 
 
 
