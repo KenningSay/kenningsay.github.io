@@ -131,7 +131,7 @@ header.scrolled {
   box-shadow: 
     0 0 25px var(--orange),
     inset 0 0 15px rgba(255, 107, 0, 0.5);
-  filter: brightness(0) invert(1) drop-shadow(0 0 8px white);
+  filter: brightness(0) invert(1) contrast(1.2) drop-shadow(0 0 8px white);
 }
 
 nav ul {
@@ -773,6 +773,7 @@ footer {
   }
 
 }
+
 
 
 
