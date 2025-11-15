@@ -96,7 +96,7 @@ header.scrolled {
 
 .logo {
   width: auto;           /* Авто ширина */
-  height: 45px;          /* Фиксированная высота */
+  height: auto;          /* Фиксированная высота */
   object-fit: contain;   /* Сохраняет пропорции */
   max-width: 220px;      /* Не даст растянуться слишком */
   min-width: 120px;      /* Не даст сжаться слишком */
@@ -767,3 +767,4 @@ footer {
   }
 
 }
+
