@@ -95,13 +95,14 @@ header.scrolled {
 }
 
 .logo {
-  width: auto;           /* Авто ширина */
-  height: 45px;          /* Фиксированная высота */
-  object-fit: contain;   /* Сохраняет пропорции */
-  color: var(--orange);
-  max-width: 220px;      /* Не даст растянуться слишком */
-  min-width: 120px;      /* Не даст сжаться слишком */
+ display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--white);
+  font-size: 1.7rem;
+  font-weight: 700;
   transition: var(--transition);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .logo:hover {
@@ -768,6 +769,7 @@ footer {
   }
 
 }
+
 
 
 
