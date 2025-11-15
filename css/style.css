@@ -98,6 +98,7 @@ header.scrolled {
   width: 25px;           /* Авто ширина */
   height: 25px;          /* Фиксированная высота */
   object-fit: contain;   /* Сохраняет пропорции */
+  color: var(--orange);
   max-width: 220px;      /* Не даст растянуться слишком */
   min-width: 120px;      /* Не даст сжаться слишком */
   transition: var(--transition);
@@ -767,5 +768,6 @@ footer {
   }
 
 }
+
 
 
