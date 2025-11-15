@@ -111,8 +111,8 @@ header.scrolled {
 }
 
 .logo-image {
-  width: auto;
-  height: 45px;
+  width: 65px;
+  height: 65px;
   border-radius: 12px;
   object-fit: cover;
   border: 2px solid var(--orange);
@@ -769,6 +769,7 @@ footer {
   }
 
 }
+
 
 
 
