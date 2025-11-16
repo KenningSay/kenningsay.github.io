@@ -154,5 +154,36 @@
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <script src="js/particles-config.js"></script>
   <script src="js/app.js"></script>
+  <script>
+  // Функция для проверки загрузки particles.js
+  function loadParticles() {
+    return new Promise((resolve, reject) => {
+      if (typeof particlesJS !== 'undefined') {
+        resolve();
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  // Загружаем particles.js с таймаутом
+  Promise.race([
+    loadParticles(),
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error('Timeout')), 5000)
+    )
+  ]).then(() => {
+    // particles.js загружен успешно
+    console.log('Particles.js loaded successfully');
+  }).catch((error) => {
+    // particles.js не загрузился - продолжаем без него
+    console.log('Particles.js not loaded, continuing without it');
+  });
+</script>
 </body>
 </html>

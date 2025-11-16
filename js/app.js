@@ -1,109 +1,244 @@
+// Инициализация частиц с проверкой
+function initParticles() {
+  if (typeof particlesJS === 'undefined') {
+    console.log('Particles.js not available');
+    return;
+  }
+  
+  if (!document.getElementById('particles-js')) {
+    console.log('Particles container not found');
+    return;
+  }
+
+  try {
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 60,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ['#FF6B00', '#FF8C42', '#E55A00', '#FFAA00', '#FFD700']
+        },
+        shape: {
+          type: 'circle',
+          stroke: {
+            width: 0,
+            color: '#000000'
+          }
+        },
+        opacity: {
+          value: 0.5,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#FF6B00',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'repulse'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 400,
+            line_linked: {
+              opacity: 1
+            }
+          },
+          bubble: {
+            distance: 400,
+            size: 40,
+            duration: 2,
+            opacity: 8,
+            speed: 3
+          },
+          repulse: {
+            distance: 100,
+            duration: 0.4
+          },
+          push: {
+            particles_nb: 4
+          },
+          remove: {
+            particles_nb: 2
+          }
+        }
+      },
+      retina_detect: true
+    });
+  } catch (error) {
+    console.log('Particles initialization error:', error);
+  }
+}
+
 // Установка высоты hero секции с учетом viewport
 function setHeroHeight() {
   const hero = document.getElementById('hero');
   const header = document.getElementById('header');
+  
+  if (!hero || !header) return;
+  
   const headerHeight = header.offsetHeight;
   hero.style.minHeight = `calc(100vh - ${headerHeight}px)`;
   hero.style.marginTop = `${headerHeight}px`;
 }
 
-// Инициализация при загрузке и изменении размера окна
-window.addEventListener('load', setHeroHeight);
-window.addEventListener('resize', setHeroHeight);
-
-// Парящий эффект для шапки при скролле
-window.addEventListener('scroll', function() {
+// Основная инициализация
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM loaded');
+  
+  // Инициализация частиц с задержкой
+  setTimeout(initParticles, 1000);
+  
+  // Установка высоты hero
+  setHeroHeight();
+  
+  // Парящий эффект для шапки
   const header = document.getElementById('header');
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
+  if (header) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
   }
-});
 
-// Плавное появление секций при скролле
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
+  // Плавное появление секций
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-const observer = new IntersectionObserver(function(entries) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
   });
-}, observerOptions);
 
-document.querySelectorAll('.section').forEach(section => {
-  observer.observe(section);
-});
+  // Мобильное меню
+  const menuToggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('nav');
 
-// Плавная прокрутка к якорям
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    const targetId = this.getAttribute('href');
-    if (targetId === '#') return;
-    
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      const headerHeight = document.getElementById('header').offsetHeight;
-      window.scrollTo({
-        top: targetElement.offsetTop - headerHeight - 20,
-        behavior: 'smooth'
-      });
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      nav.classList.toggle('active');
       
-      // Закрытие мобильного меню после клика
-      if (window.innerWidth <= 768) {
-        nav.classList.remove('active');
-        menuToggle.classList.remove('active');
+      if (nav.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+      } else {
         document.body.style.overflow = 'auto';
       }
-    }
+    });
+
+    // Закрытие меню при клике на ссылку
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function() {
+        if (nav.classList.contains('active')) {
+          nav.classList.remove('active');
+          menuToggle.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  }
+
+  // Плавная прокрутка к якорям
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
+      
+      const targetElement = document.querySelector(targetId);
+      const header = document.getElementById('header');
+      
+      if (targetElement && header) {
+        const headerHeight = header.offsetHeight;
+        window.scrollTo({
+          top: targetElement.offsetTop - headerHeight - 20,
+          behavior: 'smooth'
+        });
+      }
+    });
   });
 });
 
-// Мобильное меню
-const menuToggle = document.getElementById('menuToggle');
-const nav = document.getElementById('nav');
-
-menuToggle.addEventListener('click', function() {
-  this.classList.toggle('active');
-  nav.classList.toggle('active');
-  
-  // Блокировка прокрутки при открытом меню
-  if (nav.classList.contains('active')) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
-});
-
-// Закрытие меню при клике вне его области
-document.addEventListener('click', function(e) {
-  if (window.innerWidth <= 768 && nav.classList.contains('active')) {
-    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
-      nav.classList.remove('active');
-      menuToggle.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  }
-});
-
-// Закрытие меню при изменении размера окна
+// Ресайз события
 window.addEventListener('resize', function() {
-  if (window.innerWidth > 768) {
+  setHeroHeight();
+  
+  // Закрытие мобильного меню при увеличении экрана
+  const nav = document.getElementById('nav');
+  const menuToggle = document.getElementById('menuToggle');
+  if (window.innerWidth > 768 && nav && menuToggle) {
     nav.classList.remove('active');
     menuToggle.classList.remove('active');
     document.body.style.overflow = 'auto';
   }
 });
 
-// Прокрутка к началу страницы при загрузке на мобильных устройствах
+// Сообщаем браузеру что страница загружена
 window.addEventListener('load', function() {
-  if (window.innerWidth <= 768) {
-    window.scrollTo(0, 0);
+  console.log('Page fully loaded');
+  // Принудительно завершаем загрузку
+  if (window.stop) {
+    window.stop();
   }
 });
