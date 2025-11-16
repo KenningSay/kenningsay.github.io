@@ -29,9 +29,9 @@ body {
     radial-gradient(circle at 10% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(255, 107, 0, 0.1) 0%, transparent 20%),
     linear-gradient(135deg, #0a0a0f 0%, #1a1a1f 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-light);
-  line-height: 1.6;
+  line-height: 1.7;
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
@@ -99,6 +99,7 @@ header.scrolled {
   align-items: center;
   gap: 1rem;
   color: var(--orange);
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.7rem;
   font-weight: 700;
   transition: var(--transition);
@@ -140,6 +141,7 @@ nav ul {
 nav a {
   color: var(--white);
   text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   position: relative;
   padding: 0.6rem 0;
@@ -282,8 +284,10 @@ nav a:hover::after {
 }
 
 .hero h1 {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
   color: var(--orange);
   text-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
   background: linear-gradient(135deg, var(--orange), var(--orange-light));
@@ -292,8 +296,17 @@ nav a:hover::after {
   background-clip: text;
 }
 
+.hero .subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--orange-light);
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
 .hero p {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   font-size: 1.3rem;
   color: var(--text-light);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -306,7 +319,8 @@ nav a:hover::after {
   padding: 1rem 2.5rem;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
@@ -357,7 +371,9 @@ nav a:hover::after {
 
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.8rem;
+  font-weight: 700;
   color: var(--orange);
   margin-bottom: 3.5rem;
   text-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
@@ -402,14 +418,13 @@ nav a:hover::after {
 .about-content {
   font-size: 1.2rem;
   line-height: 1.8;
+  text-align: center;
 }
 
-.about-content p:first-of-type + p {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--orange-light);
-  margin: 1rem 0 2rem 0;
-  text-align: center;
+.about-content p:first-of-type {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  color: var(--text-light);
 }
 
 .process-steps {
@@ -423,6 +438,7 @@ nav a:hover::after {
   padding: 1.5rem;
   margin-bottom: 1.5rem;
   transition: var(--transition);
+  text-align: left;
 }
 
 .process-step:hover {
@@ -435,6 +451,7 @@ nav a:hover::after {
   color: var(--orange);
   margin-bottom: 0.5rem;
   font-size: 1.3rem;
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -459,6 +476,12 @@ nav a:hover::after {
   color: var(--orange);
   margin-bottom: 1rem;
   font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.materials p {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 /* Преимущества */
@@ -528,6 +551,11 @@ nav a:hover::after {
   margin-bottom: 1.2rem;
   color: var(--orange);
   font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.feature p {
+  font-size: 1.1rem;
 }
 
 /* Галерея */
@@ -601,6 +629,7 @@ footer {
   margin-top: 4rem;
   border-top: 1px solid var(--glass-border);
   box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* Мобильная адаптация */
@@ -666,7 +695,11 @@ footer {
   }
 
   .hero h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+  }
+
+  .hero .subtitle {
+    font-size: 1.3rem;
   }
 
   .hero p {
@@ -678,7 +711,7 @@ footer {
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 
   .glass-card {
@@ -719,7 +752,11 @@ footer {
   }
   
   .hero h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
+  }
+  
+  .hero .subtitle {
+    font-size: 1.1rem;
   }
   
   .btn {
