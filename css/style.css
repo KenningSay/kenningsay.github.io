@@ -112,8 +112,8 @@ header.scrolled {
 }
 
 .text-logo{
-  width: 35px;
-  height: 55px;
+  width: 200px;
+  height: 80px;
   border-radius: 12px;
   object-fit: contain;
   size: 15px;
