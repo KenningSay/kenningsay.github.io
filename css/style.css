@@ -117,6 +117,7 @@ header.scrolled {
   border-radius: 12px;
   object-fit: contain;
   size: 15px;
+  transition: var(--transition);
 }
 
 .logo-image {
