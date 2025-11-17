@@ -115,8 +115,9 @@ header.scrolled {
   width: 35;
   height: 55;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;
   padding: 3px;
+  size: 15px;
 }
 
 .logo-image {
