@@ -132,6 +132,15 @@ header.scrolled {
   padding: 3px;
 }
 
+.logo:hover .text-image {
+  transform: scale(1.2) rotate(5deg);
+  box-shadow: 
+    0 0 25px var(--orange),
+    inset 0 0 15px rgba(255, 107, 0, 0.5);
+  filter: brightness(0) invert(1) contrast(1.2) drop-shadow(0 0 8px white);
+}
+
+
 .logo:hover .logo-image {
   transform: scale(1.2) rotate(5deg);
   box-shadow: 
