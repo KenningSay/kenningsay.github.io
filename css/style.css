@@ -132,7 +132,7 @@ header.scrolled {
   padding: 3px;
 }
 
-.logo:hover .text-image {
+.logo:hover .text-logo {
   transform: scale(1.2) rotate(5deg);
   box-shadow: 
     0 0 25px var(--orange),
