@@ -605,8 +605,8 @@ nav a:hover::after {
 }
 
 .gallery img {
-  width: 240px;
-  height: 180px;
+  width: 480px;
+  height: 300px;
   object-fit: cover;
   border-radius: 20px;
   flex-shrink: 0;
