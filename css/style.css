@@ -849,3 +849,238 @@ header {
   border-radius: 4px;
   box-shadow: 0 0 15px var(--orange);
 }
+
+/*Анимация печати */
+
+/* Секция демонстрации печати */
+.printing-demo-section {
+  margin: 4rem 0;
+}
+
+.printing-demo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* 3D Принтер */
+.printer-machine {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.printer-body {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px 15px 0 0;
+  border: 3px solid #444;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.printer-bed {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 200px;
+  background: #333;
+  border: 2px solid #555;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.printing-model {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 100%;
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+.print-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, var(--orange), var(--orange-light));
+  transition: height 0.1s ease;
+  border-radius: 4px 4px 0 0;
+}
+
+.printer-head {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  background: #444;
+  border-radius: 8px;
+  animation: printHeadMove 4s infinite alternate;
+}
+
+.nozzle {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 12px;
+  background: #666;
+  border-radius: 0 0 4px 4px;
+}
+
+.filament {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 20px;
+  background: var(--orange);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.printer-base {
+  width: 350px;
+  height: 20px;
+  background: linear-gradient(135deg, #333, #222);
+  margin: 0 auto;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Анимации */
+@keyframes printHeadMove {
+  0%, 100% { transform: translateX(-50%) translateX(-80px); }
+  50% { transform: translateX(-50%) translateX(80px); }
+}
+
+@keyframes printing {
+  0% { height: 0%; }
+  100% { height: 100%; }
+}
+
+@keyframes extrudeFilament {
+  0% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+  50% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+  100% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+}
+
+.printing .print-layer {
+  animation: printing 3s ease-in-out forwards;
+}
+
+.printing .filament {
+  animation: extrudeFilament 0.5s infinite;
+}
+
+/* Элементы управления */
+.printing-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.print-btn, .reset-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.print-btn {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--black);
+  box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
+}
+
+.print-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.6);
+}
+
+.reset-btn {
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--glass-border);
+}
+
+.reset-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.print-progress {
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--orange-glow);
+}
+
+.progress-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--orange);
+}
+
+.print-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  opacity: 0.8;
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--orange);
+  font-size: 1.1rem;
+}

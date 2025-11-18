@@ -242,3 +242,85 @@ window.addEventListener('load', function() {
     window.stop();
   }
 });
+
+// Анимация процесса печати
+document.addEventListener('DOMContentLoaded', function() {
+  const startBtn = document.getElementById('startPrint');
+  const resetBtn = document.getElementById('resetPrint');
+  const printingModel = document.getElementById('printingModel');
+  const printLayer = document.querySelector('.print-layer');
+  const progressFill = document.querySelector('.progress-fill');
+  const progressText = document.querySelector('.progress-text');
+  const currentLayer = document.getElementById('currentLayer');
+  const printTime = document.getElementById('printTime');
+  
+  let isPrinting = false;
+  let printInterval;
+  let layersCompleted = 0;
+  const totalLayers = 100;
+  let timeElapsed = 0;
+  
+  startBtn.addEventListener('click', startPrinting);
+  resetBtn.addEventListener('click', resetPrinting);
+  
+  function startPrinting() {
+    if (isPrinting) return;
+    
+    isPrinting = true;
+    printingModel.classList.add('printing');
+    startBtn.disabled = true;
+    
+    // Запускаем анимацию
+    let progress = 0;
+    layersCompleted = 0;
+    timeElapsed = 0;
+    
+    printInterval = setInterval(() => {
+      progress += 1;
+      layersCompleted += 1;
+      timeElapsed += 1;
+      
+      // Обновляем визуальные элементы
+      printLayer.style.height = progress + '%';
+      progressFill.style.width = progress + '%';
+      progressText.textContent = progress + '% завершено';
+      currentLayer.textContent = layersCompleted + '/' + totalLayers;
+      printTime.textContent = formatTime(timeElapsed);
+      
+      if (progress >= 100) {
+        finishPrinting();
+      }
+    }, 50);
+  }
+  
+  function resetPrinting() {
+    clearInterval(printInterval);
+    isPrinting = false;
+    printingModel.classList.remove('printing');
+    startBtn.disabled = false;
+    
+    printLayer.style.height = '0%';
+    progressFill.style.width = '0%';
+    progressText.textContent = '0% завершено';
+    currentLayer.textContent = '0/' + totalLayers;
+    printTime.textContent = '0:00';
+  }
+  
+  function finishPrinting() {
+    clearInterval(printInterval);
+    isPrinting = false;
+    startBtn.disabled = false;
+    
+    // Добавляем завершающий эффект
+    printingModel.style.boxShadow = '0 0 30px rgba(255, 107, 0, 0.5)';
+    setTimeout(() => {
+      printingModel.style.boxShadow = 'none';
+    }, 2000);
+  }
+  
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+});
