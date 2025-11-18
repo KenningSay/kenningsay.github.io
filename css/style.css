@@ -807,25 +807,7 @@ footer {
   border-radius: 20px;
   backdrop-filter: blur(5px);
 }
-/* Убираем полосу вверху */
-.hero {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  min-height: 100vh;
-}
 
-/* Убираем отступы у body */
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Шапка поверх контента */
-header {
-  position: fixed;
-  top: 10px;
-  z-index: 1000;
-}
 .materials h2 {
   color: var(--orange);
   text-align: center;
