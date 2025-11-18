@@ -579,11 +579,17 @@ nav a:hover::after {
 
 /* Галерея */
 .gallery {
-  display: flex;
-  gap: 1.5rem;
+  display: grid;
+  grid-template-rows: repeat(2, 260px);  /* ← Две строки фиксированной высоты */
+  grid-auto-columns: 340px;              /* ← Ширина колонок как у изображений */
+  grid-auto-flow: column;                /* ← Заполняем колонками, а не строками */
+  gap: 2.8rem;
   overflow-x: auto;
-  padding: 1.5rem 0;
+  overflow-y: hidden;
+  padding: 4.5rem 0;
   scroll-behavior: smooth;
+  margin: 0.2rem 0;
+  border-radius: 0.2px;
 }
 
 .gallery::-webkit-scrollbar {
@@ -602,8 +608,8 @@ nav a:hover::after {
 }
 
 .gallery img {
-  width: 240px;
-  height: 180px;
+  width: 320px;
+  height: 280px;
   object-fit: cover;
   border-radius: 20px;
   flex-shrink: 0;
@@ -611,10 +617,11 @@ nav a:hover::after {
   box-shadow: var(--shadow);
   transition: var(--transition);
   background: var(--black-light);
+  gap: 0.8rem;
 }
 
 .gallery img:hover {
-  transform: scale(1.08);
+  transform: scale(1.002);
   border-color: var(--orange);
   box-shadow: 0 15px 35px rgba(255, 107, 0, 0.4);
 }
