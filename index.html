@@ -128,6 +128,17 @@
         <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjNzc3Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJNb250c2VycmF0IiBmb250LXNpemU9IjE2IiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW4gUHJvZ3Jlc3M8L3RleHQ+PC9zdmc+" alt="Процесс работы">
       </div>
     </div>
+    <div id="imageViewer" class="image-viewer">
+  <div class="viewer-content">
+    <span class="close-btn">&times;</span>
+    <button class="nav-btn prev-btn">‹</button>
+    <button class="nav-btn next-btn">›</button>
+    <img id="viewerImage" src="" alt="Просмотр изображения">
+    <div class="image-counter">
+      <span id="currentIndex">1</span> / <span id="totalImages">0</span>
+    </div>
+  </div>
+</div>
   </section>
 
   <!-- Контакты -->
@@ -185,5 +196,6 @@
     console.log('Particles.js not loaded, continuing without it');
   });
 </script>
+<script src="js/gallery-viewer.js"></script>
 </body>
 </html>
