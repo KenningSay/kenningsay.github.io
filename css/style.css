@@ -206,43 +206,9 @@ nav a:hover::after {
   opacity: 1;
 }
 
-/* Мобильное меню */
+/* Мобильное меню - скрыто на ПК */
 .menu-toggle {
   display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 32px;
-  height: 24px;
-  cursor: pointer;
-  z-index: 1001;
-  padding: 5px;
-}
-
-.menu-toggle span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background: linear-gradient(90deg, var(--orange), var(--orange-light));
-  border-radius: 3px;
-  transition: var(--transition);
-  box-shadow: 0 0 8px var(--orange-glow);
-}
-
-.menu-toggle.active span {
-  background: var(--orange);
-  box-shadow: 0 0 12px var(--orange);
-}
-
-.menu-toggle.active span:nth-child(1) {
-  transform: translateY(10px) rotate(45deg);
-}
-
-.menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.active span:nth-child(3) {
-  transform: translateY(-10px) rotate(-45deg);
 }
 
 /* Главный баннер с картинкой */
@@ -577,12 +543,12 @@ nav a:hover::after {
   font-size: 1.1rem;
 }
 
-/* Галерея */
+/* Галерея - ПК версия */
 .gallery {
   display: grid;
-  grid-template-rows: repeat(2, 260px);  /* ← Две строки фиксированной высоты */
-  grid-auto-columns: 340px;              /* ← Ширина колонок как у изображений */
-  grid-auto-flow: column;                /* ← Заполняем колонками, а не строками */
+  grid-template-rows: repeat(2, 260px);
+  grid-auto-columns: 340px;
+  grid-auto-flow: column;
   gap: 2.8rem;
   overflow-x: auto;
   overflow-y: hidden;
@@ -658,222 +624,19 @@ footer {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Мобильная адаптация */
-@media (max-width: 768px) {
-  header {
-    width: 95%;
-    padding: 1rem 1.5rem;
-    border-radius: 40px;
-  }
-
-  header.scrolled {
-    padding: 0.9rem 1.3rem;
-    border-radius: 40px;
-  }
-
-  .menu-toggle {
-    display: flex;
-  }
-
-  nav {
-    position: fixed;
-    top: 100px;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: auto;
-    background: linear-gradient(135deg, rgba(18, 18, 18, 0.98) 0%, rgba(30, 30, 30, 0.95) 100%);
-    backdrop-filter: blur(25px) saturate(180%);
-    transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    z-index: 999;
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
-    box-shadow: 
-      0 20px 45px rgba(0, 0, 0, 0.6),
-      0 0 30px var(--orange-glow);
-    padding: 1.5rem 0;
-  }
-  @media (max-width: 768px) {
-  .gallery {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    gap: 1rem !important;
-    overflow-x: auto;
-    padding: 2rem 1rem !important;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    align-items: flex-start; /* ← Выравнивание по верху */
-  }
-
-  .gallery img {
-    width: 85vw !important;
-    height: auto !important; /* ← Автоматическая высота */
-    max-height: 70vh !important; /* ← Максимальная высота */
-    min-height: 200px !important; /* ← Минимальная высота */
-    flex: 0 0 auto !important;
-    scroll-snap-align: center;
-    margin: 0 0.5rem;
-    border-radius: 15px;
-    object-fit: contain; /* ← Сохраняем пропорции */
-  }
-}
-
-/* Для очень маленьких экранов */
-@media (max-width: 480px) {
-  .gallery {
-    gap: 0.8rem !important;
-    padding: 1.5rem 0.5rem !important;
-  }
-
-  .gallery img {
-    width: 90vw !important;
-    max-height: 60vh !important;
-    min-height: 180px !important;
-    margin: 0 0.3rem;
-  }
-}
-
-  nav.active {
-    right: 2.5%;
-  }
-
-  nav ul {
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-  }
-
-  nav li {
-    width: 100%;
-    border-bottom: 1px solid rgba(255, 107, 0, 0.2);
-  }
-
-  nav li:last-child {
-    border-bottom: none;
-  }
-
-  nav a {
-    display: block;
-    padding: 1.2rem 2rem;
-    width: 100%;
-    font-size: 1.1rem;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .hero .subtitle {
-    font-size: 1.3rem;
-  }
-
-  .hero p {
-    font-size: 1.1rem;
-  }
-
-  .section {
-    padding: 4rem 1rem;
-  }
-
-  .section-title {
-    font-size: 2.2rem;
-  }
-
-  .glass-card {
-    padding: 2rem;
-  }
-
-  .features {
-    gap: 1.8rem;
-  }
-
-  .feature {
-    width: 100%;
-    max-width: 280px;
-    padding: 2rem 1.5rem;
-  }
-
-  .gallery img {
-    width: 200px;
-    height: 150px;
-  }
-
-  .about-content {
-    font-size: 1.1rem;
-  }
-
-  .process-step {
-    padding: 1.2rem;
-  }
-
-  .process-step h3 {
-    font-size: 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-content {
-    padding: 2.5rem 1.5rem;
-  }
-  
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .hero .subtitle {
-    font-size: 1.1rem;
-  }
-  
-  .btn {
-    padding: 0.9rem 2rem;
-    font-size: 1rem;
-  }
-  
-  .section-title {
-    font-size: 1.8rem;
-  }
-  
-  .gallery img {
-    width: 180px;
-    height: 135px;
-  }
-  
-  header {
-    width: 92%;
-    border-radius: 35px;
-  }
-  
-  .logo {
-    font-size: 1.4rem;
-  }
-  
-  .logo-image {
-    width: 35px;
-    height: 35px;
-  }
-
-  .about-content {
-    font-size: 1rem;
-  }
-
-  .process-step {
-    padding: 1rem;
-  }
-}
-/* Стили для просмотрщика изображений */
 /* Стили для просмотрщика изображений */
 .image-viewer {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;           /* ← Исправлено: viewport width */
-  height: 100vh;          /* ← Исправлено: viewport height */
-  background: rgba(19, 4, 1, 0.75); /* ← Увеличил прозрачность */
-  z-index: 10000;         /* ← Увеличил z-index */
+  width: 100vw;
+  height: 100vh;
+  background: rgba(19, 4, 1, 0.75);
+  z-index: 10000;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(6px); /* ← Добавил размытие фона */
+  backdrop-filter: blur(6px);
 }
 
 .image-viewer.active {
@@ -882,8 +645,8 @@ footer {
 
 .viewer-content {
   position: relative;
-  max-width: 90vw;        /* ← Исправлено: viewport width */
-  max-height: 90vh;       /* ← Исправлено: viewport height */
+  max-width: 90vw;
+  max-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -891,21 +654,20 @@ footer {
 
 #viewerImage {
   max-width: 100%;
-  max-height: 80vh;       /* ← Ограничил высоту изображения */
-  object-fit: contain;    /* ← Сохраняет пропорции */
+  max-height: 80vh;
+  object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
 }
 
-/* Кнопка закрытия */
 .close-btn {
   position: absolute;
-  top: -50px;             /* ← Поднял выше */
+  top: -50px;
   right: 0;
   font-size: 40px;
   color: white;
   cursor: pointer;
-  background: rgba(0, 0, 0, 0.5); /* ← Добавил фон */
+  background: rgba(0, 0, 0, 0.5);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -921,16 +683,15 @@ footer {
   transform: scale(1.2);
 }
 
-/* Кнопки навигации */
 .nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 107, 0, 0.8); /* ← Увеличил прозрачность */
+  background: rgba(255, 107, 0, 0.8);
   color: white;
   border: none;
   font-size: 30px;
-  width: 60px;            /* ← Увеличил размер */
+  width: 60px;
   height: 60px;
   border-radius: 50%;
   cursor: pointer;
@@ -947,17 +708,16 @@ footer {
 }
 
 .prev-btn {
-  left: 20px;             /* ← Прижал к краям */
+  left: 20px;
 }
 
 .next-btn {
   right: 20px;
 }
 
-/* Счётчик изображений */
 .image-counter {
   position: absolute;
-  bottom: -50px;          /* ← Опустил ниже */
+  bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
   color: white;
@@ -966,88 +726,4 @@ footer {
   padding: 8px 20px;
   border-radius: 20px;
   backdrop-filter: blur(5px);
-}
-/* Галерея - мобильная версия */
-@media (max-width: 768px) {
-  .gallery {
-    display: flex !important; /* ← Переопределяем grid на flex */
-    flex-wrap: nowrap !important;
-    grid-template-rows: none !important;
-    grid-auto-columns: none !important;
-    grid-auto-flow: unset !important;
-    gap: 1rem !important;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 2rem 1rem !important;
-    scroll-snap-type: x mandatory; /* ← Добавляем snap эффект */
-    -webkit-overflow-scrolling: touch; /* ← Плавный скролл на iOS */
-  }
-
-  .gallery img {
-    width: 85vw !important; /* ← Занимает 85% ширины экрана */
-    height: 60vh !important; /* ← Увеличиваем высоту */
-    flex: 0 0 auto !important; /* ← Отключаем растягивание */
-    scroll-snap-align: center; /* ← Привязка к центру при скролле */
-    margin: 0 0.5rem; /* ← Небольшие отступы между картинками */
-    border-radius: 15px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  .gallery img:hover {
-    transform: none !important; /* ← Отключаем hover эффекты на мобильных */
-  }
-
-  /* Улучшаем скроллбар для мобильных */
-  .gallery::-webkit-scrollbar {
-    height: 6px;
-  }
-
-  .gallery::-webkit-scrollbar-thumb {
-    background: var(--orange);
-    border-radius: 3px;
-  }
-}
-
-/* Ещё более компактная версия для очень маленьких экранов */
-@media (max-width: 480px) {
-  .gallery {
-    gap: 0.8rem !important;
-    padding: 1.5rem 0.5rem !important;
-  }
-
-  .gallery img {
-    width: 90vw !important;
-    height: 50vh !important;
-    margin: 0 0.3rem;
-  }
-}
-/* Индикатор прогресса для мобильной галереи */
-.gallery-container {
-  position: relative;
-}
-
-.gallery-indicators {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .gallery-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255, 107, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .indicator.active {
-    background: var(--orange);
-    transform: scale(1.2);
-  }
 }
