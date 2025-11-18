@@ -157,14 +157,66 @@
     </div>
   </div>
 </div>
-  <!-- Контакты -->
+
+
+
+<div class="printing-demo-section">
+    <h2 class="section-title">Как мы печатаем</h2>
+    <div class="glass-card">
+        <div class="printing-demo-container">
+            <div class="printer-machine">
+                <div class="printer-body">
+                    <div class="printer-bed">
+                        <div class="printing-model" id="printingModel">
+                            <!-- Анимируемый слой -->
+                            <div class="print-layer" style="height: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="printer-head">
+                        <div class="nozzle"></div>
+                        <div class="filament"></div>
+                    </div>
+                </div>
+                <div class="printer-base"></div>
+            </div>
+            
+            <div class="printing-controls">
+                <button class="print-btn" id="startPrint">Запустить печать</button>
+                <button class="reset-btn" id="resetPrint">Сбросить</button>
+                <div class="print-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <span class="progress-text">0% завершено</span>
+                </div>
+                <div class="print-stats">
+                    <div class="stat">
+                        <span class="stat-label">Слой:</span>
+                        <span class="stat-value" id="currentLayer">0/100</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Время:</span>
+                        <span class="stat-value" id="printTime">0:00</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Материал:</span>
+                        <span class="stat-value">PLA</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+
+<!-- Контакты -->
   <section id="contact" class="section">
     <h2 class="section-title">Свяжитесь с нами</h2>
     <div class="glass-card">
       <div class="contact-info">
         <p>📧 Email: hello@layerbylayer.ru</p>
         <p>📱 Telegram: @layerbylayer</p>
-        <p>📞 WhatsApp: +7 (999) 123-45-67</p>
         <p>🕒 Время работы: Ежедневно 10:00-20:00</p>
         <p style="margin-top: 2rem; font-style: italic;">
           Ответим на все вопросы, поможем с идеей и рассчитаем стоимость вашего проекта
