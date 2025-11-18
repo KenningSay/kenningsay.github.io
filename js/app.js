@@ -244,83 +244,68 @@ window.addEventListener('load', function() {
 });
 
 // Анимация процесса печати
+// Простая демонстрация печати
 document.addEventListener('DOMContentLoaded', function() {
-  const startBtn = document.getElementById('startPrint');
-  const resetBtn = document.getElementById('resetPrint');
-  const printingModel = document.getElementById('printingModel');
-  const printLayer = document.querySelector('.print-layer');
-  const progressFill = document.querySelector('.progress-fill');
-  const progressText = document.querySelector('.progress-text');
-  const currentLayer = document.getElementById('currentLayer');
-  const printTime = document.getElementById('printTime');
+  const demoBtn = document.getElementById('demoPrintBtn');
+  const demoMessage = document.getElementById('demoMessage');
+  const printer = document.querySelector('.printer');
+  const objectLayers = document.querySelector('.object-layers');
+  const nozzle = document.querySelector('.printer-nozzle');
+  
+  // Добавляем свечение к соплу
+  const nozzleGlow = document.createElement('div');
+  nozzleGlow.className = 'nozzle-glow';
+  nozzle.appendChild(nozzleGlow);
   
   let isPrinting = false;
-  let printInterval;
-  let layersCompleted = 0;
-  const totalLayers = 100;
-  let timeElapsed = 0;
   
-  startBtn.addEventListener('click', startPrinting);
-  resetBtn.addEventListener('click', resetPrinting);
-  
-  function startPrinting() {
+  demoBtn.addEventListener('click', function() {
     if (isPrinting) return;
     
     isPrinting = true;
-    printingModel.classList.add('printing');
-    startBtn.disabled = true;
+    demoBtn.disabled = true;
+    demoMessage.textContent = "Идет печать... Смотрите как создается объект!";
+    document.querySelector('.simple-printer-demo').classList.add('printing-started');
+    printer.classList.add('printing');
     
-    // Запускаем анимацию
-    let progress = 0;
-    layersCompleted = 0;
-    timeElapsed = 0;
+    // Очищаем предыдущие слои
+    objectLayers.innerHTML = '';
+    objectLayers.style.height = '0';
     
-    printInterval = setInterval(() => {
-      progress += 1;
-      layersCompleted += 1;
-      timeElapsed += 1;
-      
-      // Обновляем визуальные элементы
-      printLayer.style.height = progress + '%';
-      progressFill.style.width = progress + '%';
-      progressText.textContent = progress + '% завершено';
-      currentLayer.textContent = layersCompleted + '/' + totalLayers;
-      printTime.textContent = formatTime(timeElapsed);
-      
-      if (progress >= 100) {
+    // Запускаем анимацию печати
+    let layers = 0;
+    const totalLayers = 12;
+    
+    const printInterval = setInterval(() => {
+      if (layers >= totalLayers) {
+        clearInterval(printInterval);
         finishPrinting();
+        return;
       }
-    }, 50);
-  }
-  
-  function resetPrinting() {
-    clearInterval(printInterval);
-    isPrinting = false;
-    printingModel.classList.remove('printing');
-    startBtn.disabled = false;
-    
-    printLayer.style.height = '0%';
-    progressFill.style.width = '0%';
-    progressText.textContent = '0% завершено';
-    currentLayer.textContent = '0/' + totalLayers;
-    printTime.textContent = '0:00';
-  }
+      
+      // Добавляем слой
+      const layer = document.createElement('div');
+      layer.className = 'print-layer';
+      layer.style.animationDelay = (layers * 0.1) + 's';
+      objectLayers.appendChild(layer);
+      
+      // Увеличиваем высоту
+      objectLayers.style.height = (layers * 10) + 'px';
+      
+      layers++;
+    }, 200);
+  });
   
   function finishPrinting() {
-    clearInterval(printInterval);
-    isPrinting = false;
-    startBtn.disabled = false;
+    printer.classList.remove('printing');
+    document.querySelector('.printed-object').classList.add('print-complete');
+    demoMessage.textContent = "Готово! Объект напечатан. Хотите так же?";
+    demoBtn.innerHTML = '<span class="btn-icon">🔄</span><span class="btn-text">Повторить демо</span>';
+    demoBtn.disabled = false;
     
-    // Добавляем завершающий эффект
-    printingModel.style.boxShadow = '0 0 30px rgba(255, 107, 0, 0.5)';
     setTimeout(() => {
-      printingModel.style.boxShadow = 'none';
-    }, 2000);
-  }
-  
-  function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+      isPrinting = false;
+      document.querySelector('.printed-object').classList.remove('print-complete');
+    }, 3000);
   }
 });

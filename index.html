@@ -161,47 +161,30 @@
 
 
 <div class="printing-demo-section">
-    <h2 class="section-title">Как мы печатаем</h2>
+    <h2 class="section-title">Посмотрите как работает 3D-печать</h2>
     <div class="glass-card">
-        <div class="printing-demo-container">
-            <div class="printer-machine">
-                <div class="printer-body">
+        <div class="simple-printer-demo">
+            <div class="printer-visual">
+                <div class="printer">
                     <div class="printer-bed">
-                        <div class="printing-model" id="printingModel">
-                            <!-- Анимируемый слой -->
-                            <div class="print-layer" style="height: 0%"></div>
+                        <div class="printed-object">
+                            <div class="object-base"></div>
+                            <div class="object-layers">
+                                <!-- Слои будут добавляться через JS -->
+                            </div>
                         </div>
                     </div>
-                    <div class="printer-head">
-                        <div class="nozzle"></div>
-                        <div class="filament"></div>
-                    </div>
+                    <div class="printer-nozzle"></div>
                 </div>
-                <div class="printer-base"></div>
             </div>
             
-            <div class="printing-controls">
-                <button class="print-btn" id="startPrint">Запустить печать</button>
-                <button class="reset-btn" id="resetPrint">Сбросить</button>
-                <div class="print-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
-                    <span class="progress-text">0% завершено</span>
-                </div>
-                <div class="print-stats">
-                    <div class="stat">
-                        <span class="stat-label">Слой:</span>
-                        <span class="stat-value" id="currentLayer">0/100</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Время:</span>
-                        <span class="stat-value" id="printTime">0:00</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">Материал:</span>
-                        <span class="stat-value">PLA</span>
-                    </div>
+            <div class="demo-controls">
+                <button class="demo-btn" id="demoPrintBtn">
+                    <span class="btn-icon">🖨️</span>
+                    <span class="btn-text">Запустить демо-печать</span>
+                </button>
+                <div class="demo-message" id="demoMessage">
+                    Нажмите кнопку чтобы увидеть магию 3D-печати!
                 </div>
             </div>
         </div>
