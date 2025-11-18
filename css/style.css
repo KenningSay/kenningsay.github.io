@@ -822,17 +822,19 @@ footer {
   }
 }
 /* Стили для просмотрщика изображений */
+/* Стили для просмотрщика изображений */
 .image-viewer {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
+  width: 100vw;           /* ← Исправлено: viewport width */
+  height: 100vh;          /* ← Исправлено: viewport height */
+  background: rgba(0, 0, 0, 0.95); /* ← Увеличил прозрачность */
+  z-index: 10000;         /* ← Увеличил z-index */
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(10px); /* ← Добавил размытие фона */
 }
 
 .image-viewer.active {
@@ -841,13 +843,17 @@ footer {
 
 .viewer-content {
   position: relative;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 90vw;        /* ← Исправлено: viewport width */
+  max-height: 90vh;       /* ← Исправлено: viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #viewerImage {
   max-width: 100%;
-  max-height: 90vh;
+  max-height: 80vh;       /* ← Ограничил высоту изображения */
+  object-fit: contain;    /* ← Сохраняет пропорции */
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(255, 107, 0, 0.5);
 }
@@ -855,16 +861,24 @@ footer {
 /* Кнопка закрытия */
 .close-btn {
   position: absolute;
-  top: -40px;
+  top: -50px;             /* ← Поднял выше */
   right: 0;
   font-size: 40px;
   color: white;
   cursor: pointer;
-  transition: var(--transition);
+  background: rgba(0, 0, 0, 0.5); /* ← Добавил фон */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
 }
 
 .close-btn:hover {
   color: var(--orange);
+  background: rgba(0, 0, 0, 0.8);
   transform: scale(1.2);
 }
 
@@ -873,15 +887,19 @@ footer {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 107, 0, 0.7);
+  background: rgba(255, 107, 0, 0.8); /* ← Увеличил прозрачность */
   color: white;
   border: none;
   font-size: 30px;
-  width: 50px;
-  height: 50px;
+  width: 60px;            /* ← Увеличил размер */
+  height: 60px;
   border-radius: 50%;
   cursor: pointer;
   transition: var(--transition);
+  z-index: 10001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-btn:hover {
@@ -890,22 +908,23 @@ footer {
 }
 
 .prev-btn {
-  left: -70px;
+  left: 20px;             /* ← Прижал к краям */
 }
 
 .next-btn {
-  right: -70px;
+  right: 20px;
 }
 
 /* Счётчик изображений */
 .image-counter {
   position: absolute;
-  bottom: -40px;
+  bottom: -50px;          /* ← Опустил ниже */
   left: 50%;
   transform: translateX(-50%);
   color: white;
   font-size: 18px;
   background: rgba(0, 0, 0, 0.7);
-  padding: 5px 15px;
+  padding: 8px 20px;
   border-radius: 20px;
+  backdrop-filter: blur(5px);
 }
