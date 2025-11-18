@@ -608,8 +608,8 @@ nav a:hover::after {
 }
 
 .gallery img {
-  width: 320px;
-  height: 280px;
+  width: 355px;
+  height: 270px;
   object-fit: cover;
   border-radius: 20px;
   flex-shrink: 0;
