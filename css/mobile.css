@@ -277,12 +277,17 @@ nav a:hover {
 
 .materials-grid {
   grid-template-columns: repeat(2, 1fr) !important;
-  gap: 0.8rem !important;
+  gap: 1rem !important;
 }
 
 .material-item {
-  padding: 0.8rem !important;
-  font-size: 0.9rem;
+  padding: 1.5rem 1rem !important;
+  font-size: 1.1rem !important;
+  min-height: 100px !important;
+}
+
+.material-item .emoji {
+  font-size: 2rem !important;
 }
 
 /* Преимущества */
