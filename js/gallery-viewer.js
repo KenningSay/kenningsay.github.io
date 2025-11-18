@@ -79,28 +79,38 @@ function initGalleryIndicators() {
   
   const gallery = document.querySelector('.gallery');
   const images = document.querySelectorAll('.gallery img');
+  const existingIndicators = document.querySelector('.gallery-indicators');
   
-  // Создаем индикаторы
-  const indicatorsContainer = document.createElement('div');
-  indicatorsContainer.className = 'gallery-indicators';
+  // Удаляем старые индикаторы если есть
+  if (existingIndicators) {
+    existingIndicators.remove();
+  }
   
-  images.forEach((_, index) => {
-    const indicator = document.createElement('div');
-    indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-    indicatorsContainer.appendChild(indicator);
-  });
-  
-  // Вставляем после галереи
-  gallery.parentNode.appendChild(indicatorsContainer);
-  
-  // Обновляем индикаторы при скролле
-  gallery.addEventListener('scroll', updateIndicators);
+  // Создаем индикаторы только если их нет и есть изображения
+  if (images.length > 0 && !existingIndicators) {
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.className = 'gallery-indicators';
+    
+    images.forEach((_, index) => {
+      const indicator = document.createElement('div');
+      indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+      indicatorsContainer.appendChild(indicator);
+    });
+    
+    // Вставляем после галереи
+    gallery.parentNode.appendChild(indicatorsContainer);
+    
+    // Обновляем индикаторы при скролле
+    gallery.addEventListener('scroll', updateIndicators);
+  }
 }
 
 function updateIndicators() {
   const gallery = document.querySelector('.gallery');
   const images = document.querySelectorAll('.gallery img');
   const indicators = document.querySelectorAll('.indicator');
+  
+  if (images.length === 0 || indicators.length === 0) return;
   
   const scrollLeft = gallery.scrollLeft;
   const imageWidth = images[0].offsetWidth + 16; // + gap
@@ -112,6 +122,21 @@ function updateIndicators() {
   });
 }
 
-// Инициализируем при загрузке и изменении размера
-document.addEventListener('DOMContentLoaded', initGalleryIndicators);
-window.addEventListener('resize', initGalleryIndicators);
+// Защита от множественного вызова
+let isInitialized = false;
+
+function initGallery() {
+  if (isInitialized) return;
+  isInitialized = true;
+  
+  initGalleryIndicators();
+}
+
+// Инициализируем только один раз при загрузке
+document.addEventListener('DOMContentLoaded', initGallery);
+
+// При изменении размера переинициализируем
+window.addEventListener('resize', function() {
+  isInitialized = false;
+  initGallery();
+});
