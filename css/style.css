@@ -693,6 +693,45 @@ footer {
       0 0 30px var(--orange-glow);
     padding: 1.5rem 0;
   }
+  @media (max-width: 768px) {
+  .gallery {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 1rem !important;
+    overflow-x: auto;
+    padding: 2rem 1rem !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start; /* ← Выравнивание по верху */
+  }
+
+  .gallery img {
+    width: 85vw !important;
+    height: auto !important; /* ← Автоматическая высота */
+    max-height: 70vh !important; /* ← Максимальная высота */
+    min-height: 200px !important; /* ← Минимальная высота */
+    flex: 0 0 auto !important;
+    scroll-snap-align: center;
+    margin: 0 0.5rem;
+    border-radius: 15px;
+    object-fit: contain; /* ← Сохраняем пропорции */
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .gallery {
+    gap: 0.8rem !important;
+    padding: 1.5rem 0.5rem !important;
+  }
+
+  .gallery img {
+    width: 90vw !important;
+    max-height: 60vh !important;
+    min-height: 180px !important;
+    margin: 0 0.3rem;
+  }
+}
 
   nav.active {
     right: 2.5%;
