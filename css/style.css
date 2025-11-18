@@ -830,11 +830,11 @@ footer {
   left: 0;
   width: 100vw;           /* ← Исправлено: viewport width */
   height: 100vh;          /* ← Исправлено: viewport height */
-  background: rgba(0, 0, 0, 0.95); /* ← Увеличил прозрачность */
+  background: rgba(19, 4, 1, 0.75); /* ← Увеличил прозрачность */
   z-index: 10000;         /* ← Увеличил z-index */
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(10px); /* ← Добавил размытие фона */
+  backdrop-filter: blur(6px); /* ← Добавил размытие фона */
 }
 
 .image-viewer.active {
@@ -927,4 +927,88 @@ footer {
   padding: 8px 20px;
   border-radius: 20px;
   backdrop-filter: blur(5px);
+}
+/* Галерея - мобильная версия */
+@media (max-width: 768px) {
+  .gallery {
+    display: flex !important; /* ← Переопределяем grid на flex */
+    flex-wrap: nowrap !important;
+    grid-template-rows: none !important;
+    grid-auto-columns: none !important;
+    grid-auto-flow: unset !important;
+    gap: 1rem !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 2rem 1rem !important;
+    scroll-snap-type: x mandatory; /* ← Добавляем snap эффект */
+    -webkit-overflow-scrolling: touch; /* ← Плавный скролл на iOS */
+  }
+
+  .gallery img {
+    width: 85vw !important; /* ← Занимает 85% ширины экрана */
+    height: 60vh !important; /* ← Увеличиваем высоту */
+    flex: 0 0 auto !important; /* ← Отключаем растягивание */
+    scroll-snap-align: center; /* ← Привязка к центру при скролле */
+    margin: 0 0.5rem; /* ← Небольшие отступы между картинками */
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  .gallery img:hover {
+    transform: none !important; /* ← Отключаем hover эффекты на мобильных */
+  }
+
+  /* Улучшаем скроллбар для мобильных */
+  .gallery::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .gallery::-webkit-scrollbar-thumb {
+    background: var(--orange);
+    border-radius: 3px;
+  }
+}
+
+/* Ещё более компактная версия для очень маленьких экранов */
+@media (max-width: 480px) {
+  .gallery {
+    gap: 0.8rem !important;
+    padding: 1.5rem 0.5rem !important;
+  }
+
+  .gallery img {
+    width: 90vw !important;
+    height: 50vh !important;
+    margin: 0 0.3rem;
+  }
+}
+/* Индикатор прогресса для мобильной галереи */
+.gallery-container {
+  position: relative;
+}
+
+.gallery-indicators {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .gallery-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 107, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .indicator.active {
+    background: var(--orange);
+    transform: scale(1.2);
+  }
 }
