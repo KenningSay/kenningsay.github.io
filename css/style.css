@@ -834,93 +834,117 @@ footer {
 
 /*Анимация печати */
 
-/* Упрощенная демонстрация печати */
-.simple-printer-demo {
-  text-align: center;
-  padding: 2rem;
+.printing-demo-integrated {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 140, 66, 0.02));
+  border-radius: 25px;
+  border: 1px solid var(--glass-border);
 }
 
-.printer-visual {
-  margin-bottom: 3rem;
+.demo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Принтер */
+.printer-setup {
+  position: relative;
 }
 
 .printer {
   position: relative;
-  width: 200px;
-  height: 250px;
+  width: 280px;
+  height: 320px;
   margin: 0 auto;
+}
+
+.printer-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px;
+  border: 3px solid #444;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .printer-bed {
   position: absolute;
-  bottom: 0;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  height: 180px;
+  background: #333;
+  border: 2px solid #555;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.printed-item {
+  position: absolute;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 150px;
+  width: 120px;
   height: 150px;
-  background: #2a2a2a;
-  border: 3px solid #444;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.printed-object {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 120px;
-}
-
-.object-base {
+.item-layers {
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 10px;
-  background: var(--orange);
-  border-radius: 5px 5px 0 0;
-}
-
-.object-layers {
-  position: absolute;
-  bottom: 10px;
   left: 0;
   width: 100%;
   height: 0;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
 }
 
 .print-layer {
   width: 100%;
-  height: 8px;
+  height: 6px;
   background: linear-gradient(90deg, var(--orange), var(--orange-light));
-  margin-bottom: 2px;
+  margin: 1px 0;
   border-radius: 3px;
   transform: scaleY(0);
-  animation: layerAppear 0.3s ease-out forwards;
+  transform-origin: bottom;
+  animation: layerPrint 0.8s ease-out forwards;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
 }
 
-@keyframes layerAppear {
-  to {
+@keyframes layerPrint {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
     transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
   }
 }
 
-.printer-nozzle {
+.printer-head {
   position: absolute;
-  top: 30px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 40px;
-  height: 30px;
+  width: 50px;
+  height: 35px;
   background: #444;
   border-radius: 8px;
+  transition: transform 0.5s ease;
 }
 
-.printer-nozzle::after {
-  content: '';
+.nozzle {
   position: absolute;
   bottom: -8px;
   left: 50%;
@@ -931,49 +955,59 @@ footer {
   border-radius: 0 0 3px 3px;
 }
 
-/* Анимация печатающей головки */
-.printing .printer-nozzle {
-  animation: printMove 2s ease-in-out infinite;
-}
-
-@keyframes printMove {
-  0%, 100% { transform: translateX(-50%) translateX(-40px); }
-  50% { transform: translateX(-50%) translateX(40px); }
-}
-
-/* Эффект экструзии */
-.nozzle-glow {
+.filament-flow {
   position: absolute;
-  bottom: -15px;
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 8px;
-  height: 4px;
+  width: 3px;
+  height: 15px;
   background: var(--orange);
-  border-radius: 50%;
+  border-radius: 2px;
   opacity: 0;
-  filter: blur(2px);
 }
 
-.printing .nozzle-glow {
-  animation: extrudeGlow 0.5s ease-in-out infinite;
+/* Анимации печати */
+.printing .printer-head {
+  animation: headMove 4s ease-in-out infinite;
 }
 
-@keyframes extrudeGlow {
-  0%, 100% { opacity: 0; transform: translateX(-50%) scale(0.8); }
-  50% { opacity: 1; transform: translateX(-50%) scale(1.2); }
+@keyframes headMove {
+  0%, 100% { transform: translateX(-50%) translateX(-50px); }
+  25% { transform: translateX(-50%) translateX(50px); }
+  50% { transform: translateX(-50%) translateX(50px) translateY(20px); }
+  75% { transform: translateX(-50%) translateX(-50px) translateY(20px); }
 }
 
-/* Кнопка демо */
-.demo-btn {
+.printing .filament-flow {
+  animation: filamentExtrude 0.6s ease-in-out infinite;
+}
+
+@keyframes filamentExtrude {
+  0%, 100% { 
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+/* Кнопка и управление */
+.demo-action {
+  text-align: center;
+}
+
+.print-trigger {
   background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   color: var(--black);
   border: none;
-  padding: 1.2rem 2.5rem;
+  padding: 1.5rem 3rem;
   border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
@@ -983,38 +1017,67 @@ footer {
   margin-bottom: 1.5rem;
 }
 
-.demo-btn:hover {
+.print-trigger:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(255, 107, 0, 0.6);
 }
 
-.demo-btn:active {
-  transform: translateY(-1px);
+.print-trigger:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
-.btn-icon {
+.print-icon {
   font-size: 1.5rem;
 }
 
-.demo-message {
+.print-status {
   font-size: 1.1rem;
   color: var(--text-light);
-  opacity: 0.8;
+  min-height: 24px;
   transition: all 0.3s ease;
 }
 
-.printing-started .demo-message {
+.printing-active .print-status {
   color: var(--orange);
-  opacity: 1;
   font-weight: 600;
 }
 
-/* Завершающий эффект */
-.print-complete .printed-object {
-  animation: objectGlow 2s ease-in-out;
+/* Эффект завершения */
+.print-complete .printed-item {
+  animation: objectComplete 2s ease-in-out;
 }
 
-@keyframes objectGlow {
-  0%, 100% { filter: drop-shadow(0 0 0px var(--orange)); }
-  50% { filter: drop-shadow(0 0 20px var(--orange)); }
+@keyframes objectComplete {
+  0%, 100% { 
+    filter: drop-shadow(0 0 0px var(--orange));
+    transform: translateX(-50%) scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 25px var(--orange));
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .printing-demo-integrated {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+  
+  .demo-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .printer {
+    width: 220px;
+    height: 280px;
+  }
+  
+  .print-trigger {
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
 }

@@ -244,68 +244,72 @@ window.addEventListener('load', function() {
 });
 
 // Анимация процесса печати
-// Простая демонстрация печати
+// Демонстрация печати в блоке преимуществ
 document.addEventListener('DOMContentLoaded', function() {
-  const demoBtn = document.getElementById('demoPrintBtn');
-  const demoMessage = document.getElementById('demoMessage');
+  const printTrigger = document.getElementById('printTrigger');
+  const printStatus = document.getElementById('printStatus');
   const printer = document.querySelector('.printer');
-  const objectLayers = document.querySelector('.object-layers');
-  const nozzle = document.querySelector('.printer-nozzle');
-  
-  // Добавляем свечение к соплу
-  const nozzleGlow = document.createElement('div');
-  nozzleGlow.className = 'nozzle-glow';
-  nozzle.appendChild(nozzleGlow);
+  const itemLayers = document.querySelector('.item-layers');
+  const demoSection = document.querySelector('.printing-demo-integrated');
   
   let isPrinting = false;
   
-  demoBtn.addEventListener('click', function() {
+  printTrigger.addEventListener('click', function() {
     if (isPrinting) return;
     
+    startPrinting();
+  });
+  
+  function startPrinting() {
     isPrinting = true;
-    demoBtn.disabled = true;
-    demoMessage.textContent = "Идет печать... Смотрите как создается объект!";
-    document.querySelector('.simple-printer-demo').classList.add('printing-started');
+    printTrigger.disabled = true;
+    printStatus.textContent = "🔄 Печать началась...";
+    demoSection.classList.add('printing-active');
     printer.classList.add('printing');
     
     // Очищаем предыдущие слои
-    objectLayers.innerHTML = '';
-    objectLayers.style.height = '0';
+    itemLayers.innerHTML = '';
+    itemLayers.style.height = '0';
     
-    // Запускаем анимацию печати
-    let layers = 0;
-    const totalLayers = 12;
+    let currentLayer = 0;
+    const totalLayers = 25; // Больше слоев для долгой анимации
+    const layerHeight = 6; // Высота одного слоя
     
     const printInterval = setInterval(() => {
-      if (layers >= totalLayers) {
+      if (currentLayer >= totalLayers) {
         clearInterval(printInterval);
         finishPrinting();
         return;
       }
       
-      // Добавляем слой
+      // Создаем слой
       const layer = document.createElement('div');
       layer.className = 'print-layer';
-      layer.style.animationDelay = (layers * 0.1) + 's';
-      objectLayers.appendChild(layer);
+      layer.style.animationDelay = (currentLayer * 0.2) + 's';
+      itemLayers.prepend(layer); // Добавляем снизу
       
-      // Увеличиваем высоту
-      objectLayers.style.height = (layers * 10) + 'px';
+      // Обновляем высоту
+      itemLayers.style.height = (currentLayer * layerHeight) + 'px';
       
-      layers++;
-    }, 200);
-  });
+      // Обновляем статус
+      const progress = Math.round((currentLayer / totalLayers) * 100);
+      printStatus.textContent = `🔄 Печатается... ${progress}%`;
+      
+      currentLayer++;
+    }, 300); // Интервал увеличен для более долгой анимации
+  }
   
   function finishPrinting() {
     printer.classList.remove('printing');
-    document.querySelector('.printed-object').classList.add('print-complete');
-    demoMessage.textContent = "Готово! Объект напечатан. Хотите так же?";
-    demoBtn.innerHTML = '<span class="btn-icon">🔄</span><span class="btn-text">Повторить демо</span>';
-    demoBtn.disabled = false;
+    document.querySelector('.printed-item').classList.add('print-complete');
+    printStatus.textContent = "✅ Печать завершена!";
+    printTrigger.innerHTML = '<span class="print-icon">🔄</span> Запустить снова';
+    printTrigger.disabled = false;
     
     setTimeout(() => {
       isPrinting = false;
-      document.querySelector('.printed-object').classList.remove('print-complete');
-    }, 3000);
+      document.querySelector('.printed-item').classList.remove('print-complete');
+      demoSection.classList.remove('printing-active');
+    }, 4000);
   }
 });
