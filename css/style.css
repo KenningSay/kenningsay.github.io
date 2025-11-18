@@ -579,12 +579,9 @@ nav a:hover::after {
 
 /* Галерея */
 .gallery {
-  display: grid;
-  grid-template-rows: repeat(2, 260px);
-  grid-auto-columns: 340px;
-  grid-auto-flow: column;
+  display: flex;
   gap: 1.5rem;
-  overflow-x:auto;
+  overflow-x: auto;
   padding: 1.5rem 0;
   scroll-behavior: smooth;
 }
@@ -605,8 +602,8 @@ nav a:hover::after {
 }
 
 .gallery img {
-  width: 480px;
-  height: 300px;
+  width: 240px;
+  height: 180px;
   object-fit: cover;
   border-radius: 20px;
   flex-shrink: 0;
