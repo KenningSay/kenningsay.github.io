@@ -265,59 +265,24 @@ nav a:hover {
     margin-bottom: 2rem;
 }
 
-/* Блок "О нас" */
-.about-content {
-    font-size: 1rem;
-    line-height: 1.6;
-    text-align: left;
-}
-
-.about-content p:first-of-type {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
+/* Мобильная версия блока "О нас" */
 .process-steps {
-    margin-top: 1.5rem;
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
 }
 
 .process-step {
-    background: rgba(255, 107, 0, 0.1);
-    border: 1px solid rgba(255, 107, 0, 0.3);
-    border-radius: 15px;
-    padding: 1.2rem;
-    margin-bottom: 1rem;
-    text-align: left;
+  padding: 1.5rem !important;
 }
 
-.process-step h3 {
-    color: #FF6B00;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-    font-family: 'Montserrat', sans-serif;
+.materials-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 0.8rem !important;
 }
 
-.materials {
-    background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 140, 66, 0.1));
-    border: 1px solid rgba(255, 107, 0, 0.3);
-    border-radius: 15px;
-    padding: 1.5rem;
-    margin-top: 1.5rem;
-    text-align: center;
-}
-
-.materials h3 {
-    color: #FF6B00;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.materials p {
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.4;
+.material-item {
+  padding: 0.8rem !important;
+  font-size: 0.9rem;
 }
 
 /* Преимущества */
