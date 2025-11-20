@@ -412,6 +412,7 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
     const volume = document.getElementById('volume').value;
     const description = document.getElementById('description').value;
     const color = document.getElementById('color').value;
+    const phone = document.getElementById('phone').value;
     const material = document.getElementById('material');
     const materialText = material.options[material.selectedIndex].text;
     const urgency = document.getElementById('urgency');
@@ -426,6 +427,11 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
     
     if (!description.trim()) {
         alert('Пожалуйста, опишите вашу модель');
+        return;
+    }
+    
+    if (!phone.trim()) {
+        alert('Пожалуйста, укажите номер телефона для связи');
         return;
     }
     
@@ -463,13 +469,14 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
 📐 *Объем:* ${volume} см³
 📝 *Описание:* ${description}
 ${colorEmoji} *Цвет:* \`${color}\`
+📞 *Телефон:* ${phone}
 📦 *Материал:* ${materialText}
 ⏱️ *Срочность:* ${urgencyText}
 💰 *Стоимость:* ${cost} ₽
 
 📅 *Время заявки:* ${new Date().toLocaleString('ru-RU')}
 
-⚡ *СРОЧНО СВЯЗАТЬСЯ С КЛИЕНТОМ!*`;
+⚡ *СРОЧНО ПЕРЕЗВОНИТЬ КЛИЕНТУ!*`;
 
         // Если есть файл - отправляем файл с подписью
         if (file) {
@@ -517,6 +524,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
         userMessage += `📐 Объем: ${volume} см³\n`;
         userMessage += `📝 Описание: ${description}\n`;
         userMessage += `${colorEmoji} Цвет: ${color}\n`;
+        userMessage += `📞 Телефон: ${phone}\n`;
         userMessage += `📦 Материал: ${materialText}\n`;
         userMessage += `⏱️ Срочность: ${urgencyText}\n`;
         userMessage += `💰 Стоимость: ${cost} ₽\n`;
@@ -525,7 +533,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
             userMessage += `📎 Файл: ${file.name} отправлен\n`;
         }
         
-        userMessage += `\n📱 Уведомление отправлено в Telegram!\n`;
+        userMessage += `\n📱 Уведомление отправлено!\n`;
         userMessage += `Свяжемся с вами в течение 1 часа!`;
         
         alert(userMessage);
@@ -540,6 +548,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
         
         // Очистка формы
         document.getElementById('description').value = '';
+        document.getElementById('phone').value = '';
         document.getElementById('file').value = '';
         document.getElementById('fileName').textContent = 'Файл не выбран';
         document.getElementById('fileName').style.color = 'var(--text-light)';

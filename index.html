@@ -310,7 +310,13 @@
           <span class="file-name" id="fileName">Файл не выбран</span>
         </div>
       </div>
-      
+
+      <div class="calc-field">
+    <label>Номер телефона для связи:</label>
+    <input type="tel" id="phone" placeholder="+7 (999) 123-45-67" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}">
+    <p class="field-hint">📞 Формат: +7 (999) 123-45-67</p>
+      </div>
+
       <!-- Результат -->
       <div class="calc-result">
         <h3>Примерная стоимость: <span id="result">0</span> ₽</h3>
