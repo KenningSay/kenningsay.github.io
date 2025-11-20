@@ -477,4 +477,22 @@ function initCalculator() {
         
         closeCalculator();
     });
+
+    // Инициализация стоимости при загрузке
+    calculateCost();
 }
+// Инициализация калькулятора после загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    initCalculator(); // ← ВАЖНО: вызвать функцию
+});
+
+// Резервная инициализация
+window.addEventListener('load', function() {
+    console.log('Page fully loaded');
+    // Если калькулятор еще не инициализирован, пробуем еще раз
+    if (!document.getElementById('calcBtn')) {
+        console.log("Калькулятор не найден после полной загрузки");
+        setTimeout(initCalculator, 500);
+    }
+});
