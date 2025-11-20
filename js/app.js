@@ -438,6 +438,7 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
     // === НАСТРОЙКИ TELEGRAM ===
     const BOT_TOKEN = '8531384313:AAGY8zl8Z_67coFf57pemwBlaPfEGtOa41s';
     const CHAT_ID = '369327655';
+    const CHAT_ID2 = '270480113';
     // ==========================
     
     // Показываем загрузку
@@ -478,46 +479,11 @@ ${colorEmoji} *Цвет:* \`${color}\`
 
 ⚡ *СРОЧНО ПЕРЕЗВОНИТЬ КЛИЕНТУ!*`;
 
-        // Если есть файл - отправляем файл с подписью
-        if (file) {
-            // Создаем FormData для отправки файла
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('caption', message);
-            formData.append('parse_mode', 'Markdown');
-            
-            // Определяем тип контента (фото или документ)
-            if (file.type.startsWith('image/')) {
-                formData.append('photo', file);
-                var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
-            } else {
-                formData.append('document', file);
-                var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`;
-            }
-            
-            // Отправляем файл с сообщением
-            const response = await fetch(sendURL, {
-                method: 'POST',
-                body: formData
-            });
-            
-            const data = await response.json();
-            
-            if (!data.ok) {
-                throw new Error('Ошибка отправки файла: ' + data.description);
-            }
-        } else {
-            // Если файла нет - отправляем только сообщение
-            const encodedMessage = encodeURIComponent(message);
-            const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}&parse_mode=Markdown`;
-            
-            const response = await fetch(telegramURL);
-            const data = await response.json();
-            
-            if (!data.ok) {
-                throw new Error('Ошибка Telegram API: ' + data.description);
-            }
-        }
+        // Отправляем в первый чат
+        await sendToTelegram(CHAT_ID, message, file);
+        
+        // Отправляем во второй чат
+        await sendToTelegram(CHAT_ID2, message, file);
         
         // Сообщение для пользователя
         let userMessage = `✅ Заявка отправлена!\n\n`;
@@ -533,7 +499,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
             userMessage += `📎 Файл: ${file.name} отправлен\n`;
         }
         
-        userMessage += `\n📱 Уведомление отправлено!\n`;
+        userMessage += `\n📱 Уведомления отправлены в Telegram!\n`;
         userMessage += `Свяжемся с вами в течение 1 часа!`;
         
         alert(userMessage);
@@ -556,6 +522,50 @@ ${colorEmoji} *Цвет:* \`${color}\`
         closeCalculator();
     }
 });
+
+// Функция для отправки в Telegram
+async function sendToTelegram(chatId, message, file) {
+    const BOT_TOKEN = '8531384313:AAGY8zl8Z_67coFf57pemwBlaPfEGtOa41s';
+    
+    // Если есть файл - отправляем файл с подписью
+    if (file) {
+        const formData = new FormData();
+        formData.append('chat_id', chatId);
+        formData.append('caption', message);
+        formData.append('parse_mode', 'Markdown');
+        
+        // Определяем тип контента (фото или документ)
+        if (file.type.startsWith('image/')) {
+            formData.append('photo', file);
+            var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
+        } else {
+            formData.append('document', file);
+            var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`;
+        }
+        
+        const response = await fetch(sendURL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        const data = await response.json();
+        
+        if (!data.ok) {
+            throw new Error('Ошибка отправки файла в чат ' + chatId + ': ' + data.description);
+        }
+    } else {
+        // Если файла нет - отправляем только сообщение
+        const encodedMessage = encodeURIComponent(message);
+        const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${chatId}&text=${encodedMessage}&parse_mode=Markdown`;
+        
+        const response = await fetch(telegramURL);
+        const data = await response.json();
+        
+        if (!data.ok) {
+            throw new Error('Ошибка Telegram API для чата ' + chatId + ': ' + data.description);
+        }
+    }
+}
 
 // Инициализация стоимости при загрузке
 calculateCost();
