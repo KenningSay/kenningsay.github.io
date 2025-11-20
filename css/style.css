@@ -932,6 +932,9 @@ footer {
   z-index: 1001;
   align-items: center;
   justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Добавляем прокрутку для мобильных */
 }
 
 .calc-content {
@@ -941,19 +944,22 @@ footer {
   border-radius: 25px;
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
-  max-width: 500px;
-  width: 90%;
+  max-width: 600px; /* Увеличили ширину */
+  width: 95%; /* Увеличили процент ширины */
+  max-height: 90vh; /* Ограничиваем высоту */
+  overflow-y: auto; /* Внутренняя прокрутка */
   position: relative;
   animation: fadeUp 0.3s ease;
+  margin: auto; /* Центрируем */
 }
 
 /* Обновленный крестик закрытия */
 .calc-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 35px;
-  height: 35px;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid var(--orange);
   background: rgba(255, 107, 0, 0.1);
@@ -965,6 +971,7 @@ footer {
   font-size: 1.5rem;
   color: var(--orange);
   font-weight: bold;
+  z-index: 1002; /* Чтобы был поверх контента */
 }
 
 .calc-close:hover {
@@ -978,10 +985,11 @@ footer {
   color: var(--orange);
   margin-bottom: 1.5rem;
   text-align: center;
+  font-size: 1.8rem; /* Уменьшили размер заголовка */
 }
 
 .calc-field {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem; /* Уменьшили отступы между полями */
 }
 
 .calc-field label {
@@ -989,17 +997,18 @@ footer {
   margin-bottom: 0.5rem;
   color: var(--text-light);
   font-weight: 600;
+  font-size: 0.95rem; /* Немного уменьшили размер шрифта */
 }
 
 .calc-field input,
 .calc-field select {
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 12px;
+  padding: 10px 12px; /* Уменьшили padding */
+  border-radius: 10px;
   border: 1px solid var(--glass-border);
   background: rgba(30, 30, 30, 0.8);
   color: var(--text-light);
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: var(--transition);
 }
 
@@ -1007,12 +1016,12 @@ footer {
 .calc-field select:focus {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 10px var(--orange-glow);
+  box-shadow: 0 0 8px var(--orange-glow);
 }
 
 /* Подсказка для поля */
 .field-hint {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--orange-light);
   margin-top: 0.3rem;
   opacity: 0.8;
@@ -1022,14 +1031,14 @@ footer {
 /* Примеры объемов */
 .volume-examples {
   background: rgba(255, 107, 0, 0.05);
-  padding: 1rem;
-  border-radius: 12px;
+  padding: 0.8rem;
+  border-radius: 10px;
   border: 1px solid var(--glass-border);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 
 .examples-title {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--orange);
   margin-bottom: 0.5rem;
   font-weight: 600;
@@ -1038,14 +1047,14 @@ footer {
 .examples {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .examples span {
   background: rgba(255, 107, 0, 0.1);
-  padding: 0.4rem 0.8rem;
-  border-radius: 8px;
-  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
   cursor: pointer;
   transition: var(--transition);
   border: 1px solid transparent;
@@ -1061,59 +1070,60 @@ footer {
 .color-picker {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .color-input {
-  width: 60px;
-  height: 45px;
+  width: 50px;
+  height: 40px;
   border: 2px solid var(--glass-border);
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   background: transparent;
 }
 
 .color-input::-webkit-color-swatch {
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .color-input::-moz-color-swatch {
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .color-label {
   color: var(--text-light);
   font-weight: 600;
+  font-size: 0.95rem;
 }
 
 /* Текстовое поле */
 textarea {
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
   border: 1px solid var(--glass-border);
   background: rgba(30, 30, 30, 0.8);
   color: var(--text-light);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-family: inherit;
   resize: vertical;
-  min-height: 80px;
+  min-height: 70px; /* Уменьшили минимальную высоту */
   transition: var(--transition);
 }
 
 textarea:focus {
   outline: none;
   border-color: var(--orange);
-  box-shadow: 0 0 10px var(--orange-glow);
+  box-shadow: 0 0 8px var(--orange-glow);
 }
 
 /* Загрузка файла */
 .file-upload {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .file-input {
@@ -1124,15 +1134,16 @@ textarea:focus {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 12px 20px;
+  padding: 10px 16px;
   background: rgba(255, 107, 0, 0.1);
   border: 2px dashed var(--orange);
-  border-radius: 12px;
+  border-radius: 10px;
   color: var(--orange);
   cursor: pointer;
   transition: var(--transition);
   font-weight: 600;
   justify-content: center;
+  font-size: 0.9rem;
 }
 
 .file-label:hover {
@@ -1141,11 +1152,11 @@ textarea:focus {
 }
 
 .file-icon {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .file-name {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   color: var(--text-light);
   text-align: center;
   font-style: italic;
@@ -1153,27 +1164,28 @@ textarea:focus {
 
 .calc-result {
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 140, 66, 0.1));
-  padding: 1.5rem;
-  border-radius: 15px;
+  padding: 1.2rem;
+  border-radius: 12px;
   border: 1px solid var(--glass-border);
-  margin: 1.5rem 0;
+  margin: 1.2rem 0;
   text-align: center;
 }
 
 .calc-result h3 {
   color: var(--orange);
   margin: 0;
+  font-size: 1.1rem;
 }
 
 #result {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: var(--orange-light);
   font-weight: bold;
 }
 
 /* Примечание */
 .calc-note {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--orange-light);
   margin-top: 0.5rem;
   text-align: center;
@@ -1185,39 +1197,45 @@ textarea:focus {
   background: linear-gradient(135deg, var(--orange), var(--orange-dark));
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 12px;
-  font-size: 1.1rem;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
 }
 
 .calc-submit-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4);
 }
 
-/* Адаптивность */
+/* Адаптивность для мобильных */
 @media (max-width: 768px) {
-  .calc-floating-btn {
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 16px;
-    font-size: 0.9rem;
+  .calc-modal {
+    padding: 10px;
+    align-items: flex-start; /* Выравниваем по верху для мобильных */
   }
   
   .calc-content {
-    padding: 2rem 1.5rem;
-    margin: 1rem;
+    padding: 1.5rem 1.2rem;
+    margin: 10px auto;
+    max-height: 85vh;
+    width: 98%;
+    border-radius: 20px;
   }
   
   .calc-close {
     width: 35px;
     height: 35px;
     font-size: 1.3rem;
-    top: 15px;
-    right: 15px;
+    top: 12px;
+    right: 12px;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
   }
   
   .color-picker {
@@ -1232,5 +1250,76 @@ textarea:focus {
   
   .examples span {
     text-align: center;
+    padding: 0.4rem 0.8rem;
   }
+  
+  .calc-field {
+    margin-bottom: 1rem;
+  }
+  
+  .calc-field input,
+  .calc-field select,
+  textarea {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+  
+  .file-label {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .calc-result {
+    padding: 1rem;
+  }
+  
+  .calc-result h3 {
+    font-size: 1rem;
+  }
+  
+  #result {
+    font-size: 1.3rem;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .calc-content {
+    padding: 1.2rem 1rem;
+    border-radius: 15px;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .calc-field label {
+    font-size: 0.9rem;
+  }
+  
+  .calc-field input,
+  .calc-field select,
+  textarea {
+    font-size: 0.85rem;
+  }
+  
+  .calc-submit-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Стили для скроллбара в калькуляторе */
+.calc-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.calc-content::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 3px;
+}
+
+.calc-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  border-radius: 3px;
 }

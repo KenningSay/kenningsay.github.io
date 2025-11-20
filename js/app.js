@@ -358,7 +358,16 @@ function initCalculator() {
         calcModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-
+      function closeCalculator() {
+    calcModal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+    // Плавное скрытие
+    calcModal.style.opacity = '0';
+    setTimeout(() => {
+        calcModal.style.display = 'none';
+        calcModal.style.opacity = '1';
+    }, 300);
+}
     // Расчет стоимости
     function calculateCost() {
         const volume = parseFloat(document.getElementById('volume').value) || 0;
