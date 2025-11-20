@@ -967,117 +967,73 @@ footer {
   opacity: 0;
 }
 
-/* Анимации печати */
-.printing .printer-head {
-  animation: headMove 4s ease-in-out infinite;
+/* Анимация печати */
+.typing-animation {
+  display: inline-block;
+  width: 8px;
+  height: 20px;
+  background: var(--orange);
+  margin-left: 10px;
+  border-radius: 1px;
+  animation: typing 1.5s infinite ease-in-out;
+  box-shadow: 0 0 8px var(--orange);
 }
 
-@keyframes headMove {
-  0%, 100% { transform: translateX(-50%) translateX(-50px); }
-  25% { transform: translateX(-50%) translateX(50px); }
-  50% { transform: translateX(-50%) translateX(50px) translateY(20px); }
-  75% { transform: translateX(-50%) translateX(-50px) translateY(20px); }
+/* Дополнительный вариант с текстом */
+.typing-text {
+  position: relative;
+  padding-right: 15px;
 }
 
-.printing .filament-flow {
-  animation: filamentExtrude 0.6s ease-in-out infinite;
-}
-
-@keyframes filamentExtrude {
-  0%, 100% { 
-    opacity: 0;
-    transform: translateX(-50%) scaleY(0);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateX(-50%) scaleY(1);
-  }
-}
-
-/* Кнопка и управление */
-.demo-action {
-  text-align: center;
-}
-
-.print-trigger {
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: var(--black);
-  border: none;
-  padding: 1.5rem 3rem;
-  border-radius: 50px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.print-trigger:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(255, 107, 0, 0.6);
-}
-
-.print-trigger:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.print-icon {
-  font-size: 1.5rem;
-}
-
-.print-status {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  min-height: 24px;
-  transition: all 0.3s ease;
-}
-
-.printing-active .print-status {
+.typing-text::after {
+  content: "|";
+  position: absolute;
+  right: 0;
   color: var(--orange);
-  font-weight: 600;
+  animation: typing 0.8s infinite;
 }
 
-/* Эффект завершения */
-.print-complete .printed-item {
-  animation: objectComplete 2s ease-in-out;
-}
-
-@keyframes objectComplete {
-  0%, 100% { 
-    filter: drop-shadow(0 0 0px var(--orange));
-    transform: translateX(-50%) scale(1);
+/* Ключевые кадры анимации */
+@keyframes typing {
+  0%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
   }
-  50% { 
-    filter: drop-shadow(0 0 25px var(--orange));
-    transform: translateX(-50%) scale(1.05);
+  50% {
+    opacity: 0.5;
+    transform: scaleY(0.3);
   }
 }
 
-/* Мобильная версия */
-@media (max-width: 768px) {
-  .printing-demo-integrated {
-    padding: 2rem 1rem;
-    margin-top: 2rem;
+/* Альтернативная анимация - мигающий курсор */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
   }
-  
-  .demo-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  51%, 100% {
+    opacity: 0;
   }
-  
-  .printer {
-    width: 220px;
-    height: 280px;
+}
+
+/* Вариант с пульсацией */
+.typing-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--orange);
+  margin-left: 8px;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 12px var(--orange);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  .print-trigger {
-    padding: 1.2rem 2rem;
-    font-size: 1.1rem;
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
   }
 }
