@@ -407,69 +407,96 @@ function initCalculator() {
     document.getElementById('material').addEventListener('change', calculateCost);
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
-    // Кнопка отправки
-    document.querySelector('.calc-submit-btn').addEventListener('click', function() {
-        const volume = document.getElementById('volume').value;
-        const description = document.getElementById('description').value;
-        const color = document.getElementById('color').value;
-        const material = document.getElementById('material');
-        const materialText = material.options[material.selectedIndex].text;
-        const urgency = document.getElementById('urgency');
-        const urgencyText = urgency.options[urgency.selectedIndex].text;
-        const file = document.getElementById('file').files[0];
-        const cost = document.getElementById('result').textContent;
-        
-        if (!volume || volume < 1) {
-            alert('Пожалуйста, укажите объем модели');
-            return;
+// Кнопка отправки
+document.querySelector('.calc-submit-btn').addEventListener('click', function() {
+    const volume = document.getElementById('volume').value;
+    const description = document.getElementById('description').value;
+    const color = document.getElementById('color').value;
+    const material = document.getElementById('material');
+    const materialText = material.options[material.selectedIndex].text;
+    const urgency = document.getElementById('urgency');
+    const urgencyText = urgency.options[urgency.selectedIndex].text;
+    const file = document.getElementById('file').files[0];
+    const cost = document.getElementById('result').textContent;
+    
+    if (!volume || volume < 1) {
+        alert('Пожалуйста, укажите объем модели');
+        return;
+    }
+    
+    if (!description.trim()) {
+        alert('Пожалуйста, опишите вашу модель');
+        return;
+    }
+    
+    // === НАСТРОЙКИ TELEGRAM ===
+    const BOT_TOKEN = '8531384313:AAGY8zl8Z_67coFf57pemwBlaPfEGtOa41s'; // ← Получите у @BotFather
+    const CHAT_ID = '369327655'; // Ваш chat ID
+    // ==========================
+    
+    // Показываем загрузку
+    const submitBtn = document.querySelector('.calc-submit-btn');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = '📨 Отправляем...';
+    submitBtn.disabled = true;
+    
+    // Формируем сообщение для Telegram
+    const message = `🎯 *НОВАЯ ЗАЯВКА НА 3D ПЕЧАТЬ*
+
+📐 *Объем:* ${volume} см³
+📝 *Описание:* ${description}
+🎨 *Цвет:* ${color}
+📦 *Материал:* ${materialText}
+⏱️ *Срочность:* ${urgencyText}
+💰 *Стоимость:* ${cost} ₽
+
+${file ? `📎 *Файл:* ${file.name}` : '📎 *Файл:* не прикреплен'}
+
+📅 *Время заявки:* ${new Date().toLocaleString('ru-RU')}
+
+⚡ *СРОЧНО СВЯЗАТЬСЯ С КЛИЕНТОМ!*`;
+    
+    // Кодируем сообщение для URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Отправляем в Telegram
+    const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}&parse_mode=Markdown`;
+    
+    fetch(telegramURL)
+    .then(response => response.json())
+    .then(data => {
+        if (data.ok) {
+            let userMessage = `✅ Заявка отправлена!\n\n`;
+            userMessage += `📐 Объем: ${volume} см³\n`;
+            userMessage += `📝 Описание: ${description}\n`;
+            userMessage += `🎨 Цвет: ${color}\n`;
+            userMessage += `📦 Материал: ${materialText}\n`;
+            userMessage += `⏱️ Срочность: ${urgencyText}\n`;
+            userMessage += `💰 Стоимость: ${cost} ₽\n`;
+            
+            if (file) {
+                userMessage += `📎 Файл: ${file.name}\n`;
+                userMessage += `\n💡 Файл сохранен. Попросите клиента отправить его при необходимости.`;
+            }
+            
+            userMessage += `\n📱 Уведомление отправлено в Telegram!\n`;
+            userMessage += `Свяжемся с вами в течение 1 часа!`;
+            
+            alert(userMessage);
+        } else {
+            throw new Error('Ошибка Telegram API: ' + data.description);
         }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('✅ Заявка принята! Если не получили уведомление, свяжитесь с нами напрямую.\n\n📞 +7 (999) 123-45-67');
+    })
+    .finally(() => {
+        // Восстанавливаем кнопку
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
         
-        if (!description.trim()) {
-            alert('Пожалуйста, опишите вашу модель');
-            return;
-        }
-        
-        // ID вашей Google Form
-        const FORM_ID = '1FAIpQLScxeP76OP_KR7RkMmoIdn3DiPSpPBthu8KCabOL0v1KG2lO_g';
-        const formURL = `https://docs.google.com/forms/d/e/${FORM_ID}/formResponse`;
-        
-        // Параметры для Google Forms
-        const params = new URLSearchParams({
-            'entry.947360521': volume,           // Объем модели
-            'entry.1525512832': description,      // Описание
-            'entry.1505009661': color,            // Цвет
-            'entry.1409439790': materialText,      // Материал
-            'entry.504355002': urgencyText,      // Срочность
-            'entry.1841959389': cost + ' ₽',      // Стоимость
-            'entry.1884228957': new Date().toLocaleString('ru-RU') // Дата и время
-        });
-        
-        // Показываем сообщение пользователю
-        let message = `✅ Запрос на расчет получен!\n\n`;
-        message += `📐 Объем: ${volume} см³\n`;
-        message += `📝 Описание: ${description}\n`;
-        message += `🎨 Цвет: ${color}\n`;
-        message += `📦 Материал: ${materialText}\n`;
-        message += `⏱️ Срочность: ${urgencyText}\n`;
-        message += `💰 Примерная стоимость: ${cost} ₽\n`;
-        
-        if (file) {
-            message += `📎 Файл: ${file.name}\n`;
-        }
-        
-        message += `\nСвяжемся с вами в течение 1 часа для уточнения деталей!`;
-        
-        alert(message);
-        
-        // Отправка в Google Forms (в фоне)
-        fetch(formURL + '?' + params, {
-            method: 'POST',
-            mode: 'no-cors'
-        }).catch(error => {
-            console.log('Данные отправлены в Google Forms');
-        });
-        
-        // Очистка формы после отправки
+        // Очистка формы
         document.getElementById('description').value = '';
         document.getElementById('file').value = '';
         document.getElementById('fileName').textContent = 'Файл не выбран';
@@ -477,22 +504,8 @@ function initCalculator() {
         
         closeCalculator();
     });
+});
 
-    // Инициализация стоимости при загрузке
-    calculateCost();
+// Инициализация стоимости при загрузке
+calculateCost();
 }
-// Инициализация калькулятора после загрузки DOM
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded');
-    initCalculator(); // ← ВАЖНО: вызвать функцию
-});
-
-// Резервная инициализация
-window.addEventListener('load', function() {
-    console.log('Page fully loaded');
-    // Если калькулятор еще не инициализирован, пробуем еще раз
-    if (!document.getElementById('calcBtn')) {
-        console.log("Калькулятор не найден после полной загрузки");
-        setTimeout(initCalculator, 500);
-    }
-});
