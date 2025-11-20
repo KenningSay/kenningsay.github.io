@@ -1437,3 +1437,26 @@ textarea:focus {
   background: linear-gradient(135deg, var(--orange), var(--orange-light));
   border-radius: 3px;
 }
+
+.calc-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    opacity: 0; /* Добавляем для анимации */
+    transition: opacity 0.3s ease; /* Анимация opacity */
+}
+
+.calc-modal[style*="display: flex"] {
+    opacity: 1;
+}
