@@ -956,10 +956,10 @@ footer {
 /* Обновленный крестик закрытия */
 .calc-close {
   position: absolute;
-  top: 10px;
-  right: 20px;
-  width: 30px;
-  height: 30px;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid var(--orange);
   background: rgba(255, 107, 0, 0.1);
@@ -971,7 +971,8 @@ footer {
   font-size: 1.5rem;
   color: var(--orange);
   font-weight: bold;
-  z-index: 1002; /* Чтобы был поверх контента */
+  z-index: 1002;
+  backdrop-filter: blur(10px); /* Добавляем размытие фона */
 }
 
 .calc-close:hover {
@@ -981,42 +982,102 @@ footer {
   box-shadow: 0 0 15px var(--orange-glow);
 }
 
+/* Контейнер контента с отступом для крестика */
+.calc-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: fadeUp 0.3s ease;
+  margin: auto;
+  /* Добавляем отступ сверху для крестика */
+  padding-top: 3rem; /* Увеличили верхний padding */
+}
+
 .calc-content h2 {
   color: var(--orange);
   margin-bottom: 1.5rem;
   text-align: center;
-  font-size: 1.8rem; /* Уменьшили размер заголовка */
+  font-size: 1.8rem;
+  margin-top: 0; /* Убираем верхний отступ у заголовка */
+  padding-top: 0;
 }
 
-.calc-field {
-  margin-bottom: 1.2rem; /* Уменьшили отступы между полями */
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .calc-content {
+    padding: 2rem 1.2rem;
+    padding-top: 2.5rem; /* Увеличиваем верхний padding на мобильных */
+    margin: 20px auto; /* Добавляем отступ от краев экрана */
+    max-height: 85vh;
+    width: 95%;
+    border-radius: 20px;
+  }
+  
+  .calc-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+    top: 12px;
+    right: 12px;
+    background: rgba(18, 18, 18, 0.9); /* Темный фон для контраста */
+    border: 2px solid var(--orange);
+    backdrop-filter: blur(15px);
+  }
+  
+  .calc-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-right: 40px; /* Добавляем отступ справа чтобы текст не заезжал под крестик */
+  }
 }
 
-.calc-field label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
-  font-weight: 600;
-  font-size: 0.95rem; /* Немного уменьшили размер шрифта */
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .calc-content {
+    padding: 1.5rem 1rem;
+    padding-top: 2rem; /* Сохраняем увеличенный верхний padding */
+    border-radius: 15px;
+    margin: 15px auto;
+  }
+  
+  .calc-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.3rem;
+    padding-right: 35px; /* Отступ для маленьких экранов */
+  }
 }
 
-.calc-field input,
-.calc-field select {
-  width: 100%;
-  padding: 10px 12px; /* Уменьшили padding */
-  border-radius: 10px;
-  border: 1px solid var(--glass-border);
-  background: rgba(30, 30, 30, 0.8);
-  color: var(--text-light);
-  font-size: 0.95rem;
-  transition: var(--transition);
-}
-
-.calc-field input:focus,
-.calc-field select:focus {
-  outline: none;
-  border-color: var(--orange);
-  box-shadow: 0 0 8px var(--orange-glow);
+/* Дополнительная защита - если все равно налазит */
+@media (max-width: 360px) {
+  .calc-content {
+    padding-top: 2.2rem;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.2rem;
+    padding-right: 30px;
+  }
+  
+  .calc-close {
+    width: 30px;
+    height: 30px;
+    font-size: 1.1rem;
+  }
 }
 
 /* Подсказка для поля */
