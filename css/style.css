@@ -1483,7 +1483,7 @@ textarea:focus {
 /* Принудительные стили для поля имени на ПК */
 @media (min-width: 769px) {
     #name {
-        padding: 14px 16px !important;
+        padding: 6px 16px !important;
         font-size: 1.05rem !important;
         border-radius: 14px !important;
         background: rgba(30, 30, 30, 0.95) !important;
