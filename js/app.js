@@ -477,7 +477,4 @@ function initCalculator() {
         
         closeCalculator();
     });
-
-    // Инициализация стоимости при загрузке
-    calculateCost();
 }
