@@ -408,9 +408,11 @@ function initCalculator() {
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
 // Кнопка отправки
+// Кнопка отправки
 document.querySelector('.calc-submit-btn').addEventListener('click', async function() {
     const volume = document.getElementById('volume').value;
     const description = document.getElementById('description').value;
+    const name = document.getElementById('name').value;
     const color = document.getElementById('color').value;
     const phone = document.getElementById('phone').value;
     const material = document.getElementById('material');
@@ -427,6 +429,11 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
     
     if (!description.trim()) {
         alert('Пожалуйста, опишите вашу модель');
+        return;
+    }
+    
+    if (!name.trim()) {
+        alert('Пожалуйста, укажите ваше имя');
         return;
     }
     
@@ -467,6 +474,7 @@ document.querySelector('.calc-submit-btn').addEventListener('click', async funct
         // Формируем сообщение для Telegram
         const message = `🎯 *НОВАЯ ЗАЯВКА НА 3D ПЕЧАТЬ*
 
+👤 *Имя:* ${name}
 📐 *Объем:* ${volume} см³
 📝 *Описание:* ${description}
 ${colorEmoji} *Цвет:* \`${color}\`
@@ -490,6 +498,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
         userMessage += `📐 Объем: ${volume} см³\n`;
         userMessage += `📝 Описание: ${description}\n`;
         userMessage += `${colorEmoji} Цвет: ${color}\n`;
+        userMessage += `👤 Имя: ${name}\n`;
         userMessage += `📞 Телефон: ${phone}\n`;
         userMessage += `📦 Материал: ${materialText}\n`;
         userMessage += `⏱️ Срочность: ${urgencyText}\n`;
@@ -513,6 +522,7 @@ ${colorEmoji} *Цвет:* \`${color}\`
         submitBtn.disabled = false;
         
         // Очистка формы
+        document.getElementById('name').value = '';
         document.getElementById('description').value = '';
         document.getElementById('phone').value = '';
         document.getElementById('file').value = '';
