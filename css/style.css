@@ -1453,51 +1453,10 @@ textarea:focus {
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
-    opacity: 0; /* Добавляем для анимации */
-    transition: opacity 0.3s ease; /* Анимация opacity */
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .calc-modal[style*="display: flex"] {
     opacity: 1;
-}
-
-/* Стиль для поля телефона */
-.calc-field input[type="tel"] {
-    width: 39%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--glass-border);
-    background: rgba(30, 30, 30, 0.9) !important;
-    color: var(--text-light) !important;
-    font-size: 0.95rem;
-    transition: var(--transition);
-}
-
-.calc-field input[type="tel"]:focus {
-    outline: none;
-    border-color: var(--orange) !important;
-    box-shadow: 0 0 8px var(--orange-glow) !important;
-    background: rgba(40, 40, 40, 0.9) !important;
-}
-
-/* Принудительные стили для поля имени на ПК */
-@media (min-width: 769px) {
-    #name {
-        padding: 6px 16px !important;
-        font-size: 1.05rem !important;
-        border-radius: 14px !important;
-        background: rgba(30, 30, 30, 0.95) !important;
-        border: 1px solid var(--glass-border) !important;
-    }
-    
-    #name:focus {
-        border-color: var(--orange) !important;
-        box-shadow: 0 0 12px var(--orange-glow) !important;
-        background: rgba(40, 40, 40, 0.95) !important;
-    }
-    
-    #name::placeholder {
-        color: rgba(245, 245, 245, 0.6) !important;
-        font-size: 1rem !important;
-    }
 }
