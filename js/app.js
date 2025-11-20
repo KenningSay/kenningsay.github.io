@@ -408,8 +408,7 @@ function initCalculator() {
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
 // Кнопка отправки
-// Кнопка отправки
-document.querySelector('.calc-submit-btn').addEventListener('click', function() {
+document.querySelector('.calc-submit-btn').addEventListener('click', async function() {
     const volume = document.getElementById('volume').value;
     const description = document.getElementById('description').value;
     const color = document.getElementById('color').value;
@@ -441,58 +440,100 @@ document.querySelector('.calc-submit-btn').addEventListener('click', function() 
     submitBtn.textContent = '📨 Отправляем...';
     submitBtn.disabled = true;
     
-    // Формируем сообщение для Telegram
-    const message = `🎯 *НОВАЯ ЗАЯВКА НА 3D ПЕЧАТЬ*
+    try {
+        // Функция для определения эмодзи по цвету
+        function getColorEmoji(hexColor) {
+            const colorMap = {
+                '#FF0000': '🔴', '#00FF00': '🟢', '#0000FF': '🔵',
+                '#FFFF00': '🟡', '#FF00FF': '🟣', '#00FFFF': '🦋',
+                '#FFFFFF': '⚪', '#000000': '⚫', '#FF6B00': '🟠'
+            };
+            
+            if (colorMap[hexColor.toUpperCase()]) {
+                return colorMap[hexColor.toUpperCase()];
+            }
+            return '🎨';
+        }
+        
+        const colorEmoji = getColorEmoji(color);
+        
+        // Формируем сообщение для Telegram
+        const message = `🎯 *НОВАЯ ЗАЯВКА НА 3D ПЕЧАТЬ*
 
 📐 *Объем:* ${volume} см³
 📝 *Описание:* ${description}
-🎨 *Цвет:* ${color}
+${colorEmoji} *Цвет:* \`${color}\`
 📦 *Материал:* ${materialText}
 ⏱️ *Срочность:* ${urgencyText}
 💰 *Стоимость:* ${cost} ₽
 
-${file ? `📎 *Файл:* ${file.name}` : '📎 *Файл:* не прикреплен'}
-
 📅 *Время заявки:* ${new Date().toLocaleString('ru-RU')}
 
 ⚡ *СРОЧНО СВЯЗАТЬСЯ С КЛИЕНТОМ!*`;
-    
-    // Кодируем сообщение для URL
-    const encodedMessage = encodeURIComponent(message);
-    
-    // Отправляем в Telegram
-    const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}&parse_mode=Markdown`;
-    
-    fetch(telegramURL)
-    .then(response => response.json())
-    .then(data => {
-        if (data.ok) {
-            let userMessage = `✅ Заявка отправлена!\n\n`;
-            userMessage += `📐 Объем: ${volume} см³\n`;
-            userMessage += `📝 Описание: ${description}\n`;
-            userMessage += `🎨 Цвет: ${color}\n`;
-            userMessage += `📦 Материал: ${materialText}\n`;
-            userMessage += `⏱️ Срочность: ${urgencyText}\n`;
-            userMessage += `💰 Стоимость: ${cost} ₽\n`;
+
+        // Если есть файл - отправляем файл с подписью
+        if (file) {
+            // Создаем FormData для отправки файла
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('caption', message);
+            formData.append('parse_mode', 'Markdown');
             
-            if (file) {
-                userMessage += `📎 Файл: ${file.name}\n`;
-                userMessage += `\n💡 Файл сохранен. Попросите клиента отправить его при необходимости.`;
+            // Определяем тип контента (фото или документ)
+            if (file.type.startsWith('image/')) {
+                formData.append('photo', file);
+                var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
+            } else {
+                formData.append('document', file);
+                var sendURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`;
             }
             
-            userMessage += `\n📱 Уведомление отправлено в Telegram!\n`;
-            userMessage += `Свяжемся с вами в течение 1 часа!`;
+            // Отправляем файл с сообщением
+            const response = await fetch(sendURL, {
+                method: 'POST',
+                body: formData
+            });
             
-            alert(userMessage);
+            const data = await response.json();
+            
+            if (!data.ok) {
+                throw new Error('Ошибка отправки файла: ' + data.description);
+            }
         } else {
-            throw new Error('Ошибка Telegram API: ' + data.description);
+            // Если файла нет - отправляем только сообщение
+            const encodedMessage = encodeURIComponent(message);
+            const telegramURL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodedMessage}&parse_mode=Markdown`;
+            
+            const response = await fetch(telegramURL);
+            const data = await response.json();
+            
+            if (!data.ok) {
+                throw new Error('Ошибка Telegram API: ' + data.description);
+            }
         }
-    })
-    .catch(error => {
+        
+        // Сообщение для пользователя
+        let userMessage = `✅ Заявка отправлена!\n\n`;
+        userMessage += `📐 Объем: ${volume} см³\n`;
+        userMessage += `📝 Описание: ${description}\n`;
+        userMessage += `${colorEmoji} Цвет: ${color}\n`;
+        userMessage += `📦 Материал: ${materialText}\n`;
+        userMessage += `⏱️ Срочность: ${urgencyText}\n`;
+        userMessage += `💰 Стоимость: ${cost} ₽\n`;
+        
+        if (file) {
+            userMessage += `📎 Файл: ${file.name} отправлен\n`;
+        }
+        
+        userMessage += `\n📱 Уведомление отправлено в Telegram!\n`;
+        userMessage += `Свяжемся с вами в течение 1 часа!`;
+        
+        alert(userMessage);
+        
+    } catch (error) {
         console.error('Ошибка:', error);
         alert('✅ Заявка принята! Если не получили уведомление, свяжитесь с нами напрямую.\n\n📞 +7 (999) 123-45-67');
-    })
-    .finally(() => {
+    } finally {
         // Восстанавливаем кнопку
         submitBtn.textContent = originalText;
         submitBtn.disabled = false;
@@ -504,7 +545,7 @@ ${file ? `📎 *Файл:* ${file.name}` : '📎 *Файл:* не прикреп
         document.getElementById('fileName').style.color = 'var(--text-light)';
         
         closeCalculator();
-    });
+    }
 });
 
 // Инициализация стоимости при загрузке
