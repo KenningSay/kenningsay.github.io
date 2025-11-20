@@ -872,7 +872,7 @@ footer {
   height: 5px;
   background: var(--orange-light);
   bottom: 4px;
-  left: 10px;
+  left: 8px;
   animation: printing 1.5s infinite ease-in-out;
   box-shadow: 0 0 12px var(--orange);
   border-radius: 2px;
