@@ -408,6 +408,7 @@ function initCalculator() {
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
 // Кнопка отправки
+// Кнопка отправки
 document.querySelector('.calc-submit-btn').addEventListener('click', function() {
     const volume = document.getElementById('volume').value;
     const description = document.getElementById('description').value;
@@ -430,8 +431,8 @@ document.querySelector('.calc-submit-btn').addEventListener('click', function() 
     }
     
     // === НАСТРОЙКИ TELEGRAM ===
-    const BOT_TOKEN = '8531384313:AAGY8zl8Z_67coFf57pemwBlaPfEGtOa41s'; // ← Получите у @BotFather
-    const CHAT_ID = '369327655'; // Ваш chat ID
+    const BOT_TOKEN = '8531384313:AAGY8zl8Z_67coFf57pemwBlaPfEGtOa41s';
+    const CHAT_ID = '369327655';
     // ==========================
     
     // Показываем загрузку
@@ -509,3 +510,22 @@ ${file ? `📎 *Файл:* ${file.name}` : '📎 *Файл:* не прикреп
 // Инициализация стоимости при загрузке
 calculateCost();
 }
+
+// ================== ВЫЗОВ ФУНКЦИИ ==================
+// Добавьте эти строки в конец файла:
+
+// Инициализация калькулятора после загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    initCalculator(); // ← ВАЖНО: вызвать функцию
+});
+
+// Резервная инициализация
+window.addEventListener('load', function() {
+    console.log('Page fully loaded');
+    // Если калькулятор еще не инициализирован, пробуем еще раз
+    if (!document.getElementById('calcBtn')) {
+        console.log("Калькулятор не найден после полной загрузки");
+        setTimeout(initCalculator, 500);
+    }
+});
