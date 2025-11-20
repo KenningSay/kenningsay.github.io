@@ -1460,3 +1460,31 @@ textarea:focus {
 .calc-modal[style*="display: flex"] {
     opacity: 1;
 }
+
+/* Тёмные стили для полей как в твоём дизайне */
+.calc-field input,
+.calc-field select,
+.calc-field textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(30, 30, 30, 0.9);
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+.calc-field input:focus,
+.calc-field select:focus,
+.calc-field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 10px var(--orange-glow);
+  background: rgba(40, 40, 40, 0.9);
+}
+
+.calc-field input::placeholder {
+  color: rgba(245, 245, 245, 0.6);
+}
