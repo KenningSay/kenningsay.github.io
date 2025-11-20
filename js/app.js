@@ -361,22 +361,24 @@ function initCalculator() {
 
     // Расчет стоимости
     function calculateCost() {
+        const volume = parseFloat(document.getElementById('volume').value) || 0;
         const material = parseFloat(document.getElementById('material').value);
         const urgency = parseFloat(document.getElementById('urgency').value);
         
-        // Базовая цена за материал
+        // Базовая цена за материал (руб/см³)
         const basePrices = {
             1.0: 7,   // PLA
-            1.2: 8, // PETG
-            1.5: 12,   // ABS
+            1.2: 8,   // PETG
+            1.5: 12,  // ABS
             2.0: 15,  // Flexible
-            2.2: 45   //Resin
+            2.2: 45   // Resin
         };
         
-        const basePrice = basePrices[material] || 2;
-        const cost = 100 * basePrice * urgency; // Базовая стоимость 100 см³
+        const basePrice = basePrices[material] || 7;
+        const cost = volume * basePrice * urgency;
         
-        document.getElementById('result').textContent = Math.round(cost);
+        // Минимальная стоимость 300 руб
+        document.getElementById('result').textContent = Math.max(300, Math.round(cost));
     }
 
     // Обработчик загрузки файла
@@ -393,12 +395,14 @@ function initCalculator() {
         }
     });
 
-    // Обновляем стоимость при изменении
+    // Обновляем стоимость при изменении ВСЕХ полей
+    document.getElementById('volume').addEventListener('input', calculateCost);
     document.getElementById('material').addEventListener('change', calculateCost);
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
     // Кнопка отправки
     document.querySelector('.calc-submit-btn').addEventListener('click', function() {
+        const volume = document.getElementById('volume').value;
         const description = document.getElementById('description').value;
         const color = document.getElementById('color').value;
         const material = document.getElementById('material');
@@ -408,12 +412,18 @@ function initCalculator() {
         const file = document.getElementById('file').files[0];
         const cost = document.getElementById('result').textContent;
         
+        if (!volume || volume < 1) {
+            alert('Пожалуйста, укажите объем модели');
+            return;
+        }
+        
         if (!description.trim()) {
             alert('Пожалуйста, опишите вашу модель');
             return;
         }
         
         let message = `✅ Запрос на расчет получен!\n\n`;
+        message += `📐 Объем: ${volume} см³\n`;
         message += `📝 Описание: ${description}\n`;
         message += `🎨 Цвет: ${color}\n`;
         message += `📦 Материал: ${materialText}\n`;

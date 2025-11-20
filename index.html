@@ -243,15 +243,33 @@
     <h2>💰 Калькулятор стоимости печати</h2>
     
     <div class="calc-form">
+      <!-- Объем модели -->
+      <div class="calc-field">
+        <label>Объем модели (см³):</label>
+        <input type="number" id="volume" placeholder="Например: 50" min="1" value="50">
+        <p class="field-hint">💡 Объем можно узнать в программе для 3D-моделирования</p>
+      </div>
+      
+      <!-- Примеры объемов -->
+      <div class="volume-examples">
+        <p class="examples-title">📏 Примеры объемов:</p>
+        <div class="examples">
+          <span onclick="document.getElementById('volume').value = 20">Брелок (~20 см³)</span>
+          <span onclick="document.getElementById('volume').value = 50">Стаканчик (~50 см³)</span>
+          <span onclick="document.getElementById('volume').value = 100">Кружка (~100 см³)</span>
+          <span onclick="document.getElementById('volume').value = 200">Ваза (~200 см³)</span>
+        </div>
+      </div>
+      
       <!-- Материал -->
       <div class="calc-field">
         <label>Материал:</label>
         <select id="material">
-          <option value="1.0">PLA (стандартный) - 7 руб/г</option>
-          <option value="1.2">PETG (прочный) - 8 руб/г</option>
-          <option value="1.5">ABS (термостойкий) - 12 руб/г</option>
-          <option value="2.0">Flexible (гибкий) - 15 руб/г</option>
-          <option value="2.2">Фотополимерная смола (Максимальная детализация) 45 руб/г</option>
+          <option value="1.0">PLA (стандартный) - 7 руб/см³</option>
+          <option value="1.2">PETG (прочный) - 8 руб/см³</option>
+          <option value="1.5">ABS (термостойкий) - 12 руб/см³</option>
+          <option value="2.0">Flexible (гибкий) - 15 руб/см³</option>
+          <option value="2.2">Resin (высокая детализация) - 45 руб/см³</option>
         </select>
       </div>
       
@@ -259,7 +277,7 @@
       <div class="calc-field">
         <label>Срочность:</label>
         <select id="urgency">
-          <option value="1.0">Стандарт (3-7 дней)</option>
+          <option value="1.0">Стандарт (3-5 дней)</option>
           <option value="1.5">Срочно (1-2 дня) +50%</option>
           <option value="2.0">Очень срочно (24 часа) +100%</option>
         </select>

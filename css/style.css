@@ -950,10 +950,10 @@ footer {
 /* Обновленный крестик закрытия */
 .calc-close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
+  top: 10px;
+  right: 10px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: 2px solid var(--orange);
   background: rgba(255, 107, 0, 0.1);
@@ -1008,6 +1008,53 @@ footer {
   outline: none;
   border-color: var(--orange);
   box-shadow: 0 0 10px var(--orange-glow);
+}
+
+/* Подсказка для поля */
+.field-hint {
+  font-size: 0.8rem;
+  color: var(--orange-light);
+  margin-top: 0.3rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Примеры объемов */
+.volume-examples {
+  background: rgba(255, 107, 0, 0.05);
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1.5rem;
+}
+
+.examples-title {
+  font-size: 0.9rem;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.examples span {
+  background: rgba(255, 107, 0, 0.1);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.examples span:hover {
+  background: rgba(255, 107, 0, 0.2);
+  border-color: var(--orange);
+  transform: translateY(-2px);
 }
 
 /* Поле цвета */
@@ -1177,5 +1224,13 @@ textarea:focus {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+  }
+  
+  .examples {
+    flex-direction: column;
+  }
+  
+  .examples span {
+    text-align: center;
   }
 }
