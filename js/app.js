@@ -366,10 +366,11 @@ function initCalculator() {
         
         // Базовая цена за материал
         const basePrices = {
-            1.0: 2,   // PLA
-            1.2: 2.4, // PETG
-            1.5: 3,   // ABS
-            2.0: 4    // Flexible
+            1.0: 7,   // PLA
+            1.2: 8, // PETG
+            1.5: 12,   // ABS
+            2.0: 15,  // Flexible
+            2.2: 45   //Resin
         };
         
         const basePrice = basePrices[material] || 2;
