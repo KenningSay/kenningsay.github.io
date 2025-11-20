@@ -315,7 +315,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-// Калькулятор стоимости - обновленная версия
+// ================== КАЛЬКУЛЯТОР СТОИМОСТИ ==================
+
 function initCalculator() {
     const calcBtn = document.getElementById('calcBtn');
     const calcModal = document.getElementById('calcModal');
@@ -323,84 +324,130 @@ function initCalculator() {
     
     if (!calcBtn || !calcModal) {
         console.log("Элементы калькулятора не найдены, повторная попытка...");
-        setTimeout(initCalculator, 100); // Повторная попытка через 100ms
+        setTimeout(initCalculator, 100);
         return;
     }
     
     console.log("Калькулятор инициализирован!");
-    
+
     // Открыть калькулятор
     calcBtn.addEventListener('click', function() {
         console.log("Кнопка калькулятора нажата!");
         calcModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
     });
-    
+
     // Закрыть калькулятор
     calcClose.addEventListener('click', closeCalculator);
-    
+
     // Закрытие по клику вне окна
     calcModal.addEventListener('click', function(e) {
         if (e.target === calcModal) {
             closeCalculator();
         }
     });
-    
+
     // Закрытие по ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && calcModal.style.display === 'flex') {
             closeCalculator();
         }
     });
-    
+
     function closeCalculator() {
         calcModal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
-    
+
     // Расчет стоимости
     function calculateCost() {
-        const volume = parseFloat(document.getElementById('volume').value) || 0;
         const material = parseFloat(document.getElementById('material').value);
-        const complexity = parseFloat(document.getElementById('complexity').value);
         const urgency = parseFloat(document.getElementById('urgency').value);
         
-        const basePrice = 2; // руб за см³
-        const cost = volume * basePrice * material * complexity * urgency;
+        // Базовая цена за материал
+        const basePrices = {
+            1.0: 2,   // PLA
+            1.2: 2.4, // PETG
+            1.5: 3,   // ABS
+            2.0: 4    // Flexible
+        };
         
-        document.getElementById('result').textContent = Math.max(100, Math.round(cost));
+        const basePrice = basePrices[material] || 2;
+        const cost = 100 * basePrice * urgency; // Базовая стоимость 100 см³
+        
+        document.getElementById('result').textContent = Math.round(cost);
     }
-    
-    // Слушатели изменений
-    document.getElementById('volume').addEventListener('input', calculateCost);
+
+    // Обработчик загрузки файла
+    document.getElementById('file').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const fileName = document.getElementById('fileName');
+        
+        if (file) {
+            fileName.textContent = file.name;
+            fileName.style.color = 'var(--orange)';
+        } else {
+            fileName.textContent = 'Файл не выбран';
+            fileName.style.color = 'var(--text-light)';
+        }
+    });
+
+    // Обновляем стоимость при изменении
     document.getElementById('material').addEventListener('change', calculateCost);
-    document.getElementById('complexity').addEventListener('change', calculateCost);
     document.getElementById('urgency').addEventListener('change', calculateCost);
-    
+
     // Кнопка отправки
     document.querySelector('.calc-submit-btn').addEventListener('click', function() {
-        const volume = document.getElementById('volume').value;
-        if (!volume) {
-            alert('Пожалуйста, укажите объем модели');
+        const description = document.getElementById('description').value;
+        const color = document.getElementById('color').value;
+        const material = document.getElementById('material');
+        const materialText = material.options[material.selectedIndex].text;
+        const urgency = document.getElementById('urgency');
+        const urgencyText = urgency.options[urgency.selectedIndex].text;
+        const file = document.getElementById('file').files[0];
+        const cost = document.getElementById('result').textContent;
+        
+        if (!description.trim()) {
+            alert('Пожалуйста, опишите вашу модель');
             return;
         }
         
-        const cost = document.getElementById('result').textContent;
-        alert(`Запрос отправлен!\nОбъем: ${volume} см³\nПримерная стоимость: ${cost} ₽\n\nСвяжемся с вами для уточнения деталей!`);
+        let message = `✅ Запрос на расчет получен!\n\n`;
+        message += `📝 Описание: ${description}\n`;
+        message += `🎨 Цвет: ${color}\n`;
+        message += `📦 Материал: ${materialText}\n`;
+        message += `⏱️ Срочность: ${urgencyText}\n`;
+        message += `💰 Примерная стоимость: ${cost} ₽\n`;
+        
+        if (file) {
+            message += `📎 Файл: ${file.name}\n`;
+        }
+        
+        message += `\nСвяжемся с вами в течение 1 часа для уточнения деталей!`;
+        
+        alert(message);
         closeCalculator();
+        
+        // Очистка формы после отправки
+        document.getElementById('description').value = '';
+        document.getElementById('file').value = '';
+        document.getElementById('fileName').textContent = 'Файл не выбран';
+        document.getElementById('fileName').style.color = 'var(--text-light)';
     });
+
+    // Инициализация стоимости при загрузке
+    calculateCost();
 }
 
-// Инициализация после полной загрузки DOM
+// Инициализация калькулятора после загрузки DOM
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded');
     initCalculator();
 });
 
-// Резервная инициализация после полной загрузки страницы
+// Резервная инициализация
 window.addEventListener('load', function() {
     console.log('Page fully loaded');
-    // Если калькулятор еще не инициализирован, пробуем еще раз
     if (!document.getElementById('calcBtn')) {
         console.log("Калькулятор не найден после полной загрузки");
     }

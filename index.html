@@ -233,45 +233,66 @@
 <!-- Модальное окно калькулятора -->
 <div class="calc-modal" id="calcModal">
   <div class="calc-content">
-    <span class="calc-close" id="calcClose">&times;</span>
+    <span class="calc-close" id="calcClose">
+      <span>&times;</span>
+    </span>
+    
     <h2>💰 Калькулятор стоимости печати</h2>
     
     <div class="calc-form">
-      <div class="calc-field">
-        <label>Объем модели (см³):</label>
-        <input type="number" id="volume" placeholder="Например: 50" min="1">
-      </div>
-      
+      <!-- Материал -->
       <div class="calc-field">
         <label>Материал:</label>
         <select id="material">
-          <option value="1.0">PLA (стандартный)</option>
-          <option value="1.2">PETG (прочный)</option>
-          <option value="1.5">ABS (термостойкий)</option>
-          <option value="2.0">Flexible (гибкий)</option>
+          <option value="1.0">PLA (стандартный) - 2 руб/см³</option>
+          <option value="1.2">PETG (прочный) - 2.4 руб/см³</option>
+          <option value="1.5">ABS (термостойкий) - 3 руб/см³</option>
+          <option value="2.0">Flexible (гибкий) - 4 руб/см³</option>
         </select>
       </div>
       
-      <div class="calc-field">
-        <label>Сложность:</label>
-        <select id="complexity">
-          <option value="1.0">Простая</option>
-          <option value="1.3">Средняя</option>
-          <option value="1.7">Сложная</option>
-        </select>
-      </div>
-      
+      <!-- Срочность -->
       <div class="calc-field">
         <label>Срочность:</label>
         <select id="urgency">
           <option value="1.0">Стандарт (3-5 дней)</option>
-          <option value="1.5">Срочно (1-2 дня)</option>
-          <option value="2.0">Очень срочно (24 часа)</option>
+          <option value="1.5">Срочно (1-2 дня) +50%</option>
+          <option value="2.0">Очень срочно (24 часа) +100%</option>
         </select>
       </div>
       
+      <!-- Цвет -->
+      <div class="calc-field">
+        <label>Цвет:</label>
+        <div class="color-picker">
+          <input type="color" id="color" value="#FF6B00" class="color-input">
+          <label for="color" class="color-label">Выбрать цвет</label>
+        </div>
+      </div>
+      
+      <!-- Описание -->
+      <div class="calc-field">
+        <label>Краткое описание модели:</label>
+        <textarea id="description" placeholder="Опишите что вы хотите напечатать..." rows="3"></textarea>
+      </div>
+      
+      <!-- Загрузка изображения -->
+      <div class="calc-field">
+        <label>Пример модели (изображение):</label>
+        <div class="file-upload">
+          <input type="file" id="file" accept="image/*" class="file-input">
+          <label for="file" class="file-label">
+            <span class="file-icon">📁</span>
+            Выбрать файл
+          </label>
+          <span class="file-name" id="fileName">Файл не выбран</span>
+        </div>
+      </div>
+      
+      <!-- Результат -->
       <div class="calc-result">
         <h3>Примерная стоимость: <span id="result">0</span> ₽</h3>
+        <p class="calc-note">*Точная стоимость будет рассчитана после проверки модели</p>
       </div>
       
       <button class="calc-submit-btn">Получить точный расчет</button>
