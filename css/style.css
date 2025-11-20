@@ -807,25 +807,7 @@ footer {
   border-radius: 20px;
   backdrop-filter: blur(5px);
 }
-/* Убираем полосу вверху */
-.hero {
-  margin-top: 0 !important;
-  padding-top: 0 !important;
-  min-height: 100vh;
-}
 
-/* Убираем отступы у body */
-body {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* Шапка поверх контента */
-header {
-  position: fixed;
-  top: 10px;
-  z-index: 1000;
-}
 .materials h2 {
   color: var(--orange);
   text-align: center;
@@ -852,235 +834,250 @@ header {
 
 /*Анимация печати */
 
-/* Секция демонстрации печати */
-.printing-demo-section {
-  margin: 4rem 0;
+.printing-demo-integrated {
+  margin-top: 4rem;
+  padding: 3rem;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 140, 66, 0.02));
+  border-radius: 25px;
+  border: 1px solid var(--glass-border);
 }
 
-.printing-demo-container {
+.demo-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: center;
-}
-
-/* 3D Принтер */
-.printer-machine {
-  position: relative;
-  width: 300px;
-  height: 400px;
+  max-width: 800px;
   margin: 0 auto;
-  perspective: 1000px;
 }
 
-.printer-body {
+/* Принтер */
+.printer-setup {
+  position: relative;
+}
+
+.printer {
+  position: relative;
+  width: 280px;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.printer-frame {
   position: relative;
   width: 100%;
-  height: 350px;
+  height: 100%;
   background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
   border: 3px solid #444;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 .printer-bed {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  right: 20px;
-  height: 200px;
+  bottom: 30px;
+  left: 30px;
+  right: 30px;
+  height: 180px;
   background: #333;
   border: 2px solid #555;
   border-radius: 8px;
   overflow: hidden;
 }
 
-.printing-model {
+.printed-item {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;
-  height: 100%;
-  background: rgba(255, 107, 0, 0.1);
-  border: 1px solid rgba(255, 107, 0, 0.3);
+  width: 120px;
+  height: 150px;
 }
 
-.print-layer {
+.item-layers {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: linear-gradient(to top, var(--orange), var(--orange-light));
-  transition: height 0.1s ease;
-  border-radius: 4px 4px 0 0;
+  height: 0;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.print-layer {
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  margin: 1px 0;
+  border-radius: 3px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  animation: layerPrint 0.8s ease-out forwards;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+}
+
+@keyframes layerPrint {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
 }
 
 .printer-head {
   position: absolute;
-  top: 30px;
+  top: 40px;
   left: 50%;
   transform: translateX(-50%);
-  width: 60px;
-  height: 40px;
+  width: 50px;
+  height: 35px;
   background: #444;
   border-radius: 8px;
-  animation: printHeadMove 4s infinite alternate;
+  transition: transform 0.5s ease;
 }
 
 .nozzle {
   position: absolute;
-  bottom: -10px;
+  bottom: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 8px;
-  height: 12px;
+  width: 6px;
+  height: 10px;
   background: #666;
-  border-radius: 0 0 4px 4px;
+  border-radius: 0 0 3px 3px;
 }
 
-.filament {
+.filament-flow {
   position: absolute;
-  top: -20px;
+  top: -15px;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
-  height: 20px;
+  width: 3px;
+  height: 15px;
   background: var(--orange);
   border-radius: 2px;
   opacity: 0;
 }
 
-.printer-base {
-  width: 350px;
-  height: 20px;
-  background: linear-gradient(135deg, #333, #222);
-  margin: 0 auto;
-  border-radius: 0 0 10px 10px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+/* Анимации печати */
+.printing .printer-head {
+  animation: headMove 4s ease-in-out infinite;
 }
 
-/* Анимации */
-@keyframes printHeadMove {
-  0%, 100% { transform: translateX(-50%) translateX(-80px); }
-  50% { transform: translateX(-50%) translateX(80px); }
+@keyframes headMove {
+  0%, 100% { transform: translateX(-50%) translateX(-50px); }
+  25% { transform: translateX(-50%) translateX(50px); }
+  50% { transform: translateX(-50%) translateX(50px) translateY(20px); }
+  75% { transform: translateX(-50%) translateX(-50px) translateY(20px); }
 }
 
-@keyframes printing {
-  0% { height: 0%; }
-  100% { height: 100%; }
+.printing .filament-flow {
+  animation: filamentExtrude 0.6s ease-in-out infinite;
 }
 
-@keyframes extrudeFilament {
-  0% { opacity: 0; transform: translateX(-50%) scaleY(0); }
-  50% { opacity: 1; transform: translateX(-50%) scaleY(1); }
-  100% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+@keyframes filamentExtrude {
+  0%, 100% { 
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
 }
 
-.printing .print-layer {
-  animation: printing 3s ease-in-out forwards;
-}
-
-.printing .filament {
-  animation: extrudeFilament 0.5s infinite;
-}
-
-/* Элементы управления */
-.printing-controls {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.print-btn, .reset-btn {
-  padding: 1rem 2rem;
-  border: none;
-  border-radius: 25px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.print-btn {
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: var(--black);
-  box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
-}
-
-.print-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.6);
-}
-
-.reset-btn {
-  background: transparent;
-  color: var(--text-light);
-  border: 2px solid var(--glass-border);
-}
-
-.reset-btn:hover {
-  border-color: var(--orange);
-  color: var(--orange);
-}
-
-.print-progress {
-  background: var(--glass-bg);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 1px solid var(--glass-border);
-}
-
-.progress-bar {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--orange), var(--orange-light));
-  border-radius: 4px;
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px var(--orange-glow);
-}
-
-.progress-text {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  color: var(--orange);
-}
-
-.print-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  background: var(--glass-bg);
-  padding: 1.5rem;
-  border-radius: 15px;
-  border: 1px solid var(--glass-border);
-}
-
-.stat {
+/* Кнопка и управление */
+.demo-action {
   text-align: center;
 }
 
-.stat-label {
-  display: block;
-  font-size: 0.9rem;
-  color: var(--text-light);
-  opacity: 0.8;
-  margin-bottom: 0.3rem;
-}
-
-.stat-value {
-  display: block;
+.print-trigger {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--black);
+  border: none;
+  padding: 1.5rem 3rem;
+  border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  color: var(--orange);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.print-trigger:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(255, 107, 0, 0.6);
+}
+
+.print-trigger:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.print-icon {
+  font-size: 1.5rem;
+}
+
+.print-status {
   font-size: 1.1rem;
+  color: var(--text-light);
+  min-height: 24px;
+  transition: all 0.3s ease;
+}
+
+.printing-active .print-status {
+  color: var(--orange);
+  font-weight: 600;
+}
+
+/* Эффект завершения */
+.print-complete .printed-item {
+  animation: objectComplete 2s ease-in-out;
+}
+
+@keyframes objectComplete {
+  0%, 100% { 
+    filter: drop-shadow(0 0 0px var(--orange));
+    transform: translateX(-50%) scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 25px var(--orange));
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+/* Мобильная версия */
+@media (max-width: 768px) {
+  .printing-demo-integrated {
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+  }
+  
+  .demo-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .printer {
+    width: 220px;
+    height: 280px;
+  }
+  
+  .print-trigger {
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
 }

@@ -244,83 +244,72 @@ window.addEventListener('load', function() {
 });
 
 // Анимация процесса печати
+// Демонстрация печати в блоке преимуществ
 document.addEventListener('DOMContentLoaded', function() {
-  const startBtn = document.getElementById('startPrint');
-  const resetBtn = document.getElementById('resetPrint');
-  const printingModel = document.getElementById('printingModel');
-  const printLayer = document.querySelector('.print-layer');
-  const progressFill = document.querySelector('.progress-fill');
-  const progressText = document.querySelector('.progress-text');
-  const currentLayer = document.getElementById('currentLayer');
-  const printTime = document.getElementById('printTime');
+  const printTrigger = document.getElementById('printTrigger');
+  const printStatus = document.getElementById('printStatus');
+  const printer = document.querySelector('.printer');
+  const itemLayers = document.querySelector('.item-layers');
+  const demoSection = document.querySelector('.printing-demo-integrated');
   
   let isPrinting = false;
-  let printInterval;
-  let layersCompleted = 0;
-  const totalLayers = 100;
-  let timeElapsed = 0;
   
-  startBtn.addEventListener('click', startPrinting);
-  resetBtn.addEventListener('click', resetPrinting);
-  
-  function startPrinting() {
+  printTrigger.addEventListener('click', function() {
     if (isPrinting) return;
     
-    isPrinting = true;
-    printingModel.classList.add('printing');
-    startBtn.disabled = true;
-    
-    // Запускаем анимацию
-    let progress = 0;
-    layersCompleted = 0;
-    timeElapsed = 0;
-    
-    printInterval = setInterval(() => {
-      progress += 1;
-      layersCompleted += 1;
-      timeElapsed += 1;
-      
-      // Обновляем визуальные элементы
-      printLayer.style.height = progress + '%';
-      progressFill.style.width = progress + '%';
-      progressText.textContent = progress + '% завершено';
-      currentLayer.textContent = layersCompleted + '/' + totalLayers;
-      printTime.textContent = formatTime(timeElapsed);
-      
-      if (progress >= 100) {
-        finishPrinting();
-      }
-    }, 50);
-  }
+    startPrinting();
+  });
   
-  function resetPrinting() {
-    clearInterval(printInterval);
-    isPrinting = false;
-    printingModel.classList.remove('printing');
-    startBtn.disabled = false;
+  function startPrinting() {
+    isPrinting = true;
+    printTrigger.disabled = true;
+    printStatus.textContent = "🔄 Печать началась...";
+    demoSection.classList.add('printing-active');
+    printer.classList.add('printing');
     
-    printLayer.style.height = '0%';
-    progressFill.style.width = '0%';
-    progressText.textContent = '0% завершено';
-    currentLayer.textContent = '0/' + totalLayers;
-    printTime.textContent = '0:00';
+    // Очищаем предыдущие слои
+    itemLayers.innerHTML = '';
+    itemLayers.style.height = '0';
+    
+    let currentLayer = 0;
+    const totalLayers = 25; // Больше слоев для долгой анимации
+    const layerHeight = 6; // Высота одного слоя
+    
+    const printInterval = setInterval(() => {
+      if (currentLayer >= totalLayers) {
+        clearInterval(printInterval);
+        finishPrinting();
+        return;
+      }
+      
+      // Создаем слой
+      const layer = document.createElement('div');
+      layer.className = 'print-layer';
+      layer.style.animationDelay = (currentLayer * 0.2) + 's';
+      itemLayers.prepend(layer); // Добавляем снизу
+      
+      // Обновляем высоту
+      itemLayers.style.height = (currentLayer * layerHeight) + 'px';
+      
+      // Обновляем статус
+      const progress = Math.round((currentLayer / totalLayers) * 100);
+      printStatus.textContent = `🔄 Печатается... ${progress}%`;
+      
+      currentLayer++;
+    }, 300); // Интервал увеличен для более долгой анимации
   }
   
   function finishPrinting() {
-    clearInterval(printInterval);
-    isPrinting = false;
-    startBtn.disabled = false;
+    printer.classList.remove('printing');
+    document.querySelector('.printed-item').classList.add('print-complete');
+    printStatus.textContent = "✅ Печать завершена!";
+    printTrigger.innerHTML = '<span class="print-icon">🔄</span> Запустить снова';
+    printTrigger.disabled = false;
     
-    // Добавляем завершающий эффект
-    printingModel.style.boxShadow = '0 0 30px rgba(255, 107, 0, 0.5)';
     setTimeout(() => {
-      printingModel.style.boxShadow = 'none';
-    }, 2000);
-  }
-  
-  function formatTime(seconds) {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+      isPrinting = false;
+      document.querySelector('.printed-item').classList.remove('print-complete');
+      demoSection.classList.remove('printing-active');
+    }, 4000);
   }
 });
