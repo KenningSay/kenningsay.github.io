@@ -313,3 +313,76 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 4000);
   }
 });
+
+
+// Калькулятор стоимости
+const calcBtn = document.getElementById('calcBtn');
+const calcModal = document.getElementById('calcModal');
+const calcClose = document.getElementById('calcClose');
+const volumeInput = document.getElementById('volume');
+const materialSelect = document.getElementById('material');
+const complexitySelect = document.getElementById('complexity');
+const urgencySelect = document.getElementById('urgency');
+const resultElement = document.getElementById('result');
+
+// Открыть калькулятор
+calcBtn.addEventListener('click', function() {
+  calcModal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+});
+
+// Закрыть калькулятор
+calcClose.addEventListener('click', closeCalculator);
+calcModal.addEventListener('click', function(e) {
+  if (e.target === calcModal) {
+    closeCalculator();
+  }
+});
+
+// Закрытие по ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeCalculator();
+  }
+});
+
+function closeCalculator() {
+  calcModal.style.display = 'none';
+  document.body.style.overflow = 'auto';
+}
+
+// Расчет стоимости
+function calculateCost() {
+  const volume = parseFloat(volumeInput.value) || 0;
+  const material = parseFloat(materialSelect.value);
+  const complexity = parseFloat(complexitySelect.value);
+  const urgency = parseFloat(urgencySelect.value);
+  
+  // Базовая формула: объем × базовая цена × коэффициенты
+  const basePrice = 2; // руб за см³
+  const cost = volume * basePrice * material * complexity * urgency;
+  
+  resultElement.textContent = Math.max(100, Math.round(cost)); // Минимум 100 руб
+}
+
+// Слушатели изменений
+volumeInput.addEventListener('input', calculateCost);
+materialSelect.addEventListener('change', calculateCost);
+complexitySelect.addEventListener('change', calculateCost);
+urgencySelect.addEventListener('change', calculateCost);
+
+// Кнопка отправки
+document.querySelector('.calc-submit-btn').addEventListener('click', function() {
+  const volume = volumeInput.value;
+  if (!volume) {
+    alert('Пожалуйста, укажите объем модели');
+    return;
+  }
+  
+  const cost = resultElement.textContent;
+  const message = `Запрос точного расчета:\nОбъем: ${volume} см³\nПримерная стоимость: ${cost} ₽`;
+  
+  // Здесь можно добавить отправку на email или открытие формы связи
+  alert('Свяжемся с вами для уточнения деталей и точного расчета!');
+  closeCalculator();
+});
