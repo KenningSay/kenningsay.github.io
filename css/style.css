@@ -1463,7 +1463,7 @@ textarea:focus {
 
 /* Стиль для поля телефона */
 .calc-field input[type="tel"] {
-    width: 100%;
+    width: 39%;
     padding: 10px 12px;
     border-radius: 10px;
     border: 1px solid var(--glass-border);
