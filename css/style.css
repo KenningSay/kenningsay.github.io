@@ -1640,3 +1640,27 @@ textarea:focus {
 .hero-content .btn {
   font-size: 1.5rem !important; /* Увеличиваем текст кнопки */
 }
+
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ === */
+
+@media (max-width: 768px) {
+  /* Заголовок */
+  .hero-content h1 {
+    font-size: 4rem !important; /* Уменьшили с 7rem до 4rem */
+  }
+
+  /* Подзаголовок */
+  .hero-content .subtitle {
+    font-size: 1.5rem !important; /* Уменьшили с 2rem до 1.5rem */
+  }
+
+  /* Основной текст */
+  .hero-content p {
+    font-size: 1.3rem !important; /* Уменьшили с 1.6rem до 1.3rem */
+  }
+
+  /* Кнопка */
+  .hero-content .btn {
+    font-size: 1.1rem !important; /* Уменьшили с 1.3rem до 1.1rem */
+  }
+}
