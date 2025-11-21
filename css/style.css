@@ -71,7 +71,7 @@ header {
   top: 10px;
   left: 50%;
   transform: translateX(-50%) translateY(0);
-  z-index: 1000;
+  z-index: 4;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -843,7 +843,7 @@ footer {
   width: 100vw;
   height: 100vh;
   background: rgba(19, 4, 1, 0.75);
-  z-index: 10000;
+  z-index: 10;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(6px);
@@ -884,7 +884,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10001;
+  z-index: 2;
 }
 
 .close-btn:hover {
@@ -906,7 +906,7 @@ footer {
   border-radius: 50%;
   cursor: pointer;
   transition: var(--transition);
-  z-index: 10001;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1038,7 +1038,7 @@ footer {
   border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 5px 25px rgba(255, 107, 0, 0.4);
-  z-index: 1000;
+  z-index: 2;
   transition: var(--transition);
   font-weight: 600;
   border: 2px solid rgba(255, 255, 255, 0.2);
@@ -1059,7 +1059,7 @@ footer {
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
-  z-index: 1001;
+  z-index: 2;
   align-items: center;
   justify-content: center;
   padding: 20px;
@@ -1101,7 +1101,7 @@ footer {
   font-size: 1.5rem;
   color: var(--orange);
   font-weight: bold;
-  z-index: 1002;
+  z-index: 2;
   backdrop-filter: blur(10px); /* Добавляем размытие фона */
 }
 
@@ -1220,7 +1220,7 @@ footer {
   font-size: 1.5rem;
   color: var(--orange);
   font-weight: bold;
-  z-index: 1002;
+  z-index: 3;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
@@ -1577,7 +1577,7 @@ textarea:focus {
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    z-index: 1001;
+    z-index: 3;
     align-items: center;
     justify-content: center;
     padding: 20px;
@@ -1675,7 +1675,7 @@ textarea:focus {
   height: 100%;
   border-radius: 25px; /* Должно совпадать с .hero-content */
   pointer-events: none; /* Не мешает кликать по содержимому */
-  z-index: 3; /* Должен быть выше текста и слоёв ::before, ::after */
+  z-index: 5; /* Должен быть выше текста и слоёв ::before, ::after */
   overflow: hidden; /* Обрезаем, если выходит за границы */
 }
 
