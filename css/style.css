@@ -227,6 +227,43 @@ nav a:hover::after {
 }
 
 /* Главный баннер с картинкой */
+
+.hero-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  padding: 3.5rem;
+  border-radius: 25px;
+  max-width: 800px;
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.3s;
+  position: relative; /* ВАЖНО */
+  z-index: 1; /* Должен быть выше ::before и ::after */
+  transition: var(--transition);
+}
+
+/* Анимация появления */
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Поведение при наведении */
+.hero-content:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
 .hero {
   min-height: 100vh;
   background: 
