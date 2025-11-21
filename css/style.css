@@ -240,6 +240,35 @@ nav a:hover::after {
   position: relative;
 }
 
+/* === ХАОТИЧНОЕ СВЕЧЕНИЕ ПОД HERO CONTENT === */
+
+.hero-content::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.2), transparent);
+  filter: blur(15px);
+  opacity: 0.8;
+  z-index: -1;
+  animation: glow-pulse 4s ease-in-out infinite alternate, glow-jitter 6s linear infinite;
+}
+
+@keyframes glow-pulse {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+@keyframes glow-jitter {
+  0%   { transform: translateX(0) scale(1); }
+  25%  { transform: translateX(-2px) scale(1.02); }
+  50%  { transform: translateX(2px) scale(0.98); }
+  75%  { transform: translateX(-1px) scale(1.01); }
+  100% { transform: translateX(0) scale(1); }
+}
+
 .hero::before {
   content: '';
   position: absolute;
@@ -248,8 +277,9 @@ nav a:hover::after {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
-  
 }
+
+/* === УЛУЧШЕННЫЙ ХАОТИЧНЫЙ ЭФФЕКТ ПОД ТЕКСТОМ === */
 
 .hero-content::before {
   content: '';
@@ -264,6 +294,44 @@ nav a:hover::after {
   background-size: 30px 30px;
   pointer-events: none;
   z-index: -1;
+  /* Оставляем как есть */
+}
+
+/* --- НОВОЕ: СВЕЧЕНИЕ ПОД ТЕКСТОМ --- */
+.hero-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 107, 0, 0.05) 30%,
+    transparent 70%
+  );
+  filter: blur(25px);
+  opacity: 0.6;
+  z-index: -1; /* Должен быть под текстом, но выше сетки */
+  mix-blend-mode: overlay; /* Добавляет "жизни" за счёт смешивания цветов */
+  animation: 
+    glow-pulse 4s ease-in-out infinite alternate, 
+    glow-jitter 6s linear infinite;
+  pointer-events: none; /* Не мешает кликать */
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes glow-jitter {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(-10px, -5px) scale(1.02); }
+  50%  { transform: translate(8px, 10px) scale(0.98); }
+  75%  { transform: translate(-5px, -8px) scale(1.01); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
 .hero-content {
