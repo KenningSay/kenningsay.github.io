@@ -1623,7 +1623,7 @@ textarea:focus {
 
 /* Заголовок */
 .hero-content h1 {
-  font-size: 7rem !important; /* Увеличиваем заголовок */
+  font-size: 5.2rem !important; /* Увеличиваем заголовок */
 }
 
 /* Подзаголовок */
@@ -1633,10 +1633,10 @@ textarea:focus {
 
 /* Основной текст */
 .hero-content p {
-  font-size: 1.6rem !important; /* Увеличиваем основной текст */
+  font-size: 1.4rem !important; /* Увеличиваем основной текст */
 }
 
 /* Кнопка */
 .hero-content .btn {
-  font-size: 1.3rem !important; /* Увеличиваем текст кнопки */
+  font-size: 1.5rem !important; /* Увеличиваем текст кнопки */
 }
