@@ -231,7 +231,7 @@ nav a:hover::after {
 .hero-content {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
-  padding: 3.5rem;
+  padding: 5rem 3.5rem; /* Увеличили отступы */
   border-radius: 25px;
   max-width: 800px;
   box-shadow:
@@ -245,6 +245,79 @@ nav a:hover::after {
   position: relative; /* ВАЖНО */
   z-index: 1; /* Должен быть выше ::before и ::after */
   transition: var(--transition);
+  text-align: center; /* Убедимся, что текст по центру */
+  display: flex; /* Используем flex для управления дочерними элементами */
+  flex-direction: column; /* Располагаем элементы вертикально */
+  align-items: center; /* Центрируем по горизонтали */
+  justify-content: center; /* Центрируем по вертикали */
+  min-height: 60vh; /* Добавим минимальную высоту, чтобы кнопка могла сдвигаться вниз */
+}
+
+.hero-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6rem; /* Увеличили размер */
+  font-weight: 700;
+  margin-bottom: 1rem; /* Уменьшили отступ снизу */
+  color: #ff7700; /* Чистый оранжевый */
+  text-shadow:
+    0 0 15px rgba(255, 107, 0, 0.6), /* Основное свечение */
+    0 0 30px rgba(255, 107, 0, 0.4); /* Дополнительное свечение */
+  background: linear-gradient(135deg, #ff7700, #ffaa33); /* Градиент для блика */
+  -webkit-background-clip: text; /* Применяем градиент к тексту */
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #ff7700; /* На случай, если -webkit- не сработает */
+  animation: h1-glow-pulse 2s ease-in-out infinite alternate, h1-shimmer 3s linear infinite; /* Добавили анимации */
+  position: relative; /* Для правильной работы анимаций */
+  overflow: hidden; /* Скрываем возможные выступы градиента */
+  z-index: 2; /* Выше слоёв ::before и ::after внутри .hero-content */
+}
+
+/* Анимация пульсации свечения */
+@keyframes h1-glow-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 15px rgba(255, 107, 0, 0.6),
+      0 0 30px rgba(255, 107, 0, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 25px rgba(255, 107, 0, 0.8),
+      0 0 40px rgba(255, 107, 0, 0.6);
+  }
+}
+
+/* Анимация "блика" (движение градиента) */
+@keyframes h1-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hero-content .btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--black);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 5px 20px rgba(255, 107, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1.1rem;
+  /* --- НОВОЕ: Отступ сверху --- */
+  margin-top: 2rem; /* Кнопка опустится на 2rem ниже */
+  /* --- */
+  z-index: 2; /* Выше слоёв ::before и ::after внутри .hero-content */
 }
 
 /* Анимация появления */
