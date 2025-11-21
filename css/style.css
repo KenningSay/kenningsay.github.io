@@ -1664,3 +1664,64 @@ textarea:focus {
     font-size: 1.1rem !important; /* Уменьшили с 1.3rem до 1.1rem */
   }
 }
+
+/* === НЕОННАЯ ОБВОДКА .hero-content === */
+
+.neon-border {
+  position: absolute; /* Позиционируем относительно .hero-content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px; /* Должно совпадать с .hero-content */
+  pointer-events: none; /* Не мешает кликать по содержимому */
+  z-index: 3; /* Должен быть выше текста и слоёв ::before, ::after */
+  overflow: hidden; /* Обрезаем, если выходит за границы */
+}
+
+/* Создаём "бегущий" неон */
+.neon-border::before {
+  content: '';
+  position: absolute;
+  top: -2px; /* Начинаем чуть выше */
+  left: -2px; /* Начинаем чуть левее */
+  width: calc(100% + 4px); /* Ширина + отступы */
+  height: calc(100% + 4px); /* Высота + отступы */
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    #ff7700 10%, /* Оранжевый цвет неона */
+    #ffaa33 20%, /* Светло-оранжевый */
+    #ff7700 30%,
+    transparent 40%,
+    #ff7700 50%,
+    #ffaa33 60%,
+    #ff7700 70%,
+    transparent 80%,
+    transparent 100%
+  );
+  background-size: 300% 300%; /* Увеличиваем размер градиента для анимации */
+  animation: neon-run 3s linear infinite; /* Анимация движения */
+  border-radius: 25px; /* Совпадает с .hero-content */
+  box-shadow:
+    0 0 10px #ff7700, /* Внутренняя подсветка */
+    0 0 20px #ff7700,
+    0 0 30px rgba(255, 107, 0, 0.8),
+    0 0 40px rgba(255, 107, 0, 0.6);
+  /* Стираем "хвосты" градиента за пределами границы */
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor; /* Старый синтаксис для WebKit */
+}
+
+/* Анимация движения неона по периметру */
+@keyframes neon-run {
+  0% {
+    background-position: 0% 50%; /* Начало */
+  }
+  100% {
+    background-position: 300% 50%; /* Конец (300% для 300% размера) */
+  }
+}
