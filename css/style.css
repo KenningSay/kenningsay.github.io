@@ -1646,7 +1646,7 @@ textarea:focus {
 @media (max-width: 768px) {
   /* Заголовок */
   .hero-content h1 {
-    font-size: 4rem !important; /* Уменьшили с 7rem до 4rem */
+    font-size: 2rem !important; /* Уменьшили с 7rem до 4rem */
   }
 
   /* Подзаголовок */
