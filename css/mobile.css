@@ -736,3 +736,23 @@ header {
     margin-top: 90px;
   }
 }
+
+* Заголовок */
+.hero-content h1 {
+  font-size: 5.2rem !important; /* Увеличиваем заголовок */
+}
+
+/* Подзаголовок */
+.hero-content .subtitle {
+  font-size: 2rem !important; /* Увеличиваем подзаголовок */
+}
+
+/* Основной текст */
+.hero-content p {
+  font-size: 1.4rem !important; /* Увеличиваем основной текст */
+}
+
+/* Кнопка */
+.hero-content .btn {
+  font-size: 1.5rem !important; /* Увеличиваем текст кнопки */
+}
