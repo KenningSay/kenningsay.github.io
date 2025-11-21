@@ -730,3 +730,9 @@ header {
   color: var(--orange);
   font-size: 1.1rem;
 }
+
+@media (max-width: 768px) {
+  .hero-content {
+    margin-top: 90px;
+  }
+}
