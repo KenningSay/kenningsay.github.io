@@ -56,7 +56,7 @@ body::before {
   position: fixed;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -81,7 +81,22 @@ header {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   border: 1px solid var(--glass-border);
   border-radius: 60px;
-  transition: var(--transition);
+  transition: var(--transition); 
+}
+
+header::before{
+    content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(to right, rgba(255,119,0,0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,119,0,0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 header.scrolled {
@@ -212,29 +227,187 @@ nav a:hover::after {
 }
 
 /* Главный баннер с картинкой */
+
+.hero-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  padding: 5rem 3.5rem; /* Увеличили отступы */
+  border-radius: 25px;
+  max-width: 800px;
+  box-shadow:
+    var(--shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation-delay: 0.3s;
+  position: relative; /* ВАЖНО */
+  z-index: 1; /* Должен быть выше ::before и ::after */
+  transition: var(--transition);
+  text-align: center; /* Убедимся, что текст по центру */
+  display: flex; /* Используем flex для управления дочерними элементами */
+  flex-direction: column; /* Располагаем элементы вертикально */
+  align-items: center; /* Центрируем по горизонтали */
+  justify-content: center; /* Центрируем по вертикали */
+  min-height: 60vh; /* Добавим минимальную высоту, чтобы кнопка могла сдвигаться вниз */
+}
+
+.hero-content h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5rem; /* Увеличили размер */
+  font-weight: 1000;
+  margin-bottom: 3rem; /* Уменьшили отступ снизу */
+  color: #ff7700; /* Чистый оранжевый */
+  text-shadow:
+    0 0 15px rgba(255, 107, 0, 0.6), /* Основное свечение */
+    0 0 30px rgba(255, 107, 0, 0.4); /* Дополнительное свечение */
+  background: linear-gradient(135deg, #ff7700, #ffaa33); /* Градиент для блика */
+  -webkit-background-clip: text; /* Применяем градиент к тексту */
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #ff7700; /* На случай, если -webkit- не сработает */
+  animation: h1-glow-pulse 5s ease-in-out infinite alternate, h1-shimmer 2s linear infinite; /* Добавили анимации */
+  position: relative; /* Для правильной работы анимаций */
+  overflow: hidden; /* Скрываем возможные выступы градиента */
+  z-index: 2; /* Выше слоёв ::before и ::after внутри .hero-content */
+}
+
+/* Анимация пульсации свечения */
+@keyframes h1-glow-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 15px rgba(255, 107, 0, 0.6),
+      0 0 30px rgba(255, 107, 0, 0.4);
+  }
+  50% {
+    text-shadow:
+      0 0 25px rgba(255, 107, 0, 0.8),
+      0 0 40px rgba(255, 107, 0, 0.6);
+  }
+}
+
+/* Анимация "блика" (движение градиента) */
+@keyframes h1-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.hero-content .btn {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--black);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 5px 20px rgba(255, 107, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  border: none;
+  font-size: 1.1rem;
+  /* --- НОВОЕ: Отступ сверху --- */
+  margin-top: 2rem; /* Кнопка опустится на 2rem ниже */
+  /* --- */
+  z-index: 2; /* Выше слоёв ::before и ::after внутри .hero-content */
+}
+
+/* Анимация появления */
+@keyframes fadeUp {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Поведение при наведении */
+.hero-content:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+
 .hero {
   min-height: 100vh;
   background: 
-    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url('../image/banner.png') center/cover no-repeat;
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), /* Полупрозрачный слой поверх изображения */
+    url('../image/bann.jpg') center/cover no-repeat; /* Путь к вашему изображению */
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 2rem;
   position: relative;
+  overflow: hidden; /* Скрывает возможные выступы изображения */
 }
 
-.hero::before {
+/* Убираем старый ::before, если он мешает */
+/* .hero::before { ... } - можно удалить, если не нужен отдельно */
+
+/* Улучшаем сетку и свечение внутри .hero-content */
+.hero-content::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  background: 
+    linear-gradient(to right, rgba(255,119,0,0.03) 1px, transparent 2px),
+    linear-gradient(to bottom, rgba(255,119,0,0.03) 1px, transparent 2px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  z-index: -1; /* Сетка под текстом */
 }
 
+/* --- НОВОЕ: СВЕЧЕНИЕ ПОД ТЕКСТОМ ВНУТРИ HERO-CONTENT --- */
+.hero-content::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 107, 0, 0.05) 30%,
+    transparent 70%
+  );
+  filter: blur(25px);
+  opacity: 0.4;
+  z-index: 0; /* Свечение между сеткой и текстом */
+  mix-blend-mode: overlay;
+  animation: 
+    glow-pulse 4s ease-in-out infinite alternate, 
+    glow-jitter 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes glow-jitter {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(-10px, -5px) scale(1.02); }
+  50%  { transform: translate(8px, 10px) scale(0.98); }
+  75%  { transform: translate(-5px, -8px) scale(1.01); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* Убедимся, что .hero-content сам по себе выше слоёв */
 .hero-content {
   background: var(--glass-bg);
   backdrop-filter: blur(20px) saturate(180%);
@@ -250,51 +423,8 @@ nav a:hover::after {
   animation: fadeUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   animation-delay: 0.3s;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* Выше всех внутренних слоёв */
   transition: var(--transition);
-}
-
-.hero-content:hover {
-  transform: translateY(-8px);
-  box-shadow: 
-    0 20px 45px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-@keyframes fadeUp {
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.hero h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 3.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: var(--orange);
-  text-shadow: 0 0 15px rgba(255, 107, 0, 0.4);
-  background: linear-gradient(135deg, var(--orange), var(--orange-light));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero .subtitle {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: var(--orange-light);
-  margin-bottom: 2rem;
-  font-style: italic;
-}
-
-.hero p {
-  margin-bottom: 2rem;
-  font-size: 1.3rem;
-  color: var(--text-light);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .btn {
@@ -832,252 +962,766 @@ footer {
   box-shadow: 0 0 15px var(--orange);
 }
 
-/*Анимация печати */
-
-.printing-demo-integrated {
-  margin-top: 4rem;
-  padding: 3rem;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), rgba(255, 140, 66, 0.02));
-  border-radius: 25px;
-  border: 1px solid var(--glass-border);
-}
-
-.demo-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Принтер */
-.printer-setup {
-  position: relative;
-}
-
-.printer {
-  position: relative;
-  width: 280px;
-  height: 320px;
-  margin: 0 auto;
-}
-
-.printer-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  border-radius: 15px;
-  border: 3px solid #444;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.printer-bed {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-  right: 30px;
-  height: 180px;
-  background: #333;
-  border: 2px solid #555;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.printed-item {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 150px;
-}
-
-.item-layers {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-}
-
-.print-layer {
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(90deg, var(--orange), var(--orange-light));
-  margin: 1px 0;
-  border-radius: 3px;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  animation: layerPrint 0.8s ease-out forwards;
-  box-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
-}
-
-@keyframes layerPrint {
-  0% {
-    transform: scaleY(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-  100% {
-    transform: scaleY(1);
-    opacity: 1;
-  }
-}
-
-.printer-head {
-  position: absolute;
-  top: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 35px;
-  background: #444;
-  border-radius: 8px;
-  transition: transform 0.5s ease;
-}
-
-.nozzle {
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 10px;
-  background: #666;
-  border-radius: 0 0 3px 3px;
-}
-
-.filament-flow {
-  position: absolute;
-  top: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 3px;
-  height: 15px;
-  background: var(--orange);
-  border-radius: 2px;
-  opacity: 0;
-}
 
 /* Анимации печати */
-.printing .printer-head {
-  animation: headMove 4s ease-in-out infinite;
-}
-
-@keyframes headMove {
-  0%, 100% { transform: translateX(-50%) translateX(-50px); }
-  25% { transform: translateX(-50%) translateX(50px); }
-  50% { transform: translateX(-50%) translateX(50px) translateY(20px); }
-  75% { transform: translateX(-50%) translateX(-50px) translateY(20px); }
-}
-
-.printing .filament-flow {
-  animation: filamentExtrude 0.6s ease-in-out infinite;
-}
-
-@keyframes filamentExtrude {
-  0%, 100% { 
-    opacity: 0;
-    transform: translateX(-50%) scaleY(0);
-  }
-  50% { 
-    opacity: 1;
-    transform: translateX(-50%) scaleY(1);
-  }
-}
-
-/* Кнопка и управление */
-.demo-action {
-  text-align: center;
-}
-
-.print-trigger {
-  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-  color: var(--black);
-  border: none;
-  padding: 1.5rem 3rem;
-  border-radius: 50px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 1.3rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+.printer-icon {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  justify-content: center;
+  width: 40px;
+  height: 30px;
+  margin-right: 15px;
+  position: relative;
+  vertical-align: middle;
+  background: 
+    linear-gradient(to bottom, 
+      transparent 30%, 
+      rgba(255,107,0,0.15) 30%, 
+      rgba(255,107,0,0.15) 70%, 
+      transparent 70%
+    );
+  border: 2px solid var(--orange);
+  border-radius: 6px 6px 4px 4px;
 }
 
-.print-trigger:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(255, 107, 0, 0.6);
+.printer-icon::before {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 5px;
+  background: var(--orange);
+  top: -6px;
+  left: 12.5%;
+  border-radius: 4px 4px 0 0;
 }
 
-.print-trigger:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+.printer-icon::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 5px;
+  background: var(--orange-light);
+  bottom: 4px;
+  left: 8px;
+  animation: printing 1.5s infinite ease-in-out;
+  box-shadow: 0 0 12px var(--orange);
+  border-radius: 2px;
 }
 
-.print-icon {
+@keyframes printing {
+  0%, 100% {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateY(-5px) scaleY(0.8);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateY(-10px) scaleY(0.6);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translateY(-5px) scaleY(0.8);
+    opacity: 0.9;
+  }
+}
+
+/* Плавающая кнопка калькулятора */
+.calc-floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: white;
+  padding: 15px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 5px 25px rgba(255, 107, 0, 0.4);
+  z-index: 1000;
+  transition: var(--transition);
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.calc-floating-btn:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 35px rgba(255, 107, 0, 0.6);
+}
+
+/* Модальное окно калькулятора */
+.calc-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto; /* Добавляем прокрутку для мобильных */
+}
+
+.calc-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  max-width: 600px; /* Увеличили ширину */
+  width: 95%; /* Увеличили процент ширины */
+  max-height: 90vh; /* Ограничиваем высоту */
+  overflow-y: auto; /* Внутренняя прокрутка */
+  position: relative;
+  animation: fadeUp 0.3s ease;
+  margin: auto; /* Центрируем */
+}
+
+/* Обновленный крестик закрытия */
+.calc-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  background: rgba(255, 107, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
   font-size: 1.5rem;
-}
-
-.print-status {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  min-height: 24px;
-  transition: all 0.3s ease;
-}
-
-.printing-active .print-status {
   color: var(--orange);
+  font-weight: bold;
+  z-index: 1002;
+  backdrop-filter: blur(10px); /* Добавляем размытие фона */
+}
+
+.calc-close:hover {
+  background: var(--orange);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--orange-glow);
+}
+
+/* Контейнер контента с отступом для крестика */
+.calc-content {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 25px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  max-width: 600px;
+  width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: fadeUp 0.3s ease;
+  margin: auto;
+  /* Добавляем отступ сверху для крестика */
+  padding-top: 3rem; /* Увеличили верхний padding */
+}
+
+.calc-content h2 {
+  color: var(--orange);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 0; /* Убираем верхний отступ у заголовка */
+  padding-top: 0;
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  .calc-content {
+    padding: 2rem 1.2rem;
+    padding-top: 2.5rem; /* Увеличиваем верхний padding на мобильных */
+    margin: 20px auto; /* Добавляем отступ от краев экрана */
+    max-height: 85vh;
+    width: 95%;
+    border-radius: 20px;
+  }
+  
+  .calc-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+    top: 12px;
+    right: 12px;
+    background: rgba(18, 18, 18, 0.9); /* Темный фон для контраста */
+    border: 2px solid var(--orange);
+    backdrop-filter: blur(15px);
+  }
+  
+  .calc-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-right: 40px; /* Добавляем отступ справа чтобы текст не заезжал под крестик */
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .calc-content {
+    padding: 3rem 2.5rem 2.5rem 2.5rem;
+    padding-top: 2rem; /* Сохраняем увеличенный верхний padding */
+    border-radius: 15px;
+    margin: 15px auto;
+  }
+  
+  .calc-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.3rem;
+    padding-right: 35px; /* Отступ для маленьких экранов */
+  }
+}
+
+/* Дополнительная защита - если все равно налазит */
+@media (max-width: 360px) {
+  .calc-content {
+    padding-top: 2.2rem;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.2rem;
+    padding-right: 30px;
+  }
+  
+  .calc-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--orange);
+  background: rgba(18, 18, 18, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1.5rem;
+  color: var(--orange);
+  font-weight: bold;
+  z-index: 1002;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+}
+
+/* Подсказка для поля */
+.field-hint {
+  font-size: 0.75rem;
+  color: var(--orange-light);
+  margin-top: 0.3rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+/* Примеры объемов */
+.volume-examples {
+  background: rgba(255, 107, 0, 0.05);
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  margin-bottom: 1.2rem;
+}
+
+.examples-title {
+  font-size: 0.85rem;
+  color: var(--orange);
+  margin-bottom: 0.5rem;
   font-weight: 600;
 }
 
-/* Эффект завершения */
-.print-complete .printed-item {
-  animation: objectComplete 2s ease-in-out;
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
 }
 
-@keyframes objectComplete {
-  0%, 100% { 
-    filter: drop-shadow(0 0 0px var(--orange));
-    transform: translateX(-50%) scale(1);
-  }
-  50% { 
-    filter: drop-shadow(0 0 25px var(--orange));
-    transform: translateX(-50%) scale(1.05);
-  }
+.examples span {
+  background: rgba(255, 107, 0, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
 }
 
-/* Мобильная версия */
+.examples span:hover {
+  background: rgba(255, 107, 0, 0.2);
+  border-color: var(--orange);
+  transform: translateY(-2px);
+}
+
+/* Поле цвета */
+.color-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.color-input {
+  width: 50px;
+  height: 40px;
+  border: 2px solid var(--glass-border);
+  border-radius: 8px;
+  cursor: pointer;
+  background: transparent;
+}
+
+.color-input::-webkit-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.color-input::-moz-color-swatch {
+  border: none;
+  border-radius: 6px;
+}
+
+.color-label {
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Текстовое поле */
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(30, 30, 30, 0.8);
+  color: var(--text-light);
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 70px; /* Уменьшили минимальную высоту */
+  transition: var(--transition);
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 8px var(--orange-glow);
+}
+
+/* Загрузка файла */
+.file-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px 16px;
+  background: rgba(255, 107, 0, 0.1);
+  border: 2px dashed var(--orange);
+  border-radius: 10px;
+  color: var(--orange);
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.file-label:hover {
+  background: rgba(255, 107, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.file-icon {
+  font-size: 1.1rem;
+}
+
+.file-name {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  text-align: center;
+  font-style: italic;
+}
+
+.calc-result {
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), rgba(255, 140, 66, 0.1));
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  margin: 1.2rem 0;
+  text-align: center;
+}
+
+.calc-result h3 {
+  color: var(--orange);
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+#result {
+  font-size: 1.5rem;
+  color: var(--orange-light);
+  font-weight: bold;
+}
+
+/* Примечание */
+.calc-note {
+  font-size: 0.75rem;
+  color: var(--orange-light);
+  margin-top: 0.5rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.calc-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.calc-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4);
+}
+
+/* Адаптивность для мобильных */
 @media (max-width: 768px) {
-  .printing-demo-integrated {
-    padding: 2rem 1rem;
-    margin-top: 2rem;
+  .calc-modal {
+    padding: 10px;
+    align-items: flex-start; /* Выравниваем по верху для мобильных */
   }
   
-  .demo-container {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .calc-content {
+    padding: 1.5rem 1.2rem;
+    margin: 10px auto;
+    max-height: 85vh;
+    width: 98%;
+    border-radius: 20px;
   }
   
-  .printer {
-    width: 220px;
-    height: 280px;
+  .calc-close {
+    width: 35px;
+    height: 35px;
+    font-size: 1.3rem;
+    top: 12px;
+    right: 12px;
   }
   
-  .print-trigger {
-    padding: 1.2rem 2rem;
-    font-size: 1.1rem;
+  .calc-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .color-picker {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .examples {
+    flex-direction: column;
+  }
+  
+  .examples span {
+    text-align: center;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .calc-field {
+    margin-bottom: 1rem;
+  }
+  
+.calc-field input,
+.calc-field select,
+.calc-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(30, 30, 30, 0.9) !important;
+  color: var(--text-light) !important;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Для селектов */
+.calc-field select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23FF6B00' d='M6 8L2 4h8z'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 12px !important;
+  padding-right: 35px !important;
+}
+
+/* Для цветового поля */
+.color-input {
+  width: 50px;
+  height: 40px;
+  border: 2px solid var(--glass-border);
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(30, 30, 30, 0.9) !important;
+}
+
+.calc-field input:focus,
+.calc-field select:focus,
+.calc-field textarea:focus {
+  outline: none;
+  border-color: var(--orange) !important;
+  box-shadow: 0 0 8px var(--orange-glow) !important;
+  background: rgba(40, 40, 40, 0.9) !important;
+}
+  
+  .file-label {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .calc-result {
+    padding: 1rem;
+  }
+  
+  .calc-result h3 {
+    font-size: 1rem;
+  }
+  
+  #result {
+    font-size: 1.3rem;
+  }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+  .calc-content {
+    padding: 1.2rem 1rem;
+    border-radius: 15px;
+  }
+  
+  .calc-content h2 {
+    font-size: 1.3rem;
+  }
+  
+  .calc-field label {
+    font-size: 0.9rem;
+  }
+  
+  .calc-field input,
+  .calc-field select,
+  textarea {
+    font-size: 0.85rem;
+  }
+  
+  .calc-submit-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Стили для скроллбара в калькуляторе */
+.calc-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.calc-content::-webkit-scrollbar-track {
+  background: rgba(30, 30, 30, 0.5);
+  border-radius: 3px;
+}
+
+.calc-content::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  border-radius: 3px;
+}
+
+.calc-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 1001;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.calc-modal[style*="display: flex"] {
+    opacity: 1;
+}
+
+/* Тёмные стили для полей как в твоём дизайне */
+.calc-field input,
+.calc-field select,
+.calc-field textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(30, 30, 30, 0.9);
+  color: var(--text-light);
+  font-size: 1rem;
+  transition: var(--transition);
+  margin-bottom: 1rem;
+}
+
+.calc-field input:focus,
+.calc-field select:focus,
+.calc-field textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 10px var(--orange-glow);
+  background: rgba(40, 40, 40, 0.9);
+}
+
+.calc-field input::placeholder {
+  color: rgba(245, 245, 245, 0.6);
+}
+
+/* === УВЕЛИЧЕНИЕ РАЗМЕРА ШРИФТА В ГЛАВНОМ БЛОКЕ === */
+
+/* Заголовок */
+.hero-content h1 {
+  font-size: 5.2rem !important; /* Увеличиваем заголовок */
+}
+
+/* Подзаголовок */
+.hero-content .subtitle {
+  font-size: 2rem !important; /* Увеличиваем подзаголовок */
+}
+
+/* Основной текст */
+.hero-content p {
+  font-size: 1.4rem !important; /* Увеличиваем основной текст */
+}
+
+/* Кнопка */
+.hero-content .btn {
+  font-size: 1.5rem !important; /* Увеличиваем текст кнопки */
+}
+
+/* === АДАПТИВНЫЕ СТИЛИ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ === */
+
+@media (max-width: 768px) {
+  /* Заголовок */
+  .hero-content h1 {
+    font-size: 2.7rem !important; /* Уменьшили с 7rem до 4rem */
+  }
+
+  /* Подзаголовок */
+  .hero-content .subtitle {
+    font-size: 1.5rem !important; /* Уменьшили с 2rem до 1.5rem */
+  }
+
+  /* Основной текст */
+  .hero-content p {
+    font-size: 1.3rem !important; /* Уменьшили с 1.6rem до 1.3rem */
+  }
+
+  /* Кнопка */
+  .hero-content .btn {
+    font-size: 1.1rem !important; /* Уменьшили с 1.3rem до 1.1rem */
+  }
+}
+
+/* === НЕОННАЯ ОБВОДКА .hero-content === */
+
+.neon-border {
+  position: absolute; /* Позиционируем относительно .hero-content */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px; /* Должно совпадать с .hero-content */
+  pointer-events: none; /* Не мешает кликать по содержимому */
+  z-index: 3; /* Должен быть выше текста и слоёв ::before, ::after */
+  overflow: hidden; /* Обрезаем, если выходит за границы */
+}
+
+/* Создаём "бегущий" неон */
+.neon-border::before {
+  content: '';
+  position: absolute;
+  top: -2px; /* Начинаем чуть выше */
+  left: -2px; /* Начинаем чуть левее */
+  width: calc(100% + 4px); /* Ширина + отступы */
+  height: calc(100% + 4px); /* Высота + отступы */
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    #ff7700 10%, /* Оранжевый цвет неона */
+    #ffaa33 20%, /* Светло-оранжевый */
+    #ff7700 30%,
+    transparent 40%,
+    #ff7700 50%,
+    #ffaa33 60%,
+    #ff7700 70%,
+    transparent 80%,
+    transparent 100%
+  );
+  background-size: 300% 300%; /* Увеличиваем размер градиента для анимации */
+  animation: neon-run 3s linear infinite; /* Анимация движения */
+  border-radius: 25px; /* Совпадает с .hero-content */
+  box-shadow:
+    0 0 10px #ff7700, /* Внутренняя подсветка */
+    0 0 20px #ff7700,
+    0 0 30px rgba(255, 107, 0, 0.8),
+    0 0 40px rgba(255, 107, 0, 0.6);
+  /* Стираем "хвосты" градиента за пределами границы */
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor; /* Старый синтаксис для WebKit */
+}
+
+/* Анимация движения неона по периметру */
+@keyframes neon-run {
+  0% {
+    background-position: 0% 50%; /* Начало */
+  }
+  100% {
+    background-position: 300% 50%; /* Конец (300% для 300% размера) */
   }
 }

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/mobile.css" media="(max-width: 768px)">
 </head>
-<body>
+ <body>
   <!-- Частицы -->
   <div id="particles-js"></div>
 
@@ -28,27 +28,34 @@
       <span></span>
     </div>
     
-    <nav id="nav">
-      <ul>
-        <li><a href="#about">О нас</a></li>
-        <li><a href="#services">Услуги</a></li>
-        <li><a href="#gallery">Галерея</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-    </nav>
+<nav id="nav">
+  <ul>
+    <li>
+      <a href="#about">
+        <span class="printer-icon"></span>
+        О нас
+      </a>
+    </li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#gallery">Галерея</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+</nav>
   </header>
 
   <!-- Главный баннер -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
+  <section class="hero" id="hero" style="min-height: calc(-69px + 100vh); margin-top: 69px; left: 4px; top: 4px;">
+    <div class="hero-content" style="left: -1px;">
+      <div class="neon-border"></div>
       <h1>Layer by Layer</h1>
       <p class="subtitle">Создаём ваши идеи слой за слоем</p>
-      <p>Домашняя мастерская, где каждая деталь создаётся с вниманием и заботой. Мы - семейный проект, объединивший любовь к технологиям и ручной работе.</p>
+      <p>Печать запчастей, прототипов и декора в Мирном — быстро, без посредников, от 500руб.</p>
       <p>От первых эскизов до готового изделия - мы проходим весь путь вместе с вами, превращая ваши идеи в реальные вещи.</p>
+      <p>Присылайте STL, 3mf или описание — рассчитаем стоимость за 2 часа</p>
       <a href="#contact" class="btn">Обсудить проект</a>
     </div>
   </section>
-  <div class="section-spacer"></div>
+
 
       <!-- О нас -->
 
@@ -170,9 +177,8 @@
     <h2 class="section-title">Свяжитесь с нами</h2>
     <div class="glass-card">
       <div class="contact-info">
-        <p>📧 Email: hello@layerbylayer.ru</p>
-        <p>📱 Telegram: @layerbylayer</p>
-        <p>🕒 Время работы: Ежедневно 10:00-20:00</p>
+        <p>📧 Email: layerprint25@gmail.com </p>
+        <p>📞: +7-924-468-47-09</p>
         <p style="margin-top: 2rem; font-style: italic;">
           Ответим на все вопросы, поможем с идеей и рассчитаем стоимость вашего проекта
         </p>
@@ -220,5 +226,113 @@
   });
 </script>
 <script src="js/gallery-viewer.js"></script>
+
+
+
+<!-- Плавающая кнопка калькулятора -->
+<div class="calc-floating-btn" id="calcBtn">
+  💰 Калькулятор
+</div>
+
+<!-- Модальное окно калькулятора -->
+<div class="calc-modal" id="calcModal">
+  <div class="calc-content">
+    <span class="calc-close" id="calcClose">
+      <span>&times;</span>
+    </span>
+    
+    <h2>💰 Калькулятор стоимости печати</h2>
+    
+    <div class="calc-form">
+      <!-- Объем модели -->
+      <div class="calc-field">
+        <label>Объем модели (см³):</label>
+        <input type="number" id="volume" placeholder="Например: 50" min="1" value="50">
+        <p class="field-hint">💡 Объем можно узнать в программе для 3D-моделирования</p>
+      </div>
+      
+      <!-- Примеры объемов -->
+      <div class="volume-examples">
+        <p class="examples-title">📏 Примеры объемов:</p>
+        <div class="examples">
+          <span onclick="document.getElementById('volume').value = 20">Брелок (~20 см³)</span>
+          <span onclick="document.getElementById('volume').value = 50">Стаканчик (~50 см³)</span>
+          <span onclick="document.getElementById('volume').value = 100">Кружка (~100 см³)</span>
+          <span onclick="document.getElementById('volume').value = 200">Ваза (~200 см³)</span>
+        </div>
+      </div>
+      
+      <!-- Материал -->
+      <div class="calc-field">
+        <label>Материал:</label>
+        <select id="material">
+          <option value="1.0">PLA (стандартный) - 7 руб/см³</option>
+          <option value="1.2">PETG (прочный) - 8 руб/см³</option>
+          <option value="1.5">ABS (термостойкий) - 12 руб/см³</option>
+          <option value="2.0">Flexible (гибкий) - 15 руб/см³</option>
+          <option value="2.2">Resin (высокая детализация) - 45 руб/см³</option>
+        </select>
+      </div>
+      
+      <!-- Срочность -->
+      <div class="calc-field">
+        <label>Срочность:</label>
+        <select id="urgency">
+          <option value="1.0">Стандарт (3-5 дней)</option>
+          <option value="1.5">Срочно (1-2 дня) +50%</option>
+          <option value="2.0">Очень срочно (24 часа) +100%</option>
+        </select>
+      </div>
+      
+      <!-- Цвет -->
+      <div class="calc-field">
+        <label>Цвет:</label>
+        <div class="color-picker">
+          <input type="color" id="color" value="#FF6B00" class="color-input">
+          <label for="color" class="color-label">Выбрать цвет</label>
+        </div>
+      </div>
+      
+      <!-- Описание -->
+      <div class="calc-field">
+        <label>Краткое описание модели:</label>
+        <textarea id="description" placeholder="Опишите что вы хотите напечатать..." rows="3"></textarea>
+      </div>
+      
+      <!-- Загрузка изображения -->
+      <div class="calc-field">
+        <label>Пример модели (изображение):</label>
+        <div class="file-upload">
+          <input type="file" id="file" accept="image/*" class="file-input">
+          <label for="file" class="file-label">
+            <span class="file-icon">📁</span>
+            Выбрать файл
+          </label>
+          <span class="file-name" id="fileName">Файл не выбран</span>
+        </div>
+      </div>
+      
+            <!--Имя-->
+<div class="calc-field">
+    <label>Ваше имя:</label>
+    <input type="text" id="name" placeholder="Введите ваше имя" required>
+</div>
+      
+      <!--Номер телефона-->
+      <div class="calc-field">
+    <label>Номер телефона для связи:</label>
+    <input type="tel" id="phone" placeholder="+7 (999) 123-45-67" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}">
+      </div>
+
+      <!-- Результат -->
+      <div class="calc-result">
+        <h3>Примерная стоимость: <span id="result">0</span> ₽</h3>
+        <p class="calc-note">*Точная стоимость будет рассчитана после проверки модели</p>
+      </div>
+      
+      <button class="calc-submit-btn">Получить точный расчет</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>

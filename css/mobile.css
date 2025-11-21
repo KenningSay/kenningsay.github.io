@@ -149,7 +149,7 @@ nav a:hover {
     min-height: 100vh;
     background: 
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        url('../image/banner.png') center/cover no-repeat;
+        url('../image/bann.jpg') center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -729,4 +729,43 @@ header {
   font-weight: 700;
   color: var(--orange);
   font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    margin-top: 90px;
+  }
+}
+
+/* === МОБИЛЬНАЯ ВЕРСИЯ: УЛУЧШЕННЫЙ БЛИК ДЛЯ H1 (без прямоугольника) === */
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    color: #ff7700;
+    background: none;
+    -webkit-background-clip: none;
+    -webkit-text-fill-color: #ff7700;
+    background-clip: none;
+
+    /* --- УПРОЩЁННОЕ СВЕЧЕНИЕ --- */
+    text-shadow:
+      0 0 5px rgba(255, 107, 0, 0.4), /* Мягкое основное свечение */
+      0 0 10px rgba(255, 107, 0, 0.6); /* Более яркое свечение */
+
+    /* --- УПРОЩЁННАЯ АНИМАЦИЯ --- */
+    animation: h1-glow-pulse-mobile 2s ease-in-out infinite alternate !important;
+  }
+
+  @keyframes h1-glow-pulse-mobile {
+    0%, 100% {
+      text-shadow:
+        0 0 5px rgba(255, 107, 0, 0.4),
+        0 0 10px rgba(255, 107, 0, 0.6);
+    }
+    50% {
+      text-shadow:
+        0 0 8px rgba(255, 107, 0, 0.6),
+        0 0 15px rgba(255, 107, 0, 0.8);
+    }
+  }
 }
