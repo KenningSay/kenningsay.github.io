@@ -601,15 +601,19 @@ window.addEventListener('load', function() {
 });
 // JS для плавного появления
 document.addEventListener('DOMContentLoaded', function() {
-  const elements = document.querySelectorAll('.hero-text');
-  elements.forEach((el, i) => {
+  // Находим все текстовые элементы
+  const textElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, a, li, .btn, .material-item, .feature p, .feature h3, .process-step p, .process-step h3, .subtitle, .about-intro, .about-footer, .contact-info p, .section-title, .printer-icon, .calc-field label, .calc-result h3, .field-hint, .examples span, .file-name, .calc-note');
+
+  textElements.forEach((el, i) => {
+    // Прячем элемент и немного сдвигаем вниз
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    
+    el.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+
+    // Анимируем с небольшой задержкой
     setTimeout(() => {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
-    }, 100 * i);
+    }, 100 * i); // Увеличиваем задержку для каждого следующего элемента
   });
 });
