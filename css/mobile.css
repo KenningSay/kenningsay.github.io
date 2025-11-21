@@ -737,3 +737,36 @@ header {
   }
 }
 
+/* === МОБИЛЬНАЯ ВЕРСИЯ: УПРОЩЁННЫЙ БЛИК ДЛЯ H1 === */
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    /* Оставляем оранжевый цвет */
+    color: #ff7700;
+    /* Убираем сложный градиент */
+    background: none;
+    -webkit-background-clip: none;
+    -webkit-text-fill-color: #ff7700;
+    background-clip: none;
+    /* Оставляем только текстовую тень */
+    text-shadow:
+      0 0 10px rgba(255, 107, 0, 0.6), /* Основное свечение */
+      0 0 20px rgba(255, 107, 0, 0.4); /* Дополнительное свечение */
+    /* Упрощаем анимацию до одной - пульсация свечения */
+    animation: h1-glow-pulse-mobile 2s ease-in-out infinite alternate !important;
+  }
+
+  /* Анимация только пульсации свечения */
+  @keyframes h1-glow-pulse-mobile {
+    0%, 100% {
+      text-shadow:
+        0 0 10px rgba(255, 107, 0, 0.6),
+        0 0 20px rgba(255, 107, 0, 0.4);
+    }
+    50% {
+      text-shadow:
+        0 0 15px rgba(255, 107, 0, 0.8),
+        0 0 30px rgba(255, 107, 0, 0.6);
+    }
+  }
+}
