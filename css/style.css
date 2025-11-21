@@ -255,9 +255,9 @@ nav a:hover::after {
 
 .hero-content h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 6rem; /* Увеличили размер */
-  font-weight: 700;
-  margin-bottom: 1rem; /* Уменьшили отступ снизу */
+  font-size: 5rem; /* Увеличили размер */
+  font-weight: 1000;
+  margin-bottom: 3rem; /* Уменьшили отступ снизу */
   color: #ff7700; /* Чистый оранжевый */
   text-shadow:
     0 0 15px rgba(255, 107, 0, 0.6), /* Основное свечение */
@@ -267,7 +267,7 @@ nav a:hover::after {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: #ff7700; /* На случай, если -webkit- не сработает */
-  animation: h1-glow-pulse 2s ease-in-out infinite alternate, h1-shimmer 3s linear infinite; /* Добавили анимации */
+  animation: h1-glow-pulse 5s ease-in-out infinite alternate, h1-shimmer 2s linear infinite; /* Добавили анимации */
   position: relative; /* Для правильной работы анимаций */
   overflow: hidden; /* Скрываем возможные выступы градиента */
   z-index: 2; /* Выше слоёв ::before и ::after внутри .hero-content */
