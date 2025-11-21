@@ -1618,3 +1618,25 @@ textarea:focus {
 .calc-field input::placeholder {
   color: rgba(245, 245, 245, 0.6);
 }
+
+/* === УВЕЛИЧЕНИЕ РАЗМЕРА ШРИФТА В ГЛАВНОМ БЛОКЕ === */
+
+/* Заголовок */
+.hero-content h1 {
+  font-size: 7rem !important; /* Увеличиваем заголовок */
+}
+
+/* Подзаголовок */
+.hero-content .subtitle {
+  font-size: 2rem !important; /* Увеличиваем подзаголовок */
+}
+
+/* Основной текст */
+.hero-content p {
+  font-size: 1.6rem !important; /* Увеличиваем основной текст */
+}
+
+/* Кнопка */
+.hero-content .btn {
+  font-size: 1.3rem !important; /* Увеличиваем текст кнопки */
+}
