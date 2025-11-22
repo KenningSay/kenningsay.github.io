@@ -617,29 +617,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100 * i); // Увеличиваем задержку для каждого следующего элемента
   });
 });
-
-
-//Анимация клика 
-document.addEventListener('click', (e) => {
-    // Создаём элемент-частицу
-    const spark = document.createElement('div');
-    spark.className = 'spark';
-
-    // Позиционируем точно под курсором
-    spark.style.left = (e.clientX - 2) + 'px';
-    spark.style.top = (e.clientY - 2) + 'px';
-
-    // Добавляем случайный цвет (если хотите разноцветные искры)
-    // spark.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
-
-    // Добавляем в DOM
-    document.body.appendChild(spark);
-
-    // Запускаем анимацию через CSS
-    spark.style.animation = 'sparkFade 0.6s ease-out forwards';
-
-    // Удаляем элемент после анимации
-    setTimeout(() => {
-      spark.remove();
-    }, 600);
-  });
