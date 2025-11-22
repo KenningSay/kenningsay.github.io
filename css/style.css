@@ -1725,3 +1725,13 @@ textarea:focus {
     background-position: 300% 50%; /* Конец (300% для 300% размера) */
   }
 }
+
+.spark {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgb(221, 67, 6);
+  pointer-events: none;
+  opacity: 0;
+}

@@ -617,3 +617,28 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100 * i); // Увеличиваем задержку для каждого следующего элемента
   });
 });
+
+
+//Анимация клика 
+  document.addEventListener('click', (e) => {
+    const spark = document.createElement('div');
+    spark.className = 'spark';
+    spark.style.left = (e.clientX - 2) + 'px';
+    spark.style.top = (e.clientY - 2) + 'px';
+    document.body.appendChild(spark);
+
+    // Анимация через CSS-transition или keyframes
+    spark.animate([
+      { transform: 'scale(0)', opacity: 1 },
+      { transform: 'scale(3)', opacity: 1 },
+      { transform: 'scale(0)', opacity: 0 }
+    ], {
+      duration: 600,
+      easing: 'ease-out'
+    });
+
+    // Удалить элемент после анимации
+    setTimeout(() => {
+      spark.remove();
+    }, 600);
+  });
