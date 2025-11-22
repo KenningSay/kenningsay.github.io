@@ -1726,12 +1726,33 @@ textarea:focus {
   }
 }
 
+/*Анимация клика */
+
+/* Стили для частиц */
 .spark {
   position: absolute;
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgb(221, 67, 6);
+  background: #ff6f00; /* Оранжевый — можно поменять на любой цвет */
   pointer-events: none;
   opacity: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Анимация исчезновения */
+@keyframes sparkFade {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
 }

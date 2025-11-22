@@ -620,24 +620,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 //Анимация клика 
-  document.addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
+    // Создаём элемент-частицу
     const spark = document.createElement('div');
     spark.className = 'spark';
+
+    // Позиционируем точно под курсором
     spark.style.left = (e.clientX - 2) + 'px';
     spark.style.top = (e.clientY - 2) + 'px';
+
+    // Добавляем случайный цвет (если хотите разноцветные искры)
+    // spark.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+    // Добавляем в DOM
     document.body.appendChild(spark);
 
-    // Анимация через CSS-transition или keyframes
-    spark.animate([
-      { transform: 'scale(0)', opacity: 1 },
-      { transform: 'scale(3)', opacity: 1 },
-      { transform: 'scale(0)', opacity: 0 }
-    ], {
-      duration: 600,
-      easing: 'ease-out'
-    });
+    // Запускаем анимацию через CSS
+    spark.style.animation = 'sparkFade 0.6s ease-out forwards';
 
-    // Удалить элемент после анимации
+    // Удаляем элемент после анимации
     setTimeout(() => {
       spark.remove();
     }, 600);
