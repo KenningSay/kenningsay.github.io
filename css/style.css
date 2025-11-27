@@ -1725,10 +1725,10 @@ textarea:focus {
     background-position: 300% 50%; /* Конец (300% для 300% размера) */
   }
 }
-
 /* Основной контейнер для FAQ */
 .faq-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   width: 100%;
 }
@@ -1736,7 +1736,29 @@ textarea:focus {
 /* Настройка сетки для десктопа */
 @media (min-width: 768px) {
   .faq-container {
-    grid-template-columns: 1fr 1fr;
+    /* Убираем grid и используем flex, так как строки теперь обернуты в div */
+  }
+}
+
+/* Контейнер для каждой строки (на десктопе будет содержать 2 карточки) */
+.faq-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+/* На десктопе делаем строки двухколоночными */
+@media (min-width: 768px) {
+  .faq-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+/* На мобильных устройствах строки становятся одноколоночными */
+@media (max-width: 767px) {
+  .faq-row {
+    flex-direction: column;
   }
 }
 
@@ -1752,6 +1774,7 @@ textarea:focus {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  flex: 1; /* Карточки растягиваются, чтобы заполнить всю ширину строки */
 }
 
 /* Стили для заголовка вопроса */
