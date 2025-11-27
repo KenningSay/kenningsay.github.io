@@ -1,0 +1,771 @@
+/* ===== MOBILE FIRST STYLES ===== */
+/* Полная мобильная версия сайта */
+
+/* Базовые настройки для мобильных */
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Шапка */
+header {
+    width: 96%;
+    padding: 0.8rem 1.2rem;
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.98) 0%, rgba(30, 30, 30, 0.95) 100%);
+    backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+header.scrolled {
+    padding: 0.7rem 1rem;
+    top: 12px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.text-logo {
+    width: 120px;
+    height: 45px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+.logo-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 2px solid #FF6B00;
+}
+
+/* Мобильное меню */
+.menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: linear-gradient(90deg, #FF6B00, #FF8C42);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+nav {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 90%;
+    background: linear-gradient(135deg, rgba(18, 18, 18, 0.98) 0%, rgba(30, 30, 30, 0.95) 100%);
+    backdrop-filter: blur(25px) saturate(180%);
+    transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 999;
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 107, 0, 0.3);
+    padding: 1rem 0;
+}
+
+nav.active {
+    right: 5%;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    list-style: none;
+}
+
+nav li {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 107, 0, 0.2);
+}
+
+nav li:last-child {
+    border-bottom: none;
+}
+
+nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #FF6B00;
+    background: rgba(255, 107, 0, 0.1);
+}
+
+/* Главный баннер */
+.hero {
+    min-height: 100vh;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+        url('../image/bann.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+    position: relative;
+}
+
+.hero-content {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    max-width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    margin: 1rem;
+}
+
+.hero h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    background: linear-gradient(135deg, #FF6B00, #FF8C42);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero .subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #FF8C42;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.hero p {
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #f5f5f5;
+    line-height: 1.5;
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #FF6B00, #E55A00);
+    color: #121212;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 280px;
+    border: none;
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, #FF8C42, #FF6B00);
+    transform: translateY(-2px);
+}
+
+/* Секции */
+.section {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #FF6B00;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #FF6B00, #FF8C42);
+    border-radius: 4px;
+}
+
+.glass-card {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    margin-bottom: 2rem;
+}
+
+/* Мобильная версия блока "О нас" */
+.process-steps {
+  grid-template-columns: 1fr !important;
+  gap: 1.5rem !important;
+}
+
+.process-step {
+  padding: 1.5rem !important;
+}
+
+.materials-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1rem !important;
+}
+
+.material-item {
+  padding: 1.5rem 1rem !important;
+  font-size: 1.1rem !important;
+  min-height: 100px !important;
+}
+
+.material-item .emoji {
+  font-size: 2rem !important;
+}
+
+/* Преимущества */
+.features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.feature {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    padding: 1.8rem 1.2rem;
+    border-radius: 20px;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: #FF6B00;
+    margin-bottom: 1.2rem;
+}
+
+.feature h3 {
+    margin-bottom: 0.8rem;
+    color: #FF6B00;
+    font-size: 1.2rem;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.feature p {
+    font-size: 1rem;
+}
+
+/* ГАЛЕРЕЯ - мобильная версия */
+.gallery {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1.5rem 0.5rem;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    align-items: flex-start;
+}
+
+.gallery img {
+    width: 85vw;
+    height: auto;
+    min-height: 200px;
+    max-height: 50vh;
+    object-fit: contain;
+    border-radius: 15px;
+    flex: 0 0 auto;
+    scroll-snap-align: center;
+    margin: 0 0.3rem;
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background: #1E1E1E;
+}
+
+.gallery::-webkit-scrollbar {
+    height: 4px;
+}
+
+.gallery::-webkit-scrollbar-track {
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+}
+
+.gallery::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #FF6B00, #FF8C42);
+    border-radius: 10px;
+}
+
+/* Контакты */
+.contact-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    font-size: 1rem;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+/* Футер */
+footer {
+    background: linear-gradient(135deg, #121212 0%, #1E1E1E 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 107, 0, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+}
+
+/* Отключаем частицы для производительности */
+#particles-js {
+    display: none;
+}
+
+/* Улучшения для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .section-title {
+        font-size: 1.6rem;
+    }
+    
+    .glass-card {
+        padding: 1.2rem;
+    }
+    
+    .gallery {
+        gap: 0.8rem;
+        padding: 1rem 0.3rem;
+    }
+    
+    .gallery img {
+        width: 90vw;
+        min-height: 180px;
+        max-height: 45vh;
+    }
+}
+
+/* Landscape оптимизация */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        min-height: 120vh;
+    }
+    
+    .gallery img {
+        max-height: 60vh;
+    }
+    
+    header {
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* Desktop стили - скрываем на мобильных */
+@media (min-width: 769px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+/* Убираем полосу вверху */
+.hero {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  min-height: 100vh;
+}
+
+/* Убираем отступы у body */
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Шапка поверх контента */
+header {
+  position: fixed;
+  top: 10px;
+  z-index: 1000;
+}
+.materials h2 {
+  color: var(--orange);
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 0 15px rgba(255, 107, 0, 0.3);
+  position: relative;
+}
+
+.materials h2::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  border-radius: 4px;
+  box-shadow: 0 0 15px var(--orange);
+}
+.materials h2 {
+  font-size: 1.8rem !important;
+  margin-bottom: 2rem !important;
+}
+/*Анимация печати */
+
+/* Секция демонстрации печати */
+.printing-demo-section {
+  margin: 4rem 0;
+}
+
+.printing-demo-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+/* 3D Принтер */
+.printer-machine {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.printer-body {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border-radius: 15px 15px 0 0;
+  border: 3px solid #444;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.printer-bed {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  height: 200px;
+  background: #333;
+  border: 2px solid #555;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.printing-model {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 100%;
+  background: rgba(255, 107, 0, 0.1);
+  border: 1px solid rgba(255, 107, 0, 0.3);
+}
+
+.print-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, var(--orange), var(--orange-light));
+  transition: height 0.1s ease;
+  border-radius: 4px 4px 0 0;
+}
+
+.printer-head {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  background: #444;
+  border-radius: 8px;
+  animation: printHeadMove 4s infinite alternate;
+}
+
+.nozzle {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 12px;
+  background: #666;
+  border-radius: 0 0 4px 4px;
+}
+
+.filament {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 20px;
+  background: var(--orange);
+  border-radius: 2px;
+  opacity: 0;
+}
+
+.printer-base {
+  width: 350px;
+  height: 20px;
+  background: linear-gradient(135deg, #333, #222);
+  margin: 0 auto;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Анимации */
+@keyframes printHeadMove {
+  0%, 100% { transform: translateX(-50%) translateX(-80px); }
+  50% { transform: translateX(-50%) translateX(80px); }
+}
+
+@keyframes printing {
+  0% { height: 0%; }
+  100% { height: 100%; }
+}
+
+@keyframes extrudeFilament {
+  0% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+  50% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+  100% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+}
+
+.printing .print-layer {
+  animation: printing 3s ease-in-out forwards;
+}
+
+.printing .filament {
+  animation: extrudeFilament 0.5s infinite;
+}
+
+/* Элементы управления */
+.printing-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.print-btn, .reset-btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.print-btn {
+  background: linear-gradient(135deg, var(--orange), var(--orange-dark));
+  color: var(--black);
+  box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
+}
+
+.print-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.6);
+}
+
+.reset-btn {
+  background: transparent;
+  color: var(--text-light);
+  border: 2px solid var(--glass-border);
+}
+
+.reset-btn:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.print-progress {
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px var(--orange-glow);
+}
+
+.progress-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: var(--orange);
+}
+
+.print-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  background: var(--glass-bg);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  opacity: 0.8;
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: var(--orange);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    margin-top: 90px;
+  }
+}
+
+/* === МОБИЛЬНАЯ ВЕРСИЯ: УЛУЧШЕННЫЙ БЛИК ДЛЯ H1 (без прямоугольника) === */
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    color: #ff7700;
+    background: none;
+    -webkit-background-clip: none;
+    -webkit-text-fill-color: #ff7700;
+    background-clip: none;
+
+    /* --- УПРОЩЁННОЕ СВЕЧЕНИЕ --- */
+    text-shadow:
+      0 0 5px rgba(255, 107, 0, 0.4), /* Мягкое основное свечение */
+      0 0 10px rgba(255, 107, 0, 0.6); /* Более яркое свечение */
+
+    /* --- УПРОЩЁННАЯ АНИМАЦИЯ --- */
+    animation: h1-glow-pulse-mobile 2s ease-in-out infinite alternate !important;
+  }
+
+  @keyframes h1-glow-pulse-mobile {
+    0%, 100% {
+      text-shadow:
+        0 0 5px rgba(255, 107, 0, 0.4),
+        0 0 10px rgba(255, 107, 0, 0.6);
+    }
+    50% {
+      text-shadow:
+        0 0 8px rgba(255, 107, 0, 0.6),
+        0 0 15px rgba(255, 107, 0, 0.8);
+    }
+  }
+}
