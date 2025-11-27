@@ -1796,7 +1796,7 @@ textarea:focus {
 /* Плавное раскрытие/закрытие */
 .faq-item[open] {
   transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
 }
 
 /* Изменение маркера (плюс/минус) */
@@ -1840,4 +1840,83 @@ textarea:focus {
 }
 .faq-item summary::marker {
   display: none;
+}
+/* Стили для единого блока ответа */
+.faq-answer {
+  background: rgba(255, 107, 0, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  border-left: 3px solid var(--orange);
+  transition: var(--transition);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 0, 0.1);
+}
+
+/* Стили для списков внутри .faq-answer */
+.faq-answer ul {
+  margin: 0.8rem 0 0.8rem 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-answer li {
+  margin-bottom: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 107, 0, 0.05);
+  border-radius: 6px;
+  border-left: 3px solid var(--orange);
+  line-height: 1.4;
+}
+
+.faq-answer li:last-child {
+  margin-bottom: 0;
+}
+/* Стили для единого блока ответа */
+.faq-answer {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
+  line-height: 1.6;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 0, 0.1);
+}
+
+/* Стили для отдельных строк внутри .faq-answer */
+.faq-answer-block {
+  background: rgba(255, 107, 0, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.faq-answer-block:hover {
+  background: rgba(255, 107, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+/* Стили для иконок в блоках */
+.faq-answer-icon {
+  font-size: 1.2rem;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 107, 0, 0.1);
+  border-radius: 50%;
 }
