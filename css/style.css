@@ -615,13 +615,13 @@ nav a:hover::after {
 .material-item {
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 140, 66, 0.1));
   padding: 2rem 1.5rem;
-  border-radius: 20px;
+  border-radius: 30px;
   text-align: center;
   border: 2px solid var(--glass-border);
   transition: var(--transition);
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 8.4rem;
   min-height: 120px;
   display: flex;
   align-items: center;
