@@ -2100,9 +2100,9 @@ textarea:focus {
 
 /* Стили для лапки кота */
 .cat-paw {
-  position:sticky;
-  top: 10%;
-  right: 10%;
+  position:relative;
+  top: 5%;
+  right: -8%;
   width: 220px;
   height: 120px;
   z-index: 1;
@@ -2113,7 +2113,7 @@ textarea:focus {
 
 .cat-paw:hover {
   opacity: 1;
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.1) rotate(8deg);
 }
 
 .cat-paw-img {
