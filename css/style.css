@@ -1920,3 +1920,62 @@ textarea:focus {
   background: rgba(255, 107, 0, 0.1);
   border-radius: 50%;
 }
+
+/* Стили для кнопок мессенджеров */
+.messenger-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  margin: 1.8rem 0;
+}
+
+.messenger-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: 16px;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  min-width: 220px;
+  justify-content: center;
+  color: white;
+}
+
+.messenger-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Иконки внутри кнопок */
+.messenger-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Цвета: WhatsApp — зелёный, Telegram — синий */
+.whatsapp {
+  background: linear-gradient(135deg, #18a84d, #128C7E);
+}
+
+.telegram {
+  background: linear-gradient(135deg, #0088cc, #005a88);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .messenger-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  .messenger-btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
