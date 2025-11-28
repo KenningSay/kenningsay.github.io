@@ -2097,3 +2097,43 @@ textarea:focus {
     inset 0 0 15px rgba(255, 107, 0, 0.2),
     0 0 12px var(--orange-glow);
 }
+
+/* Стили для лапки кота */
+.cat-paw {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 120px;
+  height: 120px;
+  z-index: 2;
+  animation: paw-float 8s ease-in-out infinite;
+  opacity: 0.7;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.cat-paw:hover {
+  opacity: 1;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.cat-paw-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 107, 0, 0.5));
+}
+
+@keyframes paw-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .cat-paw {
+    top: 15%;
+    right: 5%;
+    width: 80px;
+    height: 80px;
+  }
+}
