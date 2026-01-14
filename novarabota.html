@@ -2,13 +2,14 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
     <title>План Выживания - Twitch Стример</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
         .progress-bar {
             transition: width 0.3s ease;
@@ -20,10 +21,19 @@
         .urgent-badge {
             animation: pulse 2s infinite;
         }
+        /* Prevent zoom on input focus on iOS */
+        input, select, textarea {
+            font-size: 16px;
+        }
+        /* Better tap targets */
+        button {
+            min-height: 44px;
+            min-width: 44px;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white min-h-screen">
-    <div id="app" class="max-w-6xl mx-auto p-6"></div>
+    <div id="app" class="max-w-4xl mx-auto p-3 sm:p-6"></div>
 
     <script>
         // Управление прогрессом
@@ -43,7 +53,7 @@
         const phases = [
             {
                 id: 'phase1',
-                title: 'ФАЗА 1: ПОДГОТОВКА И СТАРТ',
+                title: 'ФАЗА 1: СТАРТ',
                 subtitle: 'Недели 1-4',
                 color: 'from-red-500 to-orange-500',
                 weeks: [
@@ -53,44 +63,44 @@
                         urgent: true,
                         days: [
                             {
-                                day: 'Понедельник-Четверг (вечера по 30мин)',
+                                day: 'ПН-ЧТ (30мин)',
                                 tasks: [
                                     { id: 'reg', text: 'Зарегать Twitch, TikTok, YouTube, Instagram (ОДИН НИК)', critical: true },
-                                    { id: 'obs', text: 'Скачать и настроить OBS (3 сцены: игра, принтер, комбо)', critical: true },
-                                    { id: 'models', text: 'Купить модели на MyMiniFactory: Moonlight Greatsword + миниатюра Elden Ring ($10-20)', critical: true },
-                                    { id: 'slice', text: 'Нарезать меч в слайсере для K1 Max', critical: false },
-                                    { id: 'test', text: 'Тестовая запись 5 минут в OBS', critical: false }
+                                    { id: 'obs', text: 'Настроить OBS (3 сцены)', critical: true },
+                                    { id: 'models', text: 'Купить модели: Moonlight Greatsword + миниатюра ($10-20)', critical: true },
+                                    { id: 'slice', text: 'Нарезать меч в слайсере', critical: false },
+                                    { id: 'test', text: 'Тестовая запись OBS (5 мин)', critical: false }
                                 ]
                             },
                             {
-                                day: 'Пятница ВЕЧЕР',
+                                day: 'ПТ вечер',
                                 tasks: [
-                                    { id: 'print1', text: 'Поставить печататься Moonlight Greatsword на K1 Max (ночь+утро)', critical: true },
-                                    { id: 'prep', text: 'Подготовить рабочее место для покраски', critical: false }
+                                    { id: 'print1', text: 'Поставить печататься меч на K1 Max', critical: true },
+                                    { id: 'prep', text: 'Подготовить место для покраски', critical: false }
                                 ]
                             },
                             {
-                                day: 'Суббота 14:00-19:00 — ПЕРВЫЙ СТРИМ',
+                                day: 'СБ 14:00-19:00 — ПЕРВЫЙ СТРИМ',
                                 tasks: [
-                                    { id: 'stream1', text: 'Включить стрим! Представиться: "Печатаю из игр + играю"', critical: true },
-                                    { id: 'sword', text: '1 час: Достать меч, шлифовка, грунтовка', critical: false },
-                                    { id: 'mini', text: '1 час: Поставить миниатюру на Saturn, промывка', critical: false },
-                                    { id: 'game1', text: '3 часа: Играть в Elden Ring, болтать про оружие', critical: false }
+                                    { id: 'stream1', text: 'Включить стрим!', critical: true },
+                                    { id: 'sword', text: '1ч: Достать меч, шлифовка, грунтовка', critical: false },
+                                    { id: 'mini', text: '1ч: Поставить миниатюру на Saturn', critical: false },
+                                    { id: 'game1', text: '3ч: Играть в Elden Ring', critical: false }
                                 ]
                             },
                             {
-                                day: 'Воскресенье УТРО',
+                                day: 'ВС утро',
                                 tasks: [
-                                    { id: 'content', text: 'Нарезать 10-15 коротких видео из стрима', critical: true },
+                                    { id: 'content', text: 'Нарезать 10-15 коротких видео', critical: true },
                                     { id: 'post1', text: 'Выложить 2-3 видео в TikTok/Shorts', critical: true }
                                 ]
                             },
                             {
-                                day: 'Воскресенье 14:00-19:00 — СТРИМ 2',
+                                day: 'ВС 14:00-19:00 — СТРИМ 2',
                                 tasks: [
-                                    { id: 'paint1', text: '2 часа: Аэрограф по мечу (база+градиент)', critical: false },
-                                    { id: 'paint2', text: '1 час: Покраска миниатюры (база)', critical: false },
-                                    { id: 'game2', text: '2 часа: Elden Ring / Balatro', critical: false }
+                                    { id: 'paint1', text: '2ч: Аэрограф по мечу', critical: false },
+                                    { id: 'paint2', text: '1ч: Покраска миниатюры', critical: false },
+                                    { id: 'game2', text: '2ч: Elden Ring / Balatro', critical: false }
                                 ]
                             }
                         ]
@@ -101,19 +111,19 @@
                         urgent: false,
                         days: [
                             {
-                                day: 'Будни (вечера по 15мин)',
+                                day: 'Будни (15мин)',
                                 tasks: [
-                                    { id: 'post', text: 'Понедельник, Среда, Пятница: постить видео', critical: true },
-                                    { id: 'engage', text: 'Отвечать на комменты 10 минут в день', critical: false },
-                                    { id: 'next', text: 'Четверг: выбрать следующий проект, скачать модель', critical: false }
+                                    { id: 'post', text: 'ПН, СР, ПТ: постить видео', critical: true },
+                                    { id: 'engage', text: 'Отвечать на комменты (10 мин/день)', critical: false },
+                                    { id: 'next', text: 'ЧТ: выбрать следующий проект', critical: false }
                                 ]
                             },
                             {
-                                day: 'Суббота-Воскресенье',
+                                day: 'СБ-ВС',
                                 tasks: [
-                                    { id: 'stream3', text: 'Суббота: Стрим 14:00-19:00 (завершить меч + новый проект)', critical: true },
-                                    { id: 'stream4', text: 'Воскресенье: Контент + Стрим', critical: true },
-                                    { id: 'sword_done', text: 'Закончить Moonlight Greatsword полностью', critical: false }
+                                    { id: 'stream3', text: 'СБ: Стрим 14:00-19:00 (завершить меч)', critical: true },
+                                    { id: 'stream4', text: 'ВС: Контент + Стрим', critical: true },
+                                    { id: 'sword_done', text: 'Закончить Moonlight Greatsword', critical: false }
                                 ]
                             }
                         ]
@@ -126,23 +136,23 @@
                             {
                                 day: 'Проект недели',
                                 tasks: [
-                                    { id: 'proj2', text: 'Начать щит/другое оружие из Elden Ring (FDM)', critical: false },
+                                    { id: 'proj2', text: 'Начать щит/другое оружие (FDM)', critical: false },
                                     { id: 'mini2', text: 'Печатать 2-3 миниатюры (Resin)', critical: false },
-                                    { id: 'routine', text: 'Будни: постить контент. Выходные: 2 стрима', critical: true }
+                                    { id: 'routine', text: 'Будни: контент. Выходные: стримы', critical: true }
                                 ]
                             }
                         ]
                     },
                     {
                         id: 'week4',
-                        title: 'НЕДЕЛЯ 4: ПЕРВЫЙ МЕСЯЦ ЗАВЕРШЁН',
+                        title: 'НЕДЕЛЯ 4: МЕСЯЦ 1 ГОТОВ',
                         urgent: false,
                         days: [
                             {
-                                day: 'Итоги и планирование',
+                                day: 'Итоги',
                                 tasks: [
-                                    { id: 'review', text: 'Посмотреть статистику: сколько видео, просмотров, зрителей', critical: false },
-                                    { id: 'portfolio', text: 'Сфоткать все готовые работы (портфолио)', critical: true },
+                                    { id: 'review', text: 'Статистика: видео, просмотры, зрители', critical: false },
+                                    { id: 'portfolio', text: 'Сфоткать все работы (портфолио)', critical: true },
                                     { id: 'plan2', text: 'Выбрать 3 проекта на месяц 2', critical: false }
                                 ]
                             }
@@ -152,7 +162,7 @@
             },
             {
                 id: 'phase2',
-                title: 'ФАЗА 2: РОСТ И АУДИТОРИЯ',
+                title: 'ФАЗА 2: РОСТ',
                 subtitle: 'Месяцы 2-3',
                 color: 'from-orange-500 to-yellow-500',
                 weeks: [
@@ -162,20 +172,20 @@
                         urgent: false,
                         days: [
                             {
-                                day: 'Что делать',
+                                day: 'План',
                                 tasks: [
-                                    { id: 'proj_big', text: 'FDM: 2 больших оружия (Rivers of Blood, Sacred Relic)', critical: false },
-                                    { id: 'proj_mini', text: 'Resin: 5-7 миниатюр разных боссов', critical: false },
-                                    { id: 'led', text: 'Попробовать добавить LED в один проект', critical: false },
-                                    { id: 'collab', text: 'Найти 2-3 других стримеров (рейды, взаимопиар)', critical: false },
-                                    { id: 'shorts', text: 'Делать 40-50 коротких видео за месяц', critical: true }
+                                    { id: 'proj_big', text: 'FDM: 2 больших оружия', critical: false },
+                                    { id: 'proj_mini', text: 'Resin: 5-7 миниатюр', critical: false },
+                                    { id: 'led', text: 'Попробовать LED в проекте', critical: false },
+                                    { id: 'collab', text: 'Найти 2-3 стримеров (взаимопиар)', critical: false },
+                                    { id: 'shorts', text: '40-50 коротких видео', critical: true }
                                 ]
                             },
                             {
-                                day: 'Цель месяца',
+                                day: 'Цель',
                                 tasks: [
-                                    { id: 'viewers', text: 'Выйти на 10-20 постоянных зрителей', critical: false },
-                                    { id: 'subs', text: '1000-2000 подписчиков в TikTok', critical: false }
+                                    { id: 'viewers', text: '10-20 постоянных зрителей', critical: false },
+                                    { id: 'subs', text: '1000-2000 подписчиков TikTok', critical: false }
                                 ]
                             }
                         ]
@@ -188,18 +198,18 @@
                             {
                                 day: 'Фокус',
                                 tasks: [
-                                    { id: 'quality', text: 'Делать меньше, но лучше (детализация, weathering)', critical: false },
-                                    { id: 'complex', text: '1 сложный проект на месяц (шлем, доспех)', critical: false },
-                                    { id: 'painted', text: 'Полностью покрасить 3-4 миниатюры (продать можно)', critical: false },
-                                    { id: 'etsy', text: 'Создать Etsy shop (описания, фото, цены)', critical: true }
+                                    { id: 'quality', text: 'Делать меньше, но лучше', critical: false },
+                                    { id: 'complex', text: '1 сложный проект (шлем/доспех)', critical: false },
+                                    { id: 'painted', text: 'Покрасить 3-4 миниатюры полностью', critical: false },
+                                    { id: 'etsy', text: 'Создать Etsy shop', critical: true }
                                 ]
                             },
                             {
-                                day: 'Цель месяца',
+                                day: 'Цель',
                                 tasks: [
-                                    { id: 'viewers3', text: '20-30 постоянных зрителей', critical: false },
+                                    { id: 'viewers3', text: '20-30 зрителей', critical: false },
                                     { id: 'subs3', text: '3000-5000 подписчиков', critical: false },
-                                    { id: 'first_money', text: 'ПЕРВЫЕ $50-100 (донаты или продажа)', critical: true }
+                                    { id: 'first_money', text: 'ПЕРВЫЕ $50-100', critical: true }
                                 ]
                             }
                         ]
@@ -208,43 +218,43 @@
             },
             {
                 id: 'phase3',
-                title: 'ФАЗА 3: МОНЕТИЗАЦИЯ',
+                title: 'ФАЗА 3: ДЕНЬГИ',
                 subtitle: 'Месяцы 4-6',
                 color: 'from-yellow-500 to-green-500',
                 weeks: [
                     {
                         id: 'month4',
-                        title: 'МЕСЯЦ 4: ПЕРВЫЕ ПРОДАЖИ',
+                        title: 'МЕСЯЦ 4: ПРОДАЖИ',
                         urgent: false,
                         days: [
                             {
                                 day: 'Действия',
                                 tasks: [
-                                    { id: 'etsy_active', text: 'Активный Etsy: 10-15 листингов', critical: true },
-                                    { id: 'commission', text: 'Открыть комиссии: "Закажи своё оружие"', critical: true },
-                                    { id: 'patreon', text: 'Создать Patreon ($5 tier: ранний доступ)', critical: false },
-                                    { id: 'bundles', text: 'Делать bundles: меч+миниатюра ($200+)', critical: false }
+                                    { id: 'etsy_active', text: 'Etsy: 10-15 листингов', critical: true },
+                                    { id: 'commission', text: 'Открыть комиссии', critical: true },
+                                    { id: 'patreon', text: 'Создать Patreon ($5)', critical: false },
+                                    { id: 'bundles', text: 'Делать bundles ($200+)', critical: false }
                                 ]
                             },
                             {
                                 day: 'Цель',
                                 tasks: [
-                                    { id: 'money4', text: 'Заработать $200-400', critical: false }
+                                    { id: 'money4', text: '$200-400', critical: false }
                                 ]
                             }
                         ]
                     },
                     {
                         id: 'month5',
-                        title: 'МЕСЯЦ 5: МАСШТАБИРОВАНИЕ',
+                        title: 'МЕСЯЦ 5: МАСШТАБ',
                         urgent: false,
                         days: [
                             {
                                 day: 'Рост',
                                 tasks: [
-                                    { id: 'custom', text: '2-3 custom заказа выполнить на стриме', critical: false },
-                                    { id: 'diorama', text: 'Большая диорама (база FDM + фигурки Resin)', critical: false },
-                                    { id: 'insta', text: 'Активнее Instagram (фото процесса, reels)', critical: false }
+                                    { id: 'custom', text: '2-3 custom заказа на стриме', critical: false },
+                                    { id: 'diorama', text: 'Большая диорама (FDM+Resin)', critical: false },
+                                    { id: 'insta', text: 'Активнее Instagram', critical: false }
                                 ]
                             },
                             {
@@ -262,11 +272,11 @@
                         urgent: false,
                         days: [
                             {
-                                day: 'Финал первого этапа',
+                                day: 'Финал',
                                 tasks: [
-                                    { id: 'routine6', text: 'Отточенная рутина: 2 стрима, контент, заказы', critical: false },
-                                    { id: 'portfolio6', text: 'Большое портфолио (20+ работ)', critical: false },
-                                    { id: 'review6', text: 'Оценить: можно ли масштабироваться дальше?', critical: false }
+                                    { id: 'routine6', text: 'Отточенная рутина', critical: false },
+                                    { id: 'portfolio6', text: 'Портфолио 20+ работ', critical: false },
+                                    { id: 'review6', text: 'Оценить масштабирование', critical: false }
                                 ]
                             },
                             {
@@ -274,7 +284,7 @@
                                 tasks: [
                                     { id: 'viewers6', text: '80-150 зрителей', critical: false },
                                     { id: 'money6', text: '$600-1000', critical: true },
-                                    { id: 'decision', text: 'РЕШИТЬ: продолжать наращивать или искать баланс', critical: true }
+                                    { id: 'decision', text: 'РЕШИТЬ: что дальше', critical: true }
                                 ]
                             }
                         ]
@@ -302,7 +312,7 @@
         };
 
         const resetProgress = () => {
-            if (confirm('Сбросить весь прогресс? Это действие необратимо!')) {
+            if (confirm('Сбросить весь прогресс?')) {
                 progress = {};
                 saveProgress(progress);
                 render();
@@ -315,79 +325,79 @@
             
             const html = `
                 <!-- Header -->
-                <div class="mb-8 text-center">
-                    <h1 class="text-4xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+                <div class="mb-6 text-center">
+                    <h1 class="text-2xl sm:text-4xl font-bold mb-2 bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
                         ПЛАН ВЫЖИВАНИЯ
                     </h1>
-                    <p class="text-slate-400 text-lg">6 месяцев до первых реальных денег</p>
-                    <button onclick="resetProgress()" class="mt-4 px-4 py-2 bg-red-900 hover:bg-red-800 rounded text-sm">
-                        🔄 Сбросить прогресс
+                    <p class="text-slate-400 text-sm sm:text-lg">6 месяцев → деньги</p>
+                    <button onclick="resetProgress()" class="mt-3 px-3 py-2 bg-red-900 hover:bg-red-800 rounded text-xs sm:text-sm">
+                        🔄 Сбросить
                     </button>
                 </div>
 
                 <!-- Tips -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-blue-500 mb-2">📅</div>
-                        <p class="text-sm text-slate-300">Стримы СТРОГО суббота-воскресенье 14:00-19:00</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                        <div class="text-blue-500 mb-1 text-lg">📅</div>
+                        <p class="text-xs sm:text-sm text-slate-300">Стримы: СБ-ВС 14:00-19:00</p>
                     </div>
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-yellow-500 mb-2">⚡</div>
-                        <p class="text-sm text-slate-300">Будни: только контент и комменты (30 мин/день)</p>
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                        <div class="text-yellow-500 mb-1 text-lg">⚡</div>
+                        <p class="text-xs sm:text-sm text-slate-300">Будни: контент 30 мин/день</p>
                     </div>
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-green-500 mb-2">💵</div>
-                        <p class="text-sm text-slate-300">Первые деньги: месяц 3-4 ($50-200)</p>
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                        <div class="text-green-500 mb-1 text-lg">💵</div>
+                        <p class="text-xs sm:text-sm text-slate-300">Деньги: месяц 3-4 ($50+)</p>
                     </div>
-                    <div class="bg-slate-800 p-4 rounded-lg border border-slate-700">
-                        <div class="text-purple-500 mb-2">👥</div>
-                        <p class="text-sm text-slate-300">Не гонись за числами первые 2 месяца — делай качество</p>
+                    <div class="bg-slate-800 p-3 rounded-lg border border-slate-700">
+                        <div class="text-purple-500 mb-1 text-lg">👥</div>
+                        <p class="text-xs sm:text-sm text-slate-300">Первые 2 мес → качество</p>
                     </div>
                 </div>
 
                 <!-- Phases -->
                 ${phases.map(phase => `
-                    <div class="mb-8">
-                        <div class="bg-gradient-to-r ${phase.color} p-4 rounded-t-lg">
-                            <h2 class="text-2xl font-bold">${phase.title}</h2>
-                            <p class="text-white/80">${phase.subtitle}</p>
+                    <div class="mb-6">
+                        <div class="bg-gradient-to-r ${phase.color} p-3 sm:p-4 rounded-t-lg">
+                            <h2 class="text-lg sm:text-2xl font-bold">${phase.title}</h2>
+                            <p class="text-white/80 text-xs sm:text-base">${phase.subtitle}</p>
                         </div>
-                        <div class="bg-slate-800 rounded-b-lg p-4 border-x border-b border-slate-700">
+                        <div class="bg-slate-800 rounded-b-lg p-2 sm:p-4 border-x border-b border-slate-700">
                             ${phase.weeks.map(week => {
                                 const allTasks = week.days.flatMap(d => d.tasks);
                                 const weekProgress = getWeekProgress(week.id, allTasks);
                                 const isExpanded = expandedWeeks[week.id];
                                 
                                 return `
-                                    <div class="mb-4">
-                                        <button onclick="toggleWeek('${week.id}')" class="w-full flex items-center justify-between p-4 bg-slate-700 rounded-lg hover:bg-slate-600 transition">
-                                            <div class="flex items-center gap-3">
-                                                <span>${isExpanded ? '▼' : '▶'}</span>
-                                                <span class="font-bold">${week.title}</span>
-                                                ${week.urgent ? '<span class="px-2 py-1 bg-red-500 text-xs rounded urgent-badge">СРОЧНО</span>' : ''}
+                                    <div class="mb-3">
+                                        <button onclick="toggleWeek('${week.id}')" class="w-full flex items-center justify-between p-3 bg-slate-700 rounded-lg active:bg-slate-600">
+                                            <div class="flex items-center gap-2 flex-1 min-w-0">
+                                                <span class="text-sm">${isExpanded ? '▼' : '▶'}</span>
+                                                <span class="font-bold text-xs sm:text-base truncate">${week.title}</span>
+                                                ${week.urgent ? '<span class="px-2 py-0.5 bg-red-500 text-xs rounded urgent-badge flex-shrink-0">!</span>' : ''}
                                             </div>
-                                            <div class="flex items-center gap-2">
-                                                <div class="w-32 bg-slate-900 rounded-full h-2">
+                                            <div class="flex items-center gap-2 flex-shrink-0 ml-2">
+                                                <div class="w-16 sm:w-24 bg-slate-900 rounded-full h-2">
                                                     <div class="bg-green-500 h-2 rounded-full progress-bar" style="width: ${weekProgress}%"></div>
                                                 </div>
-                                                <span class="text-sm">${weekProgress}%</span>
+                                                <span class="text-xs sm:text-sm">${weekProgress}%</span>
                                             </div>
                                         </button>
                                         ${isExpanded ? `
-                                            <div class="mt-2 ml-4 space-y-4">
+                                            <div class="mt-2 space-y-3">
                                                 ${week.days.map(day => `
-                                                    <div class="bg-slate-900 p-4 rounded-lg">
-                                                        <h4 class="font-semibold mb-3 text-orange-400">${day.day}</h4>
+                                                    <div class="bg-slate-900 p-3 rounded-lg">
+                                                        <h4 class="font-semibold mb-2 text-orange-400 text-xs sm:text-sm">${day.day}</h4>
                                                         <div class="space-y-2">
                                                             ${day.tasks.map(task => {
                                                                 const isCompleted = progress[week.id]?.[task.id];
                                                                 return `
                                                                     <button onclick="toggleTask('${week.id}', '${task.id}')" 
-                                                                        class="w-full flex items-start gap-3 p-3 rounded transition ${isCompleted ? 'bg-green-900/30 border border-green-500/30' : 'bg-slate-800 hover:bg-slate-700 border border-slate-600'}">
-                                                                        <span class="flex-shrink-0 mt-0.5">${isCompleted ? '✅' : '⭕'}</span>
-                                                                        <span class="text-left ${isCompleted ? 'line-through text-slate-500' : ''}">
+                                                                        class="w-full flex items-start gap-2 p-2 sm:p-3 rounded active:bg-slate-700 ${isCompleted ? 'bg-green-900/30 border border-green-500/30' : 'bg-slate-800 border border-slate-600'}">
+                                                                        <span class="flex-shrink-0 text-base sm:text-lg">${isCompleted ? '✅' : '⭕'}</span>
+                                                                        <span class="text-left text-xs sm:text-sm ${isCompleted ? 'line-through text-slate-500' : ''}">
                                                                             ${task.text}
-                                                                            ${task.critical && !isCompleted ? '<span class="ml-2 text-xs text-red-400">⚠ КРИТИЧНО</span>' : ''}
+                                                                            ${task.critical && !isCompleted ? '<span class="block sm:inline sm:ml-2 text-xs text-red-400 mt-1 sm:mt-0">⚠ ВАЖНО</span>' : ''}
                                                                         </span>
                                                                     </button>
                                                                 `;
@@ -405,14 +415,17 @@
                 `).join('')}
 
                 <!-- Footer -->
-                <div class="mt-8 p-6 bg-gradient-to-r from-purple-900 to-pink-900 rounded-lg text-center">
-                    <p class="text-xl font-bold mb-2">Помни:</p>
-                    <p class="text-slate-300">
+                <div class="mt-6 p-4 bg-gradient-to-r from-purple-900 to-pink-900 rounded-lg text-center">
+                    <p class="text-base sm:text-xl font-bold mb-2">Помни:</p>
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         Первые 2 месяца будет 0-10 зрителей. Это НОРМА.<br/>
-                        Ты не для них делаешь — ты делаешь чтобы выжить.<br/>
-                        Каждый стрим, каждое видео — это шаг к свободе.
+                        Ты делаешь это чтобы выжить.<br/>
+                        Каждый стрим — шаг к свободе.
                     </p>
                 </div>
+
+                <!-- Bottom spacing for mobile -->
+                <div class="h-8"></div>
             `;
             
             app.innerHTML = html;
