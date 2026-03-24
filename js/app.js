@@ -408,7 +408,6 @@ function initCalculator() {
     document.getElementById('urgency').addEventListener('change', calculateCost);
 
 // Кнопка отправки
-// Кнопка отправки
 document.querySelector('.calc-submit-btn').addEventListener('click', async function() {
     const volume = document.getElementById('volume').value;
     const description = document.getElementById('description').value;
@@ -614,6 +613,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       el.style.opacity = '1';
       el.style.transform = 'translateY(0)';
-    }, 100 * i); // Увеличиваем задержку для каждого следующего элемента
+    }, 30 * i); // Увеличиваем задержку для каждого следующего элемента
   });
 });
