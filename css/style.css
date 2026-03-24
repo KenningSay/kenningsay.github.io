@@ -64,7 +64,7 @@ body::before {
 header {
   background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
   backdrop-filter: blur(45px) saturate(180%);
-  padding: 1.2rem 2.5rem;
+  padding: 0.7rem 2.5rem;
   position: fixed;
   width: 92%;
   max-width: 1800px;
