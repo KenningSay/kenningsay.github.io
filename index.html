@@ -424,5 +424,23 @@
     </div>
   </div>
 </div>
+   <!-- Lenis Smooth Scroll JS -->
+<script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+<script>
+    // Инициализация Lenis
+    const lenis = new Lenis({
+        duration: 1.2,        // длительность плавности
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,    // плавный скролл колесом
+        smoothTouch: false    // на тач-устройствах нативный скролл
+    });
+
+    // Анимационный цикл
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+</script>
 </body>
 </html>
