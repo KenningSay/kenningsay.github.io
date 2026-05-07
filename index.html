@@ -424,15 +424,21 @@
     </div>
   </div>
 </div>
-   <!-- Lenis Smooth Scroll JS -->
+<!-- Lenis Smooth Scroll JS -->
 <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
 <script>
-    // Инициализация Lenis
+    // Инициализация Lenis с улучшенными настройками
     const lenis = new Lenis({
-        duration: 1.2,        // длительность плавности
+        duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,    // плавный скролл колесом
-        smoothTouch: false    // на тач-устройствах нативный скролл
+        smoothWheel: true,
+        smoothTouch: false,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        infinite: false,
+        // Не трогай элементы калькулятора
+        prevent: (node) => node.id === 'calcModal' || 
+                          node.closest('#calcModal') !== null
     });
 
     // Анимационный цикл
@@ -441,6 +447,21 @@
         requestAnimationFrame(raf);
     }
     requestAnimationFrame(raf);
+
+    // Плавный скролл по якорям меню
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            if (target) {
+                lenis.scrollTo(target, {
+                    offset: -69,  // отступ под твою шапку
+                    duration: 1.5
+                });
+            }
+        });
+    });
 </script>
 </body>
 </html>
