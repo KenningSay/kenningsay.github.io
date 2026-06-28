@@ -51,10 +51,10 @@ function initParticles() {
           }
         },
         line_linked: {
-          enable: true,
+          enable: false,
           distance: 150,
           color: '#FF6B00',
-          opacity: 0.2,
+          opacity: 0,
           width: 1
         },
         move: {
