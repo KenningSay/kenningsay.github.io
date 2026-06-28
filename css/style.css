@@ -2158,3 +2158,258 @@ textarea:focus {
     height: 80px;
   }
 }
+
+
+/* ═══════════════════════════════════════════
+   VISUAL IMPROVEMENTS
+   ═══════════════════════════════════════════ */
+
+/* ── 1. Global custom scrollbar ── */
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #0a0a0f; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--orange), var(--orange-dark));
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
+
+/* ── 2. Section title shimmer ── */
+.section-title {
+  background: linear-gradient(90deg, var(--orange) 0%, var(--orange-light) 40%, #fff8 60%, var(--orange) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: title-shimmer 4s linear infinite;
+  text-shadow: none;
+}
+@keyframes title-shimmer {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.section-title::after {
+  background: linear-gradient(90deg, var(--orange), var(--orange-light), var(--orange));
+  background-size: 200% auto;
+  animation: title-shimmer 3s linear infinite;
+}
+
+/* ── 3. Wave divider ── */
+.wave-divider {
+  width: 100%;
+  max-width: 900px;
+  margin: -1rem auto 0;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.wave-divider svg { display: block; width: 100%; }
+
+/* ── 4. Stats block ── */
+.stats-section {
+  padding: 3rem 2rem !important;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.stat-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.stat-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orange-light));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+.stat-item:hover::before { transform: scaleX(1); }
+.stat-item:hover { transform: translateY(-6px); border-color: rgba(255,107,0,0.4); }
+.stat-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2.6rem;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-value .stat-pre { font-size: 1.2rem; align-self: flex-start; margin-top: 4px; }
+.stat-value .stat-suf { font-size: 1.4rem; }
+.stat-label {
+  font-size: 0.85rem;
+  color: rgba(245,245,245,0.5);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── 5. Gallery item overlay ── */
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  width: 355px;
+  height: 260px;
+  flex-shrink: 0;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  background: var(--black-light);
+}
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  display: block;
+}
+.gallery-item:hover img { transform: scale(1.09); }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,107,0,0.55), rgba(180,60,0,0.45));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(2px);
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay span {
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 2px solid rgba(255,255,255,0.7);
+  padding: 0.5rem 1.2rem;
+  border-radius: 30px;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+.gallery-item:hover .gallery-overlay span { transform: translateY(0); }
+/* Keep gallery grid working with wrappers */
+.gallery .gallery-item { gap: 0; }
+
+/* ── 6. Calc button pulse ── */
+.calc-floating-btn {
+  position: relative;
+}
+.calc-floating-btn::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50px;
+  border: 2px solid var(--orange);
+  opacity: 0;
+  animation: calc-pulse 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.calc-floating-btn::after {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50px;
+  border: 2px solid rgba(255,107,0,0.4);
+  opacity: 0;
+  animation: calc-pulse 2.2s ease-out 0.5s infinite;
+  pointer-events: none;
+}
+@keyframes calc-pulse {
+  0%   { opacity: 0.8; transform: scale(1); }
+  100% { opacity: 0;   transform: scale(1.25); }
+}
+
+/* ── 7. Process steps — horizontal timeline on desktop ── */
+@media (min-width: 769px) {
+  .process-steps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 38px;
+    left: calc(12.5% + 8px);
+    right: calc(12.5% + 8px);
+    height: 2px;
+    background: linear-gradient(90deg, var(--orange), var(--orange-light), var(--orange));
+    z-index: 0;
+    opacity: 0.4;
+  }
+  .process-step {
+    margin: 0 0.5rem;
+  }
+}
+
+/* ── 8. FAQ smooth accordion ── */
+.faq-question {
+  width: 100%;
+  background: rgba(255,107,0,0.05);
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 3rem 0.9rem 1rem;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-light);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.25s, color 0.25s;
+}
+.faq-question:hover, .faq-question.active {
+  background: rgba(255,107,0,0.12);
+  color: var(--orange);
+}
+.faq-question .faq-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--orange);
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+.faq-question.active .faq-icon { transform: translateY(-50%) rotate(45deg); }
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.38s cubic-bezier(0.4,0,0.2,1), padding 0.25s;
+}
+.faq-body.open {
+  max-height: 400px;
+}
+.faq-body p, .faq-body .faq-answer {
+  margin-top: 0;
+  padding: 0.9rem 1rem;
+  background: rgba(255,107,0,0.05);
+  border-radius: 0 0 10px 10px;
+}
